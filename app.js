@@ -168,16 +168,18 @@ document.addEventListener('DOMContentLoaded', () => {
             z: Math.random() * 2000,
             twinklePhase: Math.random() * Math.PI * 2,
             twinkleSpeed: 0.015 + Math.random() * 0.025,
-            color: i % 10 === 0 
-                ? [0, 242, 254] // Cyan stars
-                : i % 15 === 0 
-                ? [189, 94, 255] // Purple stars
-                : [255, 255, 255] // White stars
+            color: i % 8 === 0 
+                ? [0, 210, 255]   // Cyan
+                : i % 12 === 0 
+                ? [230, 38, 120]  // Spider-Verse Magenta
+                : i % 18 === 0
+                ? [59, 98, 216]   // Portal Cobalt Blue
+                : [255, 255, 255] // Pure White
         });
     }
 
     // Background comets array & initialization (3D perspective floating outwards)
-    const numComets = 12;
+    const numComets = 14;
     const comets = [];
     for (let i = 0; i < numComets; i++) {
         const angle = Math.random() * Math.PI * 2;
@@ -187,11 +189,13 @@ document.addEventListener('DOMContentLoaded', () => {
             y: Math.sin(angle) * distance,
             z: Math.random() * 2000,
             speed: 8 + Math.random() * 12,
-            color: i % 3 === 0 
-                ? [0, 242, 254] // Cyan
-                : i % 3 === 1 
-                ? [189, 94, 255] // Pink
-                : [255, 223, 122] // Gold
+            color: i % 4 === 0 
+                ? [0, 210, 255]  // Electric Cyan
+                : i % 4 === 1 
+                ? [230, 38, 120] // Hot Magenta
+                : i % 4 === 2
+                ? [255, 42, 75]  // Comic Vermilion
+                : [255, 170, 0]  // Mumbattan Amber
         });
     }
 
@@ -213,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Draw and update active shooting stars
         for (let i = shootingStars.length - 1; i >= 0; i--) {
             const ss = shootingStars[i];
-            ctx.strokeStyle = `rgba(0, 242, 254, ${ss.alpha})`;
+            ctx.strokeStyle = `rgba(230, 38, 120, ${ss.alpha})`;
             ctx.lineWidth = 1.5;
             ctx.beginPath();
             ctx.moveTo(ss.x, ss.y);
@@ -377,42 +381,131 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       Swipe / Scroll Entry Gesture Detector
+       Full Viewport Muted Dimensional Portal Video (Plays Once on Start Scroll)
        ========================================================================== */
+    const portalVideo = document.getElementById('portal-video');
+    const portalFlashOverlay = document.getElementById('portal-flash-overlay');
+    const portalEntryTrigger = document.getElementById('portal-entry-trigger');
+
     let startY = 0;
     let isSwiping = false;
+    let portalPlaybackActive = false;
+    let portalHasPlayedOnce = false;
+    let flashTriggered = false;
+
+    // Ensure video is muted and properties set
+    if (portalVideo) {
+        portalVideo.muted = true;
+        portalVideo.volume = 0;
+        portalVideo.defaultPlaybackRate = 2.0;
+        portalVideo.playbackRate = 2.0;
+        portalVideo.controls = false;
+        portalVideo.removeAttribute('controls');
+    }
 
     function handlePortalLaunch() {
-        if (isSwiping) return;
-        isSwiping = true;
+        // If already played once or currently playing, do not play again
+        if (portalHasPlayedOnce || portalPlaybackActive) {
+            // If already played once and user clicks enter button, scroll directly to calendar page
+            if (portalHasPlayedOnce) {
+                const calendarPage = document.getElementById('calendar-page');
+                if (calendarPage) {
+                    calendarPage.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+            return;
+        }
 
-        // Transition from Splash to Preloader
+        portalPlaybackActive = true;
+        portalHasPlayedOnce = true;
+        flashTriggered = false;
+
+        // Transition from Splash to Fullscreen Portal Video Screen
         splashScreen.classList.remove('active-screen');
         splashScreen.classList.add('hidden');
         
-        setTimeout(() => {
-            loaderScreen.classList.remove('hidden');
-            loaderScreen.classList.add('active-screen');
-            triggerPreloader();
-        }, 300);
+        loaderScreen.classList.remove('hidden');
+        loaderScreen.classList.add('active-screen');
+        
+        // Reset flash overlay
+        if (portalFlashOverlay) {
+            portalFlashOverlay.classList.remove('active-flash', 'fade-out');
+        }
+
+        // Start starfield warp speed in background
+        warpActive = true;
+        targetWarpSpeed = 50;
+
+        // Reset and play Muted Portal Video at 2x speed
+        if (portalVideo) {
+            portalVideo.currentTime = 0;
+            portalVideo.defaultPlaybackRate = 2.0;
+            portalVideo.playbackRate = 2.0;
+            portalVideo.muted = true;
+            portalVideo.volume = 0;
+            
+            const playPromise = portalVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    portalVideo.playbackRate = 2.0;
+                }).catch(e => {
+                    console.warn("Video play notice:", e);
+                    // If video cannot play, fallback to immediate universe entrance
+                    enterUniverse();
+                });
+            }
+
+            // Track playback time to trigger flash transition at ~8.6s
+            portalVideo.ontimeupdate = () => {
+                const currentTime = portalVideo.currentTime;
+
+                // Trigger Whiteout Burst at climactic flash (~8.6s)
+                if (currentTime >= 8.6 && !flashTriggered) {
+                    flashTriggered = true;
+                    if (portalFlashOverlay) {
+                        portalFlashOverlay.classList.add('active-flash');
+                    }
+                }
+
+                // Complete portal entry right as 9s completes
+                if (currentTime >= 8.95) {
+                    enterUniverse();
+                }
+            };
+
+            portalVideo.onended = () => {
+                enterUniverse();
+            };
+        } else {
+            enterUniverse();
+        }
     }
 
-    // Swipe up touch events anywhere on the splash screen
+    // Start scroll via mouse wheel: scrolling down on splash screen triggers portal video once
+    window.addEventListener('wheel', (e) => {
+        if (!portalHasPlayedOnce && splashScreen.classList.contains('active-screen') && e.deltaY > 15) {
+            handlePortalLaunch();
+        }
+    }, { passive: true });
+
+    // Touch swipe up on splash screen triggers portal video once
     if (splashScreen) {
         splashScreen.addEventListener('touchstart', (e) => {
             startY = e.touches[0].clientY;
-        });
+        }, { passive: true });
 
         splashScreen.addEventListener('touchmove', (e) => {
             const currentY = e.touches[0].clientY;
             const diffY = startY - currentY;
             
-            // Visual feedback on logo container
-            const logoCont = document.querySelector('.logo-container');
-            if (logoCont && diffY > 0 && diffY < 120) {
-                logoCont.style.transform = `translateY(-${diffY * 0.2}px)`;
+            // Visual feedback on logo container if not played yet
+            if (!portalHasPlayedOnce) {
+                const logoCont = document.querySelector('.logo-container');
+                if (logoCont && diffY > 0 && diffY < 120) {
+                    logoCont.style.transform = `translateY(-${diffY * 0.2}px)`;
+                }
             }
-        });
+        }, { passive: true });
 
         splashScreen.addEventListener('touchend', (e) => {
             const currentY = e.changedTouches[0].clientY;
@@ -423,7 +516,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 logoCont.style.transform = 'translateY(0)';
             }
             
-            if (diffY > 60) {
+            if (!portalHasPlayedOnce && diffY > 40) {
+                handlePortalLaunch();
+            }
+        }, { passive: true });
+    }
+
+    // Click trigger on splash "ENTER MULTIVERSE" button
+    if (portalEntryTrigger) {
+        portalEntryTrigger.addEventListener('click', handlePortalLaunch);
+        portalEntryTrigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
                 handlePortalLaunch();
             }
         });
@@ -434,75 +537,45 @@ document.addEventListener('DOMContentLoaded', () => {
         enterBtn.addEventListener('click', handlePortalLaunch);
     }
 
-    // Scroll wheel trigger: scrolling down initiates launch
-    window.addEventListener('wheel', (e) => {
-        if (splashScreen.classList.contains('active-screen') && e.deltaY > 20) {
-            handlePortalLaunch();
-        }
-    });
-
-    /* ==========================================================================
-       Simulated Space Preloader
-       ========================================================================== */
-    const logPool = [
-        "Analyzing spatial metrics... OK",
-        "Charging warp coils... 100% power",
-        "Synapse link established with Tech Verse... OK",
-        "Syncing acoustic frequencies of Cult Verse... OK",
-        "Aligning coordinate vector grid for Game Verse... OK",
-        "Verifying entrepreneur startup portal... OK",
-        "Resolving social drive coordinates... OK",
-        "Stabilizing dimensional continuum... READY"
-    ];
-
-    function triggerPreloader() {
-        warpActive = true;
-        targetWarpSpeed = 48; // Max warp speed stars
-        
-        let percentage = 70;
-        let logIndex = 0;
-        
-        // Progress Count Animation
-        const interval = setInterval(() => {
-            percentage += Math.floor(Math.random() * 4) + 1;
-            
-            if (percentage >= 100) {
-                percentage = 100;
-                clearInterval(interval);
-                
-                // Finalize entry to universe scroll system
-                setTimeout(enterUniverse, 800);
-            }
-            
-            loaderPercentage.textContent = `${percentage}%`;
-
-            // Append mock terminal logs dynamically
-            if (percentage % 4 === 0 && logIndex < logPool.length) {
-                const line = document.createElement('div');
-                line.className = 'log-line';
-                line.textContent = `> ${logPool[logIndex]}`;
-                terminalLogs.appendChild(line);
-                terminalLogs.scrollTop = terminalLogs.scrollHeight;
-                logIndex++;
-            }
-        }, 120);
-    }
-
     function enterUniverse() {
-        // Drop loader, display Scroll Container
-        loaderScreen.classList.remove('active-screen');
-        loaderScreen.classList.add('hidden');
-        
-        // Restore splash screen state so user can scroll back up to it
-        splashScreen.classList.remove('hidden');
-        splashScreen.classList.add('active-screen');
-        
+        if (!loaderScreen.classList.contains('active-screen') && !portalPlaybackActive) return;
+
+        // Flash burst into the multiverse
+        if (portalFlashOverlay) {
+            portalFlashOverlay.classList.add('active-flash');
+        }
+
         setTimeout(() => {
+            // Stop and clean up video
+            if (portalVideo) {
+                portalVideo.pause();
+                portalVideo.ontimeupdate = null;
+                portalVideo.onended = null;
+            }
+
+            // Drop loader, display Scroll Container
+            loaderScreen.classList.remove('active-screen');
+            loaderScreen.classList.add('hidden');
+            
+            // Restore splash screen state in background
+            splashScreen.classList.remove('hidden');
+            splashScreen.classList.add('active-screen');
+
+            // Fade out the dimensional flash overlay smoothly
+            if (portalFlashOverlay) {
+                portalFlashOverlay.classList.add('fade-out');
+                setTimeout(() => {
+                    portalFlashOverlay.classList.remove('active-flash', 'fade-out');
+                }, 800);
+            }
+
             // Enable scrolling snaps on container
             mainScrollContainer.classList.add('scroll-enabled');
             
             warpActive = false;
             targetWarpSpeed = 0.35; // Calm floating space stars
+            portalPlaybackActive = false;
+            isSwiping = false;
 
             // Fade in floating top navigation wheel
             const navWheel = document.getElementById('cosmic-nav-wheel');
@@ -522,7 +595,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Render the Portal Network graph
             renderPortalNetwork();
-        }, 400);
+        }, 350);
     }
 
     /* ==========================================================================
@@ -547,6 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = item.getAttribute('data-target');
             const targetSec = document.getElementById(targetId);
             if (targetSec) {
+                triggerPageGlitch(targetSec);
                 targetSec.scrollIntoView({ behavior: 'smooth' });
             }
         });
@@ -558,10 +632,47 @@ document.addEventListener('DOMContentLoaded', () => {
         threshold: 0.5 // Highlight tab when section is at least 50% in view
     };
 
+    const glitchOverlay = document.getElementById('screen-glitch-overlay');
+    function triggerPageGlitch(targetSec) {
+        if (!glitchOverlay) return;
+
+        // Restart screen glitch overlay transition (50ms ultra fast duration)
+        glitchOverlay.classList.remove('glitch-active');
+        void glitchOverlay.offsetWidth; // Force reflow
+        glitchOverlay.classList.add('glitch-active');
+
+        // Trigger Spider-Verse title glitch on target section titles (or document)
+        const targetContainer = targetSec || document;
+        const titlesToGlitch = targetContainer.querySelectorAll('.spider-title, .logo-title, .calendar-page-heading, .universe-page-heading, .gallery-page-heading, .about-page-heading, [data-text]');
+
+        titlesToGlitch.forEach(title => {
+            title.classList.remove('spider-glitch-active');
+            void title.offsetWidth; // Force reflow
+            title.classList.add('spider-glitch-active');
+        });
+
+        // Automatically clean up glitch active states after 50ms
+        setTimeout(() => {
+            glitchOverlay.classList.remove('glitch-active');
+            titlesToGlitch.forEach(title => {
+                title.classList.remove('spider-glitch-active');
+            });
+        }, 50);
+    }
+
+    let lastSectionId = null;
     const navObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const sectionId = entry.target.id;
+                
+                // Trigger Spider-Verse glitch animation when transitioning between snap pages
+                if (lastSectionId && lastSectionId !== sectionId) {
+                    const activeSec = document.getElementById(sectionId);
+                    triggerPageGlitch(activeSec);
+                }
+                lastSectionId = sectionId;
+
                 navItems.forEach(item => {
                     if (item.getAttribute('data-target') === sectionId) {
                         item.classList.add('active');
@@ -1625,6 +1736,7 @@ document.addEventListener('DOMContentLoaded', () => {
         aboutGalleryBtn.addEventListener('click', () => {
             const gallerySec = document.getElementById('gallery-page');
             if (gallerySec) {
+                triggerPageGlitch(gallerySec);
                 gallerySec.scrollIntoView({ behavior: 'smooth' });
             }
         });
