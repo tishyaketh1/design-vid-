@@ -1,39 +1,50 @@
-document.addEventListener('DOMContentLoaded', () => {
+/* ==========================================================================
+   Pravaah 2026: Immersive Multiverse Fest JS Application Code
+   ========================================================================== */
 
+document.addEventListener('DOMContentLoaded', () => {
+    // DOM Screen Elements
     const canvas = document.getElementById('starfield-canvas');
+    const ctx = canvas.getContext('2d');
     const splashScreen = document.getElementById('splash-screen');
     const loaderScreen = document.getElementById('loader-screen');
     const mainScrollContainer = document.getElementById('main-scroll-container');
     const calendarPage = document.getElementById('calendar-page');
     const universePage = document.getElementById('universe-page');
-
+    
+    // Splash & Preloader Trigger elements
     const swipeTrigger = document.getElementById('swipe-trigger');
     const enterBtn = document.getElementById('enter-btn');
     const loaderPercentage = document.getElementById('loader-percentage');
     const terminalLogs = document.getElementById('terminal-logs');
-
+    
+    // Calendar 3D Cube Viewport Elements
     const calendarCubeViewport = document.getElementById('calendar-cube-viewport');
     const calendarCube = document.getElementById('calendar-cube');
     const calendarLayoutContainer = document.getElementById('calendar-layout-container');
     const faceFeb = document.getElementById('face-feb');
     const faceMar = document.getElementById('face-mar');
     const faceApr = document.getElementById('face-apr');
-
+    
+    // Sidebar Details & Collapse Reset button
     const dayEventsPanel = document.getElementById('day-events-panel');
     const backToCubeBtn = document.getElementById('back-to-cube-btn');
     const calendarPanelTitle = document.getElementById('calendar-panel-title');
     const calendarPanelDate = document.getElementById('calendar-panel-date');
     const calendarEventsList = document.getElementById('calendar-events-list');
 
+    // Portal Network viewport elements
     const portalNetworkContainer = document.getElementById('portal-network-container');
     const portalOrbitWrapper = document.getElementById('portal-orbit-wrapper');
     const networkSvg = document.getElementById('network-svg');
     const pravaahCore = document.getElementById('pravaah-core');
 
+    // Dynamic orbital synchronization parameters
     let orbitAngle = 0;
     let isOrbitPaused = false;
     let isNetworkDeployed = false;
 
+    // Verse Event Details Modal & Toast Elements
     const eventModal = document.getElementById('event-modal');
     const closeModalBtn = document.getElementById('close-modal-btn');
     const modalVerseBadge = document.getElementById('modal-verse-badge');
@@ -42,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const eventsGrid = document.getElementById('events-grid');
     const toast = document.getElementById('toast-notification');
 
+    // Event Data for the 5 Verses (4-5 events each as requested)
     const verseData = {
         tech: {
             title: "TECH VERSE",
@@ -123,193 +135,254 @@ document.addEventListener('DOMContentLoaded', () => {
         { key: 'social', label: 'SOCIAL VERSE', color: 'var(--social-color)', angle: 198 }
     ];
 
+    // Helper: Generate Mock Form Registration Link
     function getRegistrationLink(eventName) {
         return `https://docs.google.com/forms/d/e/1FAIpQLScJp86gL9E-Pravaah2026MockForm/viewform?usp=pp_url&entry.18473822=${encodeURIComponent(eventName)}`;
     }
 
-    function initPortalSimulation() {
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        let width = (canvas.width = window.innerWidth);
-        let height = (canvas.height = window.innerHeight);
-
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetMouseX = 0;
-        let targetMouseY = 0;
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-
-        window.addEventListener('mousemove', (e) => {
-            targetMouseX = (e.clientX - width / 2) * 0.035;
-            targetMouseY = (e.clientY - height / 2) * 0.035;
-        });
-
-        const numAmbient = 160;
-        const ambientStars = [];
-        for (let i = 0; i < numAmbient; i++) {
-            ambientStars.push({
-                x: Math.random() * 2500,
-                y: Math.random() * 1600,
-                size: 0.6 + Math.random() * 1.5,
-                depth: 0.15 + Math.random() * 0.65,
-                twinkle: Math.random() * Math.PI * 2,
-                twinkleSpeed: 0.015 + Math.random() * 0.025,
-                color: i % 5 === 0 ? 'rgba(0, 210, 255,' : i % 8 === 0 ? 'rgba(230, 38, 120,' : 'rgba(255, 255, 255,'
-            });
-        }
-
-        const colors = [
-            [0, 210, 255],
-            [230, 38, 120],
-            [255, 42, 75],
-            [255, 170, 0],
-            [255, 255, 255]
-        ];
-
-        const numOrbits = 130;
-        const orbitalParticles = [];
-        for (let i = 0; i < numOrbits; i++) {
-            const c = colors[Math.floor(Math.random() * colors.length)];
-            orbitalParticles.push({
-                radiusRel: 0.28 + Math.random() * 1.35,
-                angle: Math.random() * Math.PI * 2,
-                angularSpeed: (0.005 + Math.random() * 0.014) * (Math.random() < 0.15 ? -1 : 1),
-                radialAmp: 6 + Math.random() * 18,
-                radialFreq: 1.2 + Math.random() * 2.5,
-                phase: Math.random() * Math.PI * 2,
-                size: 1.1 + Math.random() * 2.0,
-                alpha: 0.35 + Math.random() * 0.55,
-                color: c,
-                trail: []
-            });
-        }
-
-        const numHex = 28;
-        const hexStreamers = [];
-        for (let i = 0; i < numHex; i++) {
-            const ringScale = 0.55 + (i % 3) * 0.36;
-            const c = colors[i % colors.length];
-            hexStreamers.push({
-                progress: Math.random(),
-                speed: 0.0016 + Math.random() * 0.0028,
-                ringScale: ringScale,
-                color: c,
-                size: 1.4 + Math.random() * 1.8,
-                trail: []
-            });
-        }
-
-        function getHexCoord(cx, cy, radius, progress) {
-            const totalSides = 6;
-            const p = ((progress % 1) + 1) % 1;
-            const sideFloat = p * totalSides;
-            const sideIndex = Math.floor(sideFloat);
-            const sideFraction = sideFloat - sideIndex;
-
-            const a1 = (sideIndex * Math.PI) / 3 - Math.PI / 6;
-            const a2 = ((sideIndex + 1) * Math.PI) / 3 - Math.PI / 6;
-
-            const x1 = cx + Math.cos(a1) * radius;
-            const y1 = cy + Math.sin(a1) * radius;
-            const x2 = cx + Math.cos(a2) * radius;
-            const y2 = cy + Math.sin(a2) * radius;
-
-            return {
-                x: x1 + (x2 - x1) * sideFraction,
-                y: y1 + (y2 - y1) * sideFraction
-            };
-        }
-
-        let time = 0;
-        function render() {
-            time += 0.016;
-            mouseX += (targetMouseX - mouseX) * 0.05;
-            mouseY += (targetMouseY - mouseY) * 0.05;
-
-            ctx.clearRect(0, 0, width, height);
-
-            const portalCx = width * 0.5 + mouseX;
-            const portalCy = height * 0.46 + mouseY;
-            const baseRadius = Math.min(width, height) * 0.24;
-
-            for (let i = 0; i < numAmbient; i++) {
-                const s = ambientStars[i];
-                s.twinkle += s.twinkleSpeed;
-                const alpha = 0.2 + 0.6 * (0.5 + 0.5 * Math.sin(s.twinkle));
-                const sx = (s.x + mouseX * s.depth * 0.5 + width) % width;
-                const sy = (s.y + mouseY * s.depth * 0.5 + height) % height;
-
-                ctx.fillStyle = s.color + alpha + ')';
-                ctx.beginPath();
-                ctx.arc(sx, sy, s.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            for (let i = 0; i < numHex; i++) {
-                const h = hexStreamers[i];
-                h.progress += h.speed;
-                const hexRadius = baseRadius * h.ringScale;
-                const pos = getHexCoord(portalCx, portalCy, hexRadius, h.progress);
-
-                h.trail.push({ x: pos.x, y: pos.y });
-                if (h.trail.length > 7) h.trail.shift();
-
-                if (h.trail.length > 1) {
-                    ctx.beginPath();
-                    ctx.moveTo(h.trail[0].x, h.trail[0].y);
-                    for (let k = 1; k < h.trail.length; k++) {
-                        ctx.lineTo(h.trail[k].x, h.trail[k].y);
-                    }
-                    ctx.strokeStyle = 'rgba(' + h.color[0] + ',' + h.color[1] + ',' + h.color[2] + ', 0.4)';
-                    ctx.lineWidth = h.size * 0.8;
-                    ctx.stroke();
-                }
-
-                ctx.fillStyle = 'rgba(' + h.color[0] + ',' + h.color[1] + ',' + h.color[2] + ', 0.85)';
-                ctx.beginPath();
-                ctx.arc(pos.x, pos.y, h.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            for (let i = 0; i < numOrbits; i++) {
-                const p = orbitalParticles[i];
-                p.angle += p.angularSpeed;
-
-                const curRadius = baseRadius * p.radiusRel + Math.sin(time * p.radialFreq + p.phase) * p.radialAmp;
-                const px = portalCx + Math.cos(p.angle) * curRadius;
-                const py = portalCy + Math.sin(p.angle) * (curRadius * 0.88);
-
-                p.trail.push({ x: px, y: py });
-                if (p.trail.length > 6) p.trail.shift();
-
-                if (p.trail.length > 1) {
-                    ctx.beginPath();
-                    ctx.moveTo(p.trail[0].x, p.trail[0].y);
-                    for (let k = 1; k < p.trail.length; k++) {
-                        ctx.lineTo(p.trail[k].x, p.trail[k].y);
-                    }
-                    ctx.strokeStyle = 'rgba(' + p.color[0] + ',' + p.color[1] + ',' + p.color[2] + ', ' + (p.alpha * 0.35) + ')';
-                    ctx.lineWidth = p.size * 0.7;
-                    ctx.stroke();
-                }
-
-                ctx.fillStyle = 'rgba(' + p.color[0] + ',' + p.color[1] + ',' + p.color[2] + ', ' + p.alpha + ')';
-                ctx.beginPath();
-                ctx.arc(px, py, p.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            requestAnimationFrame(render);
-        }
-        render();
+    // Canvas Resize Handler
+    let width, height;
+    function resizeCanvas() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
     }
-    initPortalSimulation();
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
+    /* ==========================================================================
+       Starfield Engine (HTML5 Canvas 2D) with Twinkling Effect
+       ========================================================================== */
+    const numStars = 1500;
+    const stars = [];
+    let warpSpeed = 0.5; // Steady cosmic state speed
+    let targetWarpSpeed = 0.5;
+    let warpActive = false;
+    let cameraDriftX = 0;
+    let cameraDriftY = 0;
+
+    // Initialize Stars with Twinkle phase parameters
+    for (let i = 0; i < numStars; i++) {
+        stars.push({
+            x: (Math.random() - 0.5) * 2000,
+            y: (Math.random() - 0.5) * 2000,
+            z: Math.random() * 2000,
+            twinklePhase: Math.random() * Math.PI * 2,
+            twinkleSpeed: 0.015 + Math.random() * 0.025,
+            color: i % 8 === 0 
+                ? [0, 210, 255]   // Cyan
+                : i % 12 === 0 
+                ? [230, 38, 120]  // Spider-Verse Magenta
+                : i % 18 === 0
+                ? [59, 98, 216]   // Portal Cobalt Blue
+                : [255, 255, 255] // Pure White
+        });
+    }
+
+    // Background comets array & initialization (3D perspective floating outwards)
+    const numComets = 14;
+    const comets = [];
+    for (let i = 0; i < numComets; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 150 + Math.random() * 850;
+        comets.push({
+            x: Math.cos(angle) * distance,
+            y: Math.sin(angle) * distance,
+            z: Math.random() * 2000,
+            speed: 8 + Math.random() * 12,
+            color: i % 4 === 0 
+                ? [0, 210, 255]  // Electric Cyan
+                : i % 4 === 1 
+                ? [230, 38, 120] // Hot Magenta
+                : i % 4 === 2
+                ? [255, 42, 75]  // Comic Vermilion
+                : [255, 170, 0]  // Mumbattan Amber
+        });
+    }
+
+    // Shooting Stars simulator array & updater
+    const shootingStars = [];
+    function handleShootingStars() {
+        // Spawn a new shooting star at random times
+        if (shootingStars.length < 2 && Math.random() < 0.008) {
+            shootingStars.push({
+                x: Math.random() * width,
+                y: Math.random() * height * 0.5,
+                length: 60 + Math.random() * 90,
+                dx: 8 + Math.random() * 10,
+                dy: 4 + Math.random() * 5,
+                alpha: 1
+            });
+        }
+
+        // Draw and update active shooting stars
+        for (let i = shootingStars.length - 1; i >= 0; i--) {
+            const ss = shootingStars[i];
+            ctx.strokeStyle = `rgba(230, 38, 120, ${ss.alpha})`;
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(ss.x, ss.y);
+            ctx.lineTo(ss.x - ss.dx * 1.5, ss.y - ss.dy * 1.5);
+            ctx.stroke();
+
+            ss.x += ss.dx;
+            ss.y += ss.dy;
+            ss.alpha -= 0.03; // Fade speed
+
+            if (ss.alpha <= 0 || ss.x > width || ss.y > height) {
+                shootingStars.splice(i, 1);
+            }
+        }
+    }
+
+    // Starfield Animation Loop
+    function animateStars() {
+        if (warpActive) {
+            ctx.fillStyle = `rgba(2, 2, 8, ${0.1 + (1 - warpSpeed/50) * 0.2})`;
+            ctx.fillRect(0, 0, width, height);
+        } else {
+            ctx.clearRect(0, 0, width, height);
+        }
+
+        // Render shooting stars on canvas background
+        handleShootingStars();
+
+        // Smoothly interpolate warp speed
+        warpSpeed += (targetWarpSpeed - warpSpeed) * 0.08;
+
+        const cx = width / 2 + cameraDriftX;
+        const cy = height / 2 + cameraDriftY;
+        const fov = 180;
+
+        for (let i = 0; i < numStars; i++) {
+            const star = stars[i];
+            
+            // Draw star lines during warp, circles during normal state
+            const prevZ = star.z;
+            star.z -= warpSpeed;
+
+            if (star.z <= 0) {
+                star.z = 2000;
+                star.x = (Math.random() - 0.5) * 2000;
+                star.y = (Math.random() - 0.5) * 2000;
+                continue;
+            }
+
+            // Calculate twinkling brightness multiplier
+            const twinkleVal = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(star.twinklePhase));
+            star.twinklePhase += star.twinkleSpeed;
+
+            // Project 3D coordinates to 2D screen
+            const px = cx + (star.x / prevZ) * fov;
+            const py = cy + (star.y / prevZ) * fov;
+
+            const sx = cx + (star.x / star.z) * fov;
+            const sy = cy + (star.y / star.z) * fov;
+
+            // Render only if on screen
+            if (sx >= 0 && sx < width && sy >= 0 && sy < height) {
+                const alpha = Math.min(1, (2000 - star.z) / 500) * twinkleVal;
+                ctx.strokeStyle = `rgba(${star.color[0]}, ${star.color[1]}, ${star.color[2]}, ${alpha})`;
+                
+                if (warpSpeed > 5) {
+                    // Warp speed: Stretch into lines
+                    ctx.lineWidth = Math.min(2.5, warpSpeed / 10);
+                    ctx.beginPath();
+                    ctx.moveTo(px, py);
+                    ctx.lineTo(sx, sy);
+                    ctx.stroke();
+                } else {
+                    // Floating state: Small twinkling dots
+                    const size = Math.max(0.5, (1 - star.z / 2000) * 3);
+                    ctx.fillStyle = `rgba(${star.color[0]}, ${star.color[1]}, ${star.color[2]}, ${alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
+
+        // Render background comets flowing outwards from center
+        for (let i = 0; i < numComets; i++) {
+            const comet = comets[i];
+            
+            // Scale speed with warp speed if active
+            const currentSpeed = comet.speed * (warpSpeed > 1 ? (warpSpeed * 0.8) : 1);
+            comet.z -= currentSpeed;
+
+            if (comet.z <= 0) {
+                comet.z = 2000;
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 150 + Math.random() * 850;
+                comet.x = Math.cos(angle) * distance;
+                comet.y = Math.sin(angle) * distance;
+                comet.speed = 8 + Math.random() * 12;
+                continue;
+            }
+
+            const sx = cx + (comet.x / comet.z) * fov;
+            const sy = cy + (comet.y / comet.z) * fov;
+
+            // Render only if on screen (with padding for tails)
+            if (sx >= -100 && sx < width + 100 && sy >= -100 && sy < height + 100) {
+                // Calculate radial depth progress factor (0 at center, 1 at viewport borders)
+                const radialFactor = 1 - (comet.z / 2000);
+                
+                // Fade in near Z=2000, and scale up brightness (alpha) as it reaches the outer part
+                const alpha = Math.min(1, (2000 - comet.z) / 300) * (0.35 + 0.65 * radialFactor) * Math.min(1, comet.z / 60);
+                
+                // Apply a glowing drop shadow when reaching the outer part of the viewport
+                if (radialFactor > 0.45) {
+                    ctx.shadowColor = `rgb(${comet.color[0]}, ${comet.color[1]}, ${comet.color[2]})`;
+                    ctx.shadowBlur = (radialFactor - 0.45) * 30;
+                } else {
+                    ctx.shadowBlur = 0;
+                }
+
+                // Tail coordinate projection (Z + tailLength)
+                const tailZ = comet.z + 180 + (comet.speed * 4);
+                const px = cx + (comet.x / tailZ) * fov;
+                const py = cy + (comet.y / tailZ) * fov;
+
+                // Create tail gradient pointing to the center
+                const grad = ctx.createLinearGradient(sx, sy, px, py);
+                grad.addColorStop(0, `rgba(${comet.color[0]}, ${comet.color[1]}, ${comet.color[2]}, ${alpha * 0.7})`);
+                grad.addColorStop(1, `rgba(${comet.color[0]}, ${comet.color[1]}, ${comet.color[2]}, 0)`);
+
+                ctx.strokeStyle = grad;
+                // Line width grows thicker as it flies outward
+                ctx.lineWidth = Math.max(1.2, (0.4 + radialFactor * 1.6) * 3.2);
+                ctx.beginPath();
+                ctx.moveTo(sx, sy);
+                ctx.lineTo(px, py);
+                ctx.stroke();
+
+                // Draw comet head (grows larger as it flies outward)
+                const headSize = Math.max(1.5, (0.4 + radialFactor * 1.6) * 4.2);
+                ctx.fillStyle = `rgba(${comet.color[0]}, ${comet.color[1]}, ${comet.color[2]}, ${alpha})`;
+                ctx.beginPath();
+                ctx.arc(sx, sy, headSize, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Reset shadow blur
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        requestAnimationFrame(animateStars);
+    }
+    animateStars();
+
+    // Mouse movement adds subtle camera drift
+    window.addEventListener('mousemove', (e) => {
+        if (!warpActive) {
+            cameraDriftX = (e.clientX - width / 2) * 0.05;
+            cameraDriftY = (e.clientY - height / 2) * 0.05;
+        }
+    });
+
+    /* ==========================================================================
+       Full Viewport Muted Dimensional Portal Video (Plays Once on Start Scroll)
+       ========================================================================== */
     const portalVideo = document.getElementById('portal-video');
     const portalFlashOverlay = document.getElementById('portal-flash-overlay');
     const portalEntryTrigger = document.getElementById('portal-entry-trigger');
@@ -320,6 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let portalHasPlayedOnce = false;
     let flashTriggered = false;
 
+    // Ensure video is muted and properties set
     if (portalVideo) {
         portalVideo.muted = true;
         portalVideo.volume = 0;
@@ -330,13 +404,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handlePortalLaunch() {
-
+        // If already played once or currently playing, do not play again
         if (portalHasPlayedOnce || portalPlaybackActive) {
-
+            // If already played once and user clicks enter button, scroll directly to calendar page
             if (portalHasPlayedOnce) {
-                const targetPage = document.getElementById('about-page') || document.getElementById('calendar-page');
-                if (targetPage) {
-                    targetPage.scrollIntoView({ behavior: 'smooth' });
+                const calendarPage = document.getElementById('calendar-page');
+                if (calendarPage) {
+                    calendarPage.scrollIntoView({ behavior: 'smooth' });
                 }
             }
             return;
@@ -346,37 +420,46 @@ document.addEventListener('DOMContentLoaded', () => {
         portalHasPlayedOnce = true;
         flashTriggered = false;
 
+        // Transition from Splash to Fullscreen Portal Video Screen
         splashScreen.classList.remove('active-screen');
         splashScreen.classList.add('hidden');
-
+        
         loaderScreen.classList.remove('hidden');
         loaderScreen.classList.add('active-screen');
-
+        
+        // Reset flash overlay
         if (portalFlashOverlay) {
             portalFlashOverlay.classList.remove('active-flash', 'fade-out');
         }
 
+        // Start starfield warp speed in background
+        warpActive = true;
+        targetWarpSpeed = 50;
+
+        // Reset and play Muted Portal Video at 2x speed
         if (portalVideo) {
             portalVideo.currentTime = 0;
             portalVideo.defaultPlaybackRate = 2.0;
             portalVideo.playbackRate = 2.0;
             portalVideo.muted = true;
             portalVideo.volume = 0;
-
+            
             const playPromise = portalVideo.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     portalVideo.playbackRate = 2.0;
                 }).catch(e => {
                     console.warn("Video play notice:", e);
-
+                    // If video cannot play, fallback to immediate universe entrance
                     enterUniverse();
                 });
             }
 
+            // Track playback time to trigger flash transition at ~8.6s
             portalVideo.ontimeupdate = () => {
                 const currentTime = portalVideo.currentTime;
 
+                // Trigger Whiteout Burst at climactic flash (~8.6s)
                 if (currentTime >= 8.6 && !flashTriggered) {
                     flashTriggered = true;
                     if (portalFlashOverlay) {
@@ -384,6 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
+                // Complete portal entry right as 9s completes
                 if (currentTime >= 8.95) {
                     enterUniverse();
                 }
@@ -397,12 +481,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Start scroll via mouse wheel: scrolling down on splash screen triggers portal video once
     window.addEventListener('wheel', (e) => {
         if (!portalHasPlayedOnce && splashScreen.classList.contains('active-screen') && e.deltaY > 15) {
             handlePortalLaunch();
         }
     }, { passive: true });
 
+    // Touch swipe up on splash screen triggers portal video once
     if (splashScreen) {
         splashScreen.addEventListener('touchstart', (e) => {
             startY = e.touches[0].clientY;
@@ -411,7 +497,8 @@ document.addEventListener('DOMContentLoaded', () => {
         splashScreen.addEventListener('touchmove', (e) => {
             const currentY = e.touches[0].clientY;
             const diffY = startY - currentY;
-
+            
+            // Visual feedback on logo container if not played yet
             if (!portalHasPlayedOnce) {
                 const logoCont = document.querySelector('.logo-container');
                 if (logoCont && diffY > 0 && diffY < 120) {
@@ -423,18 +510,19 @@ document.addEventListener('DOMContentLoaded', () => {
         splashScreen.addEventListener('touchend', (e) => {
             const currentY = e.changedTouches[0].clientY;
             const diffY = startY - currentY;
-
+            
             const logoCont = document.querySelector('.logo-container');
             if (logoCont) {
                 logoCont.style.transform = 'translateY(0)';
             }
-
+            
             if (!portalHasPlayedOnce && diffY > 40) {
                 handlePortalLaunch();
             }
         }, { passive: true });
     }
 
+    // Click trigger on splash "ENTER MULTIVERSE" button
     if (portalEntryTrigger) {
         portalEntryTrigger.addEventListener('click', handlePortalLaunch);
         portalEntryTrigger.addEventListener('keydown', (e) => {
@@ -444,6 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Fallback enter button click (if present)
     if (enterBtn) {
         enterBtn.addEventListener('click', handlePortalLaunch);
     }
@@ -451,24 +540,28 @@ document.addEventListener('DOMContentLoaded', () => {
     function enterUniverse() {
         if (!loaderScreen.classList.contains('active-screen') && !portalPlaybackActive) return;
 
+        // Flash burst into the multiverse
         if (portalFlashOverlay) {
             portalFlashOverlay.classList.add('active-flash');
         }
 
         setTimeout(() => {
-
+            // Stop and clean up video
             if (portalVideo) {
                 portalVideo.pause();
                 portalVideo.ontimeupdate = null;
                 portalVideo.onended = null;
             }
 
+            // Drop loader, display Scroll Container
             loaderScreen.classList.remove('active-screen');
             loaderScreen.classList.add('hidden');
-
+            
+            // Restore splash screen state in background
             splashScreen.classList.remove('hidden');
             splashScreen.classList.add('active-screen');
 
+            // Fade out the dimensional flash overlay smoothly
             if (portalFlashOverlay) {
                 portalFlashOverlay.classList.add('fade-out');
                 setTimeout(() => {
@@ -476,32 +569,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 800);
             }
 
+            // Enable scrolling snaps on container
             mainScrollContainer.classList.add('scroll-enabled');
-
+            
+            warpActive = false;
+            targetWarpSpeed = 0.35; // Calm floating space stars
             portalPlaybackActive = false;
             isSwiping = false;
 
+            // Fade in floating top navigation wheel
             const navWheel = document.getElementById('cosmic-nav-wheel');
             if (navWheel) {
                 navWheel.classList.remove('hidden-nav');
                 setTimeout(updateNavPill, 100);
             }
-
-            const targetPage = document.getElementById('about-page') || document.getElementById('calendar-page');
-            if (targetPage) {
-                targetPage.scrollIntoView({ behavior: 'smooth' });
+            
+            // Smoothly scroll down to the calendar page (timeline)
+            const calendarPage = document.getElementById('calendar-page');
+            if (calendarPage) {
+                calendarPage.scrollIntoView({ behavior: 'smooth' });
             }
-
+            
+            // Render the 3D Month Cube calendars
             generateCalendarCube();
 
+            // Render the Portal Network graph
             renderPortalNetwork();
         }, 350);
     }
 
+    /* ==========================================================================
+       Scroll Snap Page Transition Listeners (Starfield Canvas Blurring & Nav Sync)
+       ========================================================================== */
     mainScrollContainer.addEventListener('scroll', () => {
         const scrollTop = mainScrollContainer.scrollTop;
         const pageHeight = window.innerHeight;
 
+        // If scrolled past 40% of the first snap section, trigger blurring and nebula glows
         if (scrollTop > pageHeight * 0.4) {
             document.body.classList.add('universe-active');
         } else {
@@ -509,6 +613,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Cosmic Nav click scroll snap handlers
     const navItems = document.querySelectorAll('.nav-item');
     navItems.forEach(item => {
         item.addEventListener('click', () => {
@@ -521,28 +626,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Intersection Observer to sync Scroll Snaps back to Nav Wheel highlights
     const observerOptions = {
         root: mainScrollContainer,
-        threshold: 0.5
+        threshold: 0.5 // Highlight tab when section is at least 50% in view
     };
 
     const glitchOverlay = document.getElementById('screen-glitch-overlay');
     function triggerPageGlitch(targetSec) {
         if (!glitchOverlay) return;
 
+        // Restart screen glitch overlay transition (50ms ultra fast duration)
         glitchOverlay.classList.remove('glitch-active');
-        void glitchOverlay.offsetWidth;
+        void glitchOverlay.offsetWidth; // Force reflow
         glitchOverlay.classList.add('glitch-active');
 
+        // Trigger Spider-Verse title glitch on target section titles (or document)
         const targetContainer = targetSec || document;
-        const titlesToGlitch = targetContainer.querySelectorAll('.spider-title, .logo-title, .calendar-page-heading, .universe-page-heading, .gallery-page-heading, .about-page-heading, .team-page-heading, [data-text]');
+        const titlesToGlitch = targetContainer.querySelectorAll('.spider-title, .logo-title, .calendar-page-heading, .universe-page-heading, .gallery-page-heading, .about-page-heading, [data-text]');
 
         titlesToGlitch.forEach(title => {
             title.classList.remove('spider-glitch-active');
-            void title.offsetWidth;
+            void title.offsetWidth; // Force reflow
             title.classList.add('spider-glitch-active');
         });
 
+        // Automatically clean up glitch active states after 50ms
         setTimeout(() => {
             glitchOverlay.classList.remove('glitch-active');
             titlesToGlitch.forEach(title => {
@@ -556,7 +665,8 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const sectionId = entry.target.id;
-
+                
+                // Trigger Spider-Verse glitch animation when transitioning between snap pages
                 if (lastSectionId && lastSectionId !== sectionId) {
                     const activeSec = document.getElementById(sectionId);
                     triggerPageGlitch(activeSec);
@@ -579,6 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navObserver.observe(section);
     });
 
+    // Helper: recalculates navigation capsule offsets and active glows
     function updateNavPill() {
         const activeItem = document.querySelector('.nav-item.active');
         const pill = document.getElementById('nav-indicator-pill');
@@ -586,24 +697,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeItem && pill && navWheel) {
             pill.style.left = `${activeItem.offsetLeft}px`;
             pill.style.width = `${activeItem.offsetWidth}px`;
-
+            
+            // Set data active theme based on target id
             const targetId = activeItem.getAttribute('data-target');
             let theme = "home";
-            if (targetId === "about-page") theme = "about";
-            else if (targetId === "calendar-page") theme = "calendar";
+            if (targetId === "calendar-page") theme = "calendar";
             else if (targetId === "universe-page") theme = "portals";
             else if (targetId === "gallery-page") theme = "gallery";
-            else if (targetId === "team-page") theme = "team";
-
+            else if (targetId === "about-page") theme = "about";
+            
             navWheel.setAttribute('data-active-theme', theme);
         }
     }
 
+    /* ==========================================================================
+       Interactive Portal Network Generator (Branching Node System)
+       ========================================================================== */
     let activeVerse = null;
 
     function renderPortalNetwork() {
         if (!portalNetworkContainer) return;
 
+        // Clear dynamic elements
         document.querySelectorAll('.portal-node, .branch-event-node').forEach(el => el.remove());
         networkSvg.innerHTML = '';
 
@@ -615,6 +730,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const rPortal = isMobile ? rect.width * 0.28 : rect.width * 0.26;
         const rEvent = isMobile ? rect.width * 0.46 : rect.width * 0.42;
 
+        // Draw central core ring inside SVG
         const coreRing = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         coreRing.setAttribute("cx", cx);
         coreRing.setAttribute("cy", cy);
@@ -626,11 +742,13 @@ document.addEventListener('DOMContentLoaded', () => {
         coreRing.style.transition = "opacity 1.2s ease 0.4s";
         networkSvg.appendChild(coreRing);
 
+        // Generate Verse Portals and branches
         verses.forEach((verse) => {
             const rad = (verse.angle * Math.PI) / 180;
             const px = cx + Math.cos(rad) * rPortal;
             const py = cy + Math.sin(rad) * rPortal;
 
+            // 1. Draw SVG Connection: Core -> Portal
             const coreLine = document.createElementNS("http://www.w3.org/2000/svg", "path");
             coreLine.setAttribute("d", `M ${cx} ${cy} L ${px} ${py}`);
             coreLine.setAttribute("stroke", verse.color);
@@ -642,9 +760,10 @@ document.addEventListener('DOMContentLoaded', () => {
             coreLine.style.transition = "opacity 1.2s ease 0.4s";
             networkSvg.appendChild(coreLine);
 
+            // 2. Create Portal Node
             const portal = document.createElement('div');
             portal.className = `portal-node portal-${verse.key}`;
-
+            
             if (isNetworkDeployed) {
                 portal.style.left = `${px}px`;
                 portal.style.top = `${py}px`;
@@ -661,12 +780,12 @@ document.addEventListener('DOMContentLoaded', () => {
             portal.setAttribute('data-target-left', px);
             portal.setAttribute('data-target-top', py);
             portal.setAttribute('data-verse', verse.key);
-
+            // Compute dynamic nested moons
             const numMoons = (verse.key === 'tech' || verse.key === 'game') ? 2 : 1;
             let moonsHTML = '';
             for (let m = 0; m < numMoons; m++) {
-                const orbitSpeed = 6 + m * 5;
-                const moonOffset = isMobile ? (35 + m * 6) : (65 + m * 10);
+                const orbitSpeed = 6 + m * 5; // 6s and 11s orbital periods
+                const moonOffset = isMobile ? (35 + m * 6) : (65 + m * 10); // offset distance from center
                 const spinAnimation = (m === 1) ? 'spin-counter' : 'spin';
                 moonsHTML += `
                     <div class="portal-moon-orbit" style="animation-name: ${spinAnimation}; animation-duration: ${orbitSpeed}s;">
@@ -684,23 +803,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
 
+            // Pause orbit on portal hover
             portal.addEventListener('mouseenter', () => { isOrbitPaused = true; });
             portal.addEventListener('mouseleave', () => { isOrbitPaused = false; });
 
             portalOrbitWrapper.appendChild(portal);
 
+            // 3. Create Event branch nodes fanned out around the portal node
             const events = verseData[verse.key].events;
             events.forEach((evt, idx) => {
-
+                // Fan out event nodes in a +-35 degree sweep centered on portal's angle
                 const sweepAngle = isMobile ? 60 : 70;
                 const halfSweep = sweepAngle / 2;
                 const angleStep = sweepAngle / (events.length - 1);
-
+                
                 const evAngle = (verse.angle - halfSweep) + idx * angleStep;
                 const evRad = (evAngle * Math.PI) / 180;
                 const ex = cx + Math.cos(evRad) * rEvent;
                 const ey = cy + Math.sin(evRad) * rEvent;
 
+                // Draw SVG Connection: Portal -> Event
                 const eventLine = document.createElementNS("http://www.w3.org/2000/svg", "path");
                 eventLine.setAttribute("d", `M ${px} ${py} L ${ex} ${ey}`);
                 eventLine.setAttribute("stroke", verse.color);
@@ -709,6 +831,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 eventLine.setAttribute("class", `path-event-${verse.key}`);
                 networkSvg.appendChild(eventLine);
 
+                // Create Event dot node
                 const eventNode = document.createElement('div');
                 eventNode.className = `branch-event-node branch-event-${verse.key}`;
                 eventNode.style.left = `${ex}px`;
@@ -722,17 +845,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
 
+                // Pause orbit on event hover
                 eventNode.addEventListener('mouseenter', () => { isOrbitPaused = true; });
                 eventNode.addEventListener('mouseleave', () => { isOrbitPaused = false; });
 
                 portalOrbitWrapper.appendChild(eventNode);
 
+                // Click event sub-node opens details modal
                 eventNode.addEventListener('click', (e) => {
                     e.stopPropagation();
                     openEventDetailModal(evt, verse.key);
                 });
             });
 
+            // Portal Click behavior
             portal.addEventListener('click', (e) => {
                 e.stopPropagation();
                 activatePortalBranch(verse.key);
@@ -740,6 +866,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Window resize rebuilds coordinates to adapt sizes
     window.addEventListener('resize', () => {
         renderPortalNetwork();
         updateNavPill();
@@ -748,11 +875,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function activatePortalBranch(verseKey) {
         activeVerse = verseKey;
 
+        // Set bracket glows matching current active verse color theme
         verses.forEach(v => {
             document.body.classList.remove(`verse-${v.key}-active`);
         });
         document.body.classList.add(`verse-${verseKey}-active`);
 
+        // Dim other portal nodes
         document.querySelectorAll('.portal-node').forEach(node => {
             if (node.getAttribute('data-verse') === verseKey) {
                 node.classList.add('active-portal');
@@ -763,9 +892,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Toggle active paths and node elements
         verses.forEach(v => {
             const isTarget = v.key === verseKey;
-
+            
+            // Core -> Portal line
             const coreLine = document.getElementById(`path-core-${v.key}`);
             if (coreLine) {
                 if (isTarget) {
@@ -781,6 +912,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Portal -> Event lines
             document.querySelectorAll(`.path-event-${v.key}`).forEach(path => {
                 if (isTarget) {
                     path.classList.add('line-active');
@@ -789,9 +921,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            // Event nodes
             document.querySelectorAll(`.branch-event-${v.key}`).forEach((node) => {
                 if (isTarget) {
-
+                    // Small delay to let branch lines animate first
                     setTimeout(() => {
                         node.classList.add('node-active');
                     }, 250);
@@ -802,6 +935,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Core Reset Handler / Big Bang Deploy Trigger
     pravaahCore.addEventListener('click', (e) => {
         e.stopPropagation();
         if (!isNetworkDeployed) {
@@ -816,31 +950,35 @@ document.addEventListener('DOMContentLoaded', () => {
         const flash = document.getElementById('big-bang-flash');
         const prompt = document.getElementById('core-deploy-prompt');
 
+        // 1. Play blinding camera-flash whiteout
         if (flash) {
             flash.classList.add('flash-active');
-
+            // Force browser reflow to register class instantly
             flash.offsetHeight;
             setTimeout(() => {
                 flash.classList.remove('flash-active');
             }, 50);
         }
 
+        // 2. Core flash scale animation
         pravaahCore.classList.add('core-flash-pulse');
         setTimeout(() => {
             pravaahCore.classList.remove('core-flash-pulse');
         }, 600);
 
+        // 3. Remove undeployed class from parent page to start HUD boot sequence
         if (universePage) {
             universePage.classList.remove('network-undeployed');
         }
 
+        // 4. Spring portals outward from center center (50%, 50%) to actual target offsets in a spiral wave
         document.querySelectorAll('.portal-node').forEach((node, idx) => {
             const targetLeft = node.getAttribute('data-target-left');
             const targetTop = node.getAttribute('data-target-top');
             if (targetLeft && targetTop) {
-
+                // Assign sequential transition delay to create spiral cascade
                 node.style.transitionDelay = `${idx * 0.12}s`;
-
+                
                 node.style.left = `${targetLeft}px`;
                 node.style.top = `${targetTop}px`;
                 node.style.transform = 'translate(-50%, -50%) scale(1)';
@@ -849,6 +987,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // 5. Fade in SVG connection lines with matching spiral delays
         document.querySelectorAll('#network-svg circle, #network-svg path').forEach(svgEl => {
             const id = svgEl.getAttribute('id');
             if (id && id.startsWith('path-core-')) {
@@ -863,6 +1002,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // 6. Fade out the deploy instructions prompt
         if (prompt) {
             prompt.classList.add('fade-out');
             setTimeout(() => {
@@ -870,23 +1010,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         }
 
+        // 7. Update persistent flag
         isNetworkDeployed = true;
     }
 
+    // Core Hover Pause
     pravaahCore.addEventListener('mouseenter', () => { isOrbitPaused = true; });
     pravaahCore.addEventListener('mouseleave', () => { isOrbitPaused = false; });
 
     function resetPortalNetwork() {
         activeVerse = null;
 
+        // Restore all portal opacities
         document.querySelectorAll('.portal-node').forEach(node => {
             node.classList.remove('active-portal', 'portal-dimmed');
         });
 
+        // Hide event nodes
         document.querySelectorAll('.branch-event-node').forEach(node => {
             node.classList.remove('node-active');
         });
 
+        // Reset SVG paths
         verses.forEach(v => {
             const coreLine = document.getElementById(`path-core-${v.key}`);
             if (coreLine) {
@@ -900,11 +1045,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // Reset bracket glows
         verses.forEach(v => {
             document.body.classList.remove(`verse-${v.key}-active`);
         });
     }
 
+    // Live Telemetry Coordinate Generator Interval
     const liveCoords = document.getElementById('live-coords');
     if (liveCoords) {
         setInterval(() => {
@@ -914,12 +1061,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
     }
 
+    // Reset when clicking empty space inside page viewport
     universePage.addEventListener('click', (e) => {
         if (e.target === universePage || e.target.classList.contains('network-viewport') || e.target.id === 'portal-network-container') {
             resetPortalNetwork();
         }
     });
 
+    /* ==========================================================================
+       Chrono Grid 3D Cube Month Generator & Face Rotations
+       ========================================================================== */
+    // Calendar Event Nodes Data (March 20 - 23)
     const calendarEventsData = {
         "20": {
             dateStr: "MARCH 20, 2026",
@@ -973,11 +1125,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const module = document.createElement('div');
             module.className = 'month-module';
 
+            // Month Label Heading
             const title = document.createElement('div');
             title.className = 'month-title';
             title.textContent = m.name;
             module.appendChild(title);
 
+            // Weekday Initials
             const dayNames = document.createElement('div');
             dayNames.className = 'day-names';
             const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
@@ -988,39 +1142,46 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             module.appendChild(dayNames);
 
+            // Day Node Grid
             const daysGrid = document.createElement('div');
             daysGrid.className = 'days-grid';
 
+            // Start Day spacer padding
             for (let i = 0; i < m.startDay; i++) {
                 const emptyCell = document.createElement('div');
                 emptyCell.className = 'calendar-day empty-day';
                 daysGrid.appendChild(emptyCell);
             }
 
+            // Insert month day cells
             for (let d = 1; d <= m.days; d++) {
                 const dayCell = document.createElement('div');
                 dayCell.className = 'calendar-day';
                 dayCell.textContent = d;
 
+                // Highlight Active nodes: March 20-23
                 const isActiveNode = (m.monthNum === 2 && d >= 20 && d <= 23);
                 if (isActiveNode) {
                     dayCell.classList.add('active-node');
                 }
 
+                // Click date behavior
                 dayCell.addEventListener('click', (e) => {
-                    e.stopPropagation();
-
+                    e.stopPropagation(); // Avoid triggering face hover resets
+                    
                     document.querySelectorAll('.calendar-day').forEach(cell => {
                         cell.classList.remove('selected');
                     });
                     dayCell.classList.add('selected');
 
+                    // Load events list in sidebar
                     if (isActiveNode) {
                         loadDailyEvents(d.toString());
                     } else {
                         loadEmptyEvents(`${d} ${m.name}`);
                     }
 
+                    // Collapse Cube view & overlay events list into focus
                     calendarCubeViewport.classList.add('cube-collapsed');
                     dayEventsPanel.classList.add('panel-visible');
                     backToCubeBtn.classList.remove('hidden-btn');
@@ -1033,6 +1194,7 @@ document.addEventListener('DOMContentLoaded', () => {
             container.appendChild(module);
         });
 
+        // Set up Hover listeners for 3D rotations
         setupCubeRotations();
     }
 
@@ -1048,21 +1210,26 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // Hover face focus angles:
+        // Front (Feb): Straight view
         faceFeb.addEventListener('mouseenter', () => {
             clearActiveArrows();
             calendarCube.style.transform = 'rotateX(-5deg) rotateY(0deg)';
         });
-
+        
+        // Top (Mar): Tilt 90deg down to face user
         faceMar.addEventListener('mouseenter', () => {
             clearActiveArrows();
             calendarCube.style.transform = 'rotateX(-90deg) rotateY(0deg)';
         });
 
+        // Right (Apr): Spin 90deg left to face user
         faceApr.addEventListener('mouseenter', () => {
             clearActiveArrows();
             calendarCube.style.transform = 'rotateX(-5deg) rotateY(-90deg)';
         });
 
+        // Reset to angled isometric perspective on mouse exit viewport (only if no arrow is active)
         calendarCubeViewport.addEventListener('mouseleave', () => {
             const hasActiveArrow = arrows.some(a => a && a.classList.contains('active-arrow'));
             if (!calendarCubeViewport.classList.contains('cube-collapsed') && !hasActiveArrow) {
@@ -1070,6 +1237,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Arrow click handlers
         if (arrowTop) {
             arrowTop.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -1113,27 +1281,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // "BACK" button handler: Restore cube and hide events panel
     backToCubeBtn.addEventListener('click', () => {
-
+        // Expand cube viewport & restore normal sidebar
         calendarCubeViewport.classList.remove('cube-collapsed');
         dayEventsPanel.classList.remove('panel-visible');
         backToCubeBtn.classList.add('hidden-btn');
-
+        
+        // Reset selections
         document.querySelectorAll('.calendar-day').forEach(cell => {
             cell.classList.remove('selected');
         });
 
+        // Clear active arrows
         document.querySelectorAll('.cube-nav-arrow').forEach(a => {
             a.classList.remove('active-arrow');
         });
 
+        // Reset details panel state
         setTimeout(() => {
             calendarPanelTitle.textContent = "SELECT A TEMPORAL NODE";
             calendarPanelDate.textContent = "No cycle loaded";
             calendarEventsList.innerHTML = `
                 <div class="no-events-prompt">Click a highlighted day grid cell to query local verse event timelines.</div>
             `;
-
+            // Restore default angle
             calendarCube.style.transform = 'rotateX(-32deg) rotateY(-45deg)';
         }, 300);
     });
@@ -1150,7 +1322,8 @@ document.addEventListener('DOMContentLoaded', () => {
         data.events.forEach(evt => {
             const card = document.createElement('div');
             card.className = 'calendar-event-card';
-
+            
+            // Get correct badge color theme based on verse
             let badgeClass = 'badge-tech';
             let verseLabel = 'TECH';
             let verseColor = 'var(--tech-color)';
@@ -1174,11 +1347,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <a href="${regUrl}" target="_blank" class="register-btn-link" style="border-color: rgba(${hexToRgb(verseColor)}, 0.4); margin-top: 5px;">REGISTER NOW</a>
             `;
 
+            // Trigger visual feedback toast on clicking registration link
             const link = card.querySelector('.register-btn-link');
             link.addEventListener('click', (e) => {
                 showToast(evt.name, verseColor);
             });
 
+            // Hover transitions
             link.addEventListener('mouseenter', () => {
                 link.style.backgroundColor = verseColor;
                 link.style.color = '#000000';
@@ -1188,6 +1363,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.style.color = '#ffffff';
             });
 
+            // Dynamic color glow transitions on card itself
             card.style.borderColor = `rgba(${hexToRgb(verseColor)}, 0.15)`;
             card.addEventListener('mouseenter', () => {
                 card.style.borderColor = verseColor;
@@ -1219,19 +1395,25 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
+    /* ==========================================================================
+       Specific Event Details Modal (Triggered by clicking Event nodes)
+       ========================================================================== */
     function openEventDetailModal(evt, verseKey) {
         const verse = verseData[verseKey];
         if (!verse) return;
 
+        // Set dynamic content in modal
         modalVerseBadge.textContent = verse.badge;
         modalVerseBadge.style.color = verse.color;
         modalVerseBadge.style.borderColor = verse.color;
         modalVerseTitle.textContent = evt.name;
         modalVerseDesc.textContent = `${verse.title} // DETAILED BRIEF`;
-
+        
+        // Set background glow color matching the verse portal
         document.querySelector('.modal-glow-back').style.background = `radial-gradient(circle, ${verse.glow} 0%, transparent 70%)`;
         document.querySelector('.modal-container').style.borderColor = `rgba(${hexToRgb(verse.color)}, 0.25)`;
 
+        // Inject Events List with only the selected single card details
         eventsGrid.innerHTML = '';
         const card = document.createElement('div');
         card.className = 'event-card';
@@ -1260,12 +1442,14 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <a href="${regUrl}" target="_blank" class="register-btn-link" style="border-color: rgba(${hexToRgb(verse.color)}, 0.4); margin-top: 10px;">REGISTER NOW</a>
         `;
-
+        
+        // Trigger feedback toast on registration
         const link = card.querySelector('.register-btn-link');
         link.addEventListener('click', (e) => {
             showToast(evt.name, verse.color);
         });
 
+        // Button Hover effect
         link.addEventListener('mouseenter', () => {
             link.style.backgroundColor = verse.color;
             link.style.color = '#000000';
@@ -1277,6 +1461,7 @@ document.addEventListener('DOMContentLoaded', () => {
             link.style.boxShadow = 'none';
         });
 
+        // Dynamic color glow transitions on modal card itself
         card.style.borderColor = `rgba(${hexToRgb(verse.color)}, 0.15)`;
         card.addEventListener('mouseenter', () => {
             card.style.borderColor = verse.color;
@@ -1293,38 +1478,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         eventsGrid.appendChild(card);
 
-        if (canvas) canvas.classList.add('blur-background');
+        // Open screen blur and modal container
+        canvas.classList.add('blur-background');
         eventModal.classList.remove('hidden');
         setTimeout(() => {
             eventModal.classList.add('active-modal');
         }, 50);
     }
 
+    // Close Modal Event Handler
     function closeModal() {
         eventModal.classList.remove('active-modal');
-        if (canvas) canvas.classList.remove('blur-background');
-
+        canvas.classList.remove('blur-background');
+        
         setTimeout(() => {
             eventModal.classList.add('hidden');
         }, 400);
     }
 
     closeModalBtn.addEventListener('click', closeModal);
-
+    
+    // Close modal if clicking outside the container
     eventModal.addEventListener('click', (e) => {
         if (e.target === eventModal) {
             closeModal();
         }
     });
 
+    /* ==========================================================================
+       Toast Helper Functions
+       ========================================================================== */
     let toastTimeout;
     function showToast(eventName, color) {
         clearTimeout(toastTimeout);
-
+        
         toast.querySelector('.toast-icon').style.color = color;
         toast.style.borderColor = `rgba(${hexToRgb(color)}, 0.5)`;
         toast.querySelector('.toast-msg').textContent = `Opening registration portal for ${eventName}...`;
-
+        
         toast.classList.remove('toast-hidden');
         toast.classList.add('toast-visible');
 
@@ -1334,13 +1525,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3200);
     }
 
+    // Helper: Hex Color to RGB CSV string converter
     function hexToRgb(hexVar) {
         if (hexVar.startsWith('var')) {
             const cleanName = hexVar.substring(4, hexVar.length - 1);
             const styleVal = getComputedStyle(document.documentElement).getPropertyValue(cleanName).trim();
             return hexToRgb(styleVal);
         }
-
+        
         let c = hexVar.replace('#', '');
         if (c.length === 3) {
             c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
@@ -1351,6 +1543,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${r}, ${g}, ${b}`;
     }
 
+    // Brochure download mock simulator
     const brochureBtn = document.getElementById('brochure-btn');
     if (brochureBtn) {
         brochureBtn.addEventListener('click', () => {
@@ -1358,14 +1551,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // requestAnimationFrame Orbit Loop
     function tickOrbit() {
         if (!isOrbitPaused && !eventModal.classList.contains('active-modal')) {
-
+            // Base speed is 0.04 (calm, steady drift). If a portal is active, slow down to 0.01 (extremely slow crawl) for easy clicking.
             const speed = activeVerse ? 0.01 : 0.04;
             orbitAngle = (orbitAngle + speed) % 360;
             if (portalOrbitWrapper) {
                 portalOrbitWrapper.style.transform = `rotate(${orbitAngle}deg)`;
-
+                
+                // Keep child wrappers upright (perfectly horizontal counter-rotation)
                 portalOrbitWrapper.querySelectorAll('.portal-upright-wrapper, .event-upright-wrapper').forEach(child => {
                     child.style.transform = `rotate(${-orbitAngle}deg)`;
                 });
@@ -1374,22 +1569,24 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(tickOrbit);
     }
 
+    // JS Scroll Ticker auto-scroll & pause on hover logic
     const tickerViewports = document.querySelectorAll('.ticker-viewport');
     tickerViewports.forEach(vp => {
         let scrollInterval;
         const track = vp.querySelector('.ticker-track');
         if (!track) return;
-
-        const scrollSpeed = 38;
-
+        
+        const scrollSpeed = 38; 
+        
         function startAutoScroll() {
             scrollInterval = setInterval(() => {
                 vp.scrollTop += 1;
             }, scrollSpeed);
         }
-
+        
         startAutoScroll();
 
+        // Loop scrolling infinitely for BOTH manual scrollbar drag/wheel and auto scroll
         vp.addEventListener('scroll', () => {
             const halfHeight = track.scrollHeight / 2;
             if (vp.scrollTop >= halfHeight - 1) {
@@ -1398,21 +1595,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 vp.scrollTop = halfHeight;
             }
         });
-
+        
+        // Pause scrolling on mouse enter (allows manual scrolling!)
         vp.addEventListener('mouseenter', () => {
             clearInterval(scrollInterval);
         });
-
+        
+        // Resume scrolling on mouse leave
         vp.addEventListener('mouseleave', () => {
             startAutoScroll();
         });
     });
 
+    /* ==========================================================================
+       Editorial Gallery Controls (Vero Studio Inspired)
+       ========================================================================== */
     const galleryGrid = document.getElementById('gallery-grid');
     const filterTabs = document.querySelectorAll('.filter-tab');
     const galleryCards = document.querySelectorAll('.gallery-card');
     const aboutGalleryBtn = document.getElementById('about-gallery-btn');
-
+    
+    // Lightbox Components
     const lightbox = document.getElementById('gallery-lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxTag = document.getElementById('lightbox-tag');
@@ -1420,14 +1623,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeLightboxBtn = document.getElementById('close-lightbox-btn');
     const prevLightboxBtn = document.getElementById('prev-lightbox-btn');
     const nextLightboxBtn = document.getElementById('next-lightbox-btn');
-
+    
     let currentFilteredCards = [];
     let activeLightboxIdx = 0;
 
+    // Helper to calculate unique filtered cards for the lightbox sequence
     function updateFilteredCards() {
         const uniqueCards = [];
         const seenSrcs = new Set();
-
+        
         galleryCards.forEach(card => {
             if (!card.classList.contains('card-dimmed')) {
                 const img = card.querySelector('img');
@@ -1443,15 +1647,17 @@ document.addEventListener('DOMContentLoaded', () => {
         currentFilteredCards = uniqueCards;
     }
 
+    // Initialize list
     updateFilteredCards();
 
+    // Filter Logic
     filterTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             filterTabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
-
+            
             const filterValue = tab.getAttribute('data-filter');
-
+            
             galleryCards.forEach(card => {
                 const category = card.getAttribute('data-category');
                 if (filterValue === 'all' || category === filterValue) {
@@ -1460,11 +1666,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     card.classList.add('card-dimmed');
                 }
             });
-
+            
+            // Recalculate unique list for lightbox sequence
             updateFilteredCards();
         });
     });
 
+    // Lightbox Open Trigger
     galleryCards.forEach((card) => {
         card.addEventListener('click', () => {
             const img = card.querySelector('img');
@@ -1484,16 +1692,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = card.querySelector('img');
         const tag = card.querySelector('.gallery-card-tag');
         const title = card.querySelector('.gallery-card-title');
-
+        
         if (lightboxImg && img) lightboxImg.src = img.src;
         if (lightboxTag && tag) {
             lightboxTag.textContent = tag.textContent;
-
+            // Transfer specific verse design class
             const baseClass = tag.className.split(' ').find(c => c.startsWith('tag-'));
             lightboxTag.className = `lightbox-tag ${baseClass || ''}`;
         }
         if (lightboxTitle && title) lightboxTitle.textContent = title.textContent;
-
+        
         if (lightbox) lightbox.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     }
@@ -1523,6 +1731,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Connect Gallery Button from About Page Explorer
     if (aboutGalleryBtn) {
         aboutGalleryBtn.addEventListener('click', () => {
             const gallerySec = document.getElementById('gallery-page');
@@ -1533,26 +1742,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Keyboard controls
     document.addEventListener('keydown', (e) => {
         if (lightbox && !lightbox.classList.contains('hidden')) {
             if (e.key === 'Escape') closeLightbox();
             if (e.key === 'ArrowLeft') navigateLightbox(-1);
             if (e.key === 'ArrowRight') navigateLightbox(1);
         }
-    });
-
-    document.querySelectorAll('.footer-links-list a[href^="#"]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            if (href && href.startsWith('#')) {
-                const targetEl = document.querySelector(href);
-                if (targetEl) {
-                    e.preventDefault();
-                    triggerPageGlitch(targetEl);
-                    targetEl.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        });
     });
 
     tickOrbit();
