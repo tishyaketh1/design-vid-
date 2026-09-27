@@ -15,9 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const calendarCubeViewport = document.getElementById('calendar-cube-viewport');
     const calendarCube = document.getElementById('calendar-cube');
     const calendarLayoutContainer = document.getElementById('calendar-layout-container');
+    const faceJan = document.getElementById('face-jan');
     const faceFeb = document.getElementById('face-feb');
     const faceMar = document.getElementById('face-mar');
     const faceApr = document.getElementById('face-apr');
+    const faceMay = document.getElementById('face-may');
+    const faceJun = document.getElementById('face-jun');
+    const cubeBtnPrev = document.getElementById('cube-btn-prev');
+    const cubeBtnNext = document.getElementById('cube-btn-next');
+    const cubeMonthTracker = document.getElementById('cube-month-tracker');
 
     const dayEventsPanel = document.getElementById('day-events-panel');
     const backToCubeBtn = document.getElementById('back-to-cube-btn');
@@ -468,6 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             splashScreen.classList.remove('hidden');
             splashScreen.classList.add('active-screen');
+            document.body.classList.add('portal-entered');
 
             if (portalFlashOverlay) {
                 portalFlashOverlay.classList.add('fade-out');
@@ -921,6 +928,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const calendarEventsData = {
+        // March Pravaah Festival Core Events
+        "MAR-20": {
+            dateStr: "MARCH 20, 2026",
+            events: [
+                { name: "Robo Soccer", verse: "tech", time: "10:00 AM", venue: "Robotics Bay A", desc: "Autonomous and manual robot soccer matches." },
+                { name: "Step Up", verse: "cult", time: "06:00 PM", venue: "Main Arena Gate 1", desc: "Vibrant group street dance battle." },
+                { name: "Valorant Showdown", verse: "game", time: "10:00 AM", venue: "Esports Lounge A", desc: "Tactical team esports qualifiers." },
+                { name: "Green Horizon", verse: "social", time: "10:00 AM", venue: "Botanical Annex", desc: "Environmental project presentations." }
+            ]
+        },
+        "MAR-21": {
+            dateStr: "MARCH 21, 2026",
+            events: [
+                { name: "Code-A-Thon", verse: "tech", time: "09:00 AM", venue: "Matrix Lab 3", desc: "24-hour algorithmic development sprint." },
+                { name: "Symphony", verse: "cult", time: "07:00 PM", venue: "The Amphitheater", desc: "Battle of the cosmic rock bands." },
+                { name: "BGMI Arena", verse: "game", time: "11:00 AM", venue: "Esports Lounge B", desc: "Squad survival tournament." },
+                { name: "Pitchers", verse: "ent", time: "11:00 AM", venue: "Incubation Incubator", desc: "Venture capitalist pitching panels." }
+            ]
+        },
+        "MAR-22": {
+            dateStr: "MARCH 22, 2026",
+            events: [
+                { name: "AI Odyssey", verse: "tech", time: "11:30 AM", venue: "Neuromorphic Hall", desc: "Design neural network architectures." },
+                { name: "Voice of Pravaah", verse: "cult", time: "02:00 PM", venue: "Auditorium Prime", desc: "Solo singing championship." },
+                { name: "Crypto Quest", verse: "ent", time: "10:00 AM", venue: "Finance Lab B", desc: "Crypto simulation trading tournament." },
+                { name: "Blood Donation Camp", verse: "social", time: "09:00 AM", venue: "Medical Room 1", desc: "Certified health donation drive." }
+            ]
+        },
+        "MAR-23": {
+            dateStr: "MARCH 23, 2026",
+            events: [
+                { name: "Vogue", verse: "cult", time: "08:00 PM", venue: "The Galaxy Runway", desc: "Cyberpunk and eco fashion show." },
+                { name: "Shark Tank Junior", verse: "ent", time: "02:00 PM", venue: "Incubation Incubator", desc: "Young student startup presentations." },
+                { name: "Nukkad Natak", verse: "social", time: "04:00 PM", venue: "Open Air Stage B", desc: "Social awareness street plays." },
+                { name: "Chess Grandmaster", verse: "game", time: "10:00 AM", venue: "Silence Lounge", desc: "Bullet chess tournament." }
+            ]
+        },
         "20": {
             dateStr: "MARCH 20, 2026",
             events: [
@@ -956,25 +1000,163 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "Nukkad Natak", verse: "social", time: "04:00 PM", venue: "Open Air Stage B", desc: "Social awareness street plays." },
                 { name: "Chess Grandmaster", verse: "game", time: "10:00 AM", venue: "Silence Lounge", desc: "Bullet chess tournament." }
             ]
+        },
+        // January Nodes
+        "JAN-15": {
+            dateStr: "JANUARY 15, 2026",
+            events: [
+                { name: "Portal Pre-Registration", verse: "tech", time: "10:00 AM", venue: "Online Portal", desc: "Early bird registrations and team formation opening for Pravaah 2026." },
+                { name: "Cosmic Hackathon Briefing", verse: "ent", time: "04:00 PM", venue: "Virtual Auditorium", desc: "Theme unveilings and track problem statements released." }
+            ]
+        },
+        "JAN-26": {
+            dateStr: "JANUARY 26, 2026",
+            events: [
+                { name: "Republic Day Cultural Unveil", verse: "cult", time: "09:00 AM", venue: "Main Amphitheater", desc: "Flag hoisting & teaser screening for Pravaah 2026 themes." }
+            ]
+        },
+        // February Nodes
+        "FEB-14": {
+            dateStr: "FEBRUARY 14, 2026",
+            events: [
+                { name: "Band Auditions Prelims", verse: "cult", time: "02:00 PM", venue: "Music Studio 1", desc: "Shortlisting bands for Symphony rock showdown." },
+                { name: "Robotics Workshop", verse: "tech", time: "11:00 AM", venue: "Maker Space", desc: "Hands-on bot assembly and microcontroller programming." }
+            ]
+        },
+        "FEB-28": {
+            dateStr: "FEBRUARY 28, 2026",
+            events: [
+                { name: "National Science Day Expo", verse: "tech", time: "10:00 AM", venue: "Innovation Deck", desc: "Student research projects and autonomous systems showcase." }
+            ]
+        },
+        // April Nodes
+        "APR-10": {
+            dateStr: "APRIL 10, 2026",
+            events: [
+                { name: "Post-Fest Innovation Demo", verse: "tech", time: "11:00 AM", venue: "Incubation Center", desc: "Demonstrations of top projects developed during Code-A-Thon." }
+            ]
+        },
+        "APR-25": {
+            dateStr: "APRIL 25, 2026",
+            events: [
+                { name: "Cosmic Esports Finals", verse: "game", time: "03:00 PM", venue: "Esports Arena", desc: "Inter-college league championships." }
+            ]
+        },
+        // May Nodes
+        "MAY-8": {
+            dateStr: "MAY 08, 2026",
+            events: [
+                { name: "Summer Dev Bootcamp Kickoff", verse: "tech", time: "10:00 AM", venue: "Matrix Lab 1", desc: "Full-stack and AI internship preparation program." }
+            ]
+        },
+        "MAY-20": {
+            dateStr: "MAY 20, 2026",
+            events: [
+                { name: "Multiverse Startup Pitch", verse: "ent", time: "02:00 PM", venue: "Auditorium Prime", desc: "Angel investor demo day for student entrepreneurs." }
+            ]
+        },
+        // June Nodes
+        "JUN-15": {
+            dateStr: "JUNE 15, 2026",
+            events: [
+                { name: "Pravaah Star Awards", verse: "cult", time: "06:00 PM", venue: "Grand Ballroom", desc: "Annual award ceremony honoring outstanding organizers & participants." }
+            ]
         }
     };
 
     const calendarMonths = [
-        { name: "FEBRUARY 2026", days: 28, startDay: 0, monthNum: 1, element: faceFeb },
-        { name: "MARCH 2026", days: 31, startDay: 0, monthNum: 2, element: faceMar },
-        { name: "APRIL 2026", days: 30, startDay: 3, monthNum: 3, element: faceApr }
+        { name: "JANUARY 2026", code: "JAN", days: 31, startDay: 4, monthNum: 0, element: faceJan, activeDays: [15, 26] },
+        { name: "FEBRUARY 2026", code: "FEB", days: 28, startDay: 0, monthNum: 1, element: faceFeb, activeDays: [14, 28] },
+        { name: "MARCH 2026", code: "MAR", days: 31, startDay: 0, monthNum: 2, element: faceMar, activeDays: [20, 21, 22, 23] },
+        { name: "APRIL 2026", code: "APR", days: 30, startDay: 3, monthNum: 3, element: faceApr, activeDays: [10, 25] },
+        { name: "MAY 2026", code: "MAY", days: 31, startDay: 5, monthNum: 4, element: faceMay, activeDays: [8, 20] },
+        { name: "JUNE 2026", code: "JUN", days: 30, startDay: 1, monthNum: 5, element: faceJun, activeDays: [15] }
     ];
 
+    let currentStep = 0;
+    let currentMonthIndex = 0;
+
+    function getCubeTransformForStep(step) {
+        const cycle = Math.floor(step / 6);
+        const pos = ((step % 6) + 6) % 6;
+        const baseRotY = cycle * -360;
+
+        switch (pos) {
+            case 0: // JAN (Front)
+                return `rotateX(0deg) rotateY(${baseRotY}deg)`;
+            case 1: // FEB (Right)
+                return `rotateX(0deg) rotateY(${baseRotY - 90}deg)`;
+            case 2: // MAR (Back)
+                return `rotateX(0deg) rotateY(${baseRotY - 180}deg)`;
+            case 3: // APR (Left)
+                return `rotateX(0deg) rotateY(${baseRotY - 270}deg)`;
+            case 4: // MAY (Top)
+                return `rotateX(-90deg) rotateY(${baseRotY - 360}deg)`;
+            case 5: // JUN (Bottom)
+                return `rotateX(90deg) rotateY(${baseRotY - 360}deg)`;
+            default:
+                return `rotateX(0deg) rotateY(${baseRotY}deg)`;
+        }
+    }
+
+    function focusMonthByStep(step) {
+        currentStep = step;
+        currentMonthIndex = ((currentStep % 6) + 6) % 6;
+
+        if (calendarCube) {
+            calendarCube.style.transform = getCubeTransformForStep(currentStep);
+        }
+
+        // Highlight focused face and dim non-focused
+        calendarMonths.forEach((m, idx) => {
+            if (m.element) {
+                if (idx === currentMonthIndex) {
+                    m.element.classList.add('is-focused');
+                } else {
+                    m.element.classList.remove('is-focused');
+                }
+            }
+        });
+
+        // Highlight active month pill
+        const pills = document.querySelectorAll('.month-pill');
+        pills.forEach((pill, idx) => {
+            if (idx === currentMonthIndex) {
+                pill.classList.add('active-pill');
+            } else {
+                pill.classList.remove('active-pill');
+            }
+        });
+
+        // Update button tooltips / accessibility
+        const prevIdx = ((currentMonthIndex - 1) % 6 + 6) % 6;
+        const nextIdx = (currentMonthIndex + 1) % 6;
+        if (cubeBtnPrev) {
+            cubeBtnPrev.setAttribute('title', `Rotate to ${calendarMonths[prevIdx].code} 2026`);
+        }
+        if (cubeBtnNext) {
+            cubeBtnNext.setAttribute('title', `Rotate to ${calendarMonths[nextIdx].code} 2026`);
+        }
+    }
+
+    function focusMonth(targetIndex) {
+        let delta = targetIndex - currentMonthIndex;
+        if (delta > 3) delta -= 6;
+        if (delta < -3) delta += 6;
+        focusMonthByStep(currentStep + delta);
+    }
+
     function generateCalendarCube() {
-        calendarMonths.forEach(m => {
+        calendarMonths.forEach((m, mIdx) => {
             const container = m.element;
+            if (!container) return;
             container.innerHTML = '';
 
             const module = document.createElement('div');
-            module.className = 'month-module';
+            module.className = `month-module module-${m.code.toLowerCase()}`;
 
             const title = document.createElement('div');
-            title.className = 'month-title';
+            title.className = `month-title title-${m.code.toLowerCase()}`;
             title.textContent = m.name;
             module.appendChild(title);
 
@@ -1002,20 +1184,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 dayCell.className = 'calendar-day';
                 dayCell.textContent = d;
 
-                const isActiveNode = (m.monthNum === 2 && d >= 20 && d <= 23);
-                if (isActiveNode) {
-                    dayCell.classList.add('active-node');
+                const hasActiveEvent = m.activeDays && m.activeDays.includes(d);
+                if (hasActiveEvent) {
+                    dayCell.classList.add('active-node', `node-${m.code.toLowerCase()}`);
                 }
 
                 dayCell.addEventListener('click', (e) => {
                     e.stopPropagation();
+
+                    // Focus the month if not already focused
+                    if (currentMonthIndex !== mIdx) {
+                        focusMonth(mIdx);
+                    }
 
                     document.querySelectorAll('.calendar-day').forEach(cell => {
                         cell.classList.remove('selected');
                     });
                     dayCell.classList.add('selected');
 
-                    if (isActiveNode) {
+                    const monthEventKey = `${m.code}-${d}`;
+                    if (calendarEventsData[monthEventKey]) {
+                        loadDailyEvents(monthEventKey);
+                    } else if (m.code === 'MAR' && calendarEventsData[d.toString()]) {
                         loadDailyEvents(d.toString());
                     } else {
                         loadEmptyEvents(`${d} ${m.name}`);
@@ -1033,88 +1223,60 @@ document.addEventListener('DOMContentLoaded', () => {
             container.appendChild(module);
         });
 
-        setupCubeRotations();
+        setupCubeControls();
+        focusMonthByStep(0); // Focus January by default
     }
 
-    function setupCubeRotations() {
-        const arrowTop = document.getElementById('cube-arrow-top');
-        const arrowLeft = document.getElementById('cube-arrow-left');
-        const arrowRight = document.getElementById('cube-arrow-right');
-        const arrows = [arrowTop, arrowLeft, arrowRight];
-
-        function clearActiveArrows() {
-            arrows.forEach(a => {
-                if (a) a.classList.remove('active-arrow');
+    function setupCubeControls() {
+        if (cubeBtnPrev) {
+            cubeBtnPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                focusMonthByStep(currentStep - 1);
             });
         }
 
-        faceFeb.addEventListener('mouseenter', () => {
-            clearActiveArrows();
-            calendarCube.style.transform = 'rotateX(-5deg) rotateY(0deg)';
+        if (cubeBtnNext) {
+            cubeBtnNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                focusMonthByStep(currentStep + 1);
+            });
+        }
+
+        const pills = document.querySelectorAll('.month-pill');
+        pills.forEach((pill) => {
+            pill.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const targetIdx = parseInt(pill.getAttribute('data-month-index'), 10);
+                if (!isNaN(targetIdx)) {
+                    focusMonth(targetIdx);
+                }
+            });
         });
 
-        faceMar.addEventListener('mouseenter', () => {
-            clearActiveArrows();
-            calendarCube.style.transform = 'rotateX(-90deg) rotateY(0deg)';
-        });
-
-        faceApr.addEventListener('mouseenter', () => {
-            clearActiveArrows();
-            calendarCube.style.transform = 'rotateX(-5deg) rotateY(-90deg)';
-        });
-
-        calendarCubeViewport.addEventListener('mouseleave', () => {
-            const hasActiveArrow = arrows.some(a => a && a.classList.contains('active-arrow'));
-            if (!calendarCubeViewport.classList.contains('cube-collapsed') && !hasActiveArrow) {
-                calendarCube.style.transform = 'rotateX(-32deg) rotateY(-45deg)';
+        // Allow clicking on any cube face to bring it to focus
+        calendarMonths.forEach((m, idx) => {
+            if (m.element) {
+                m.element.addEventListener('click', () => {
+                    if (currentMonthIndex !== idx) {
+                        focusMonth(idx);
+                    }
+                });
             }
         });
 
-        if (arrowTop) {
-            arrowTop.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (arrowTop.classList.contains('active-arrow')) {
-                    clearActiveArrows();
-                    calendarCube.style.transform = 'rotateX(-32deg) rotateY(-45deg)';
-                } else {
-                    clearActiveArrows();
-                    arrowTop.classList.add('active-arrow');
-                    calendarCube.style.transform = 'rotateX(-90deg) rotateY(0deg)';
+        // Keyboard navigation for cube
+        window.addEventListener('keydown', (e) => {
+            if (calendarCubeViewport && !calendarCubeViewport.classList.contains('cube-collapsed')) {
+                if (e.key === 'ArrowLeft') {
+                    focusMonthByStep(currentStep - 1);
+                } else if (e.key === 'ArrowRight') {
+                    focusMonthByStep(currentStep + 1);
                 }
-            });
-        }
-
-        if (arrowLeft) {
-            arrowLeft.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (arrowLeft.classList.contains('active-arrow')) {
-                    clearActiveArrows();
-                    calendarCube.style.transform = 'rotateX(-32deg) rotateY(-45deg)';
-                } else {
-                    clearActiveArrows();
-                    arrowLeft.classList.add('active-arrow');
-                    calendarCube.style.transform = 'rotateX(-5deg) rotateY(0deg)';
-                }
-            });
-        }
-
-        if (arrowRight) {
-            arrowRight.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (arrowRight.classList.contains('active-arrow')) {
-                    clearActiveArrows();
-                    calendarCube.style.transform = 'rotateX(-32deg) rotateY(-45deg)';
-                } else {
-                    clearActiveArrows();
-                    arrowRight.classList.add('active-arrow');
-                    calendarCube.style.transform = 'rotateX(-5deg) rotateY(-90deg)';
-                }
-            });
-        }
+            }
+        });
     }
 
     backToCubeBtn.addEventListener('click', () => {
-
         calendarCubeViewport.classList.remove('cube-collapsed');
         dayEventsPanel.classList.remove('panel-visible');
         backToCubeBtn.classList.add('hidden-btn');
@@ -1123,18 +1285,14 @@ document.addEventListener('DOMContentLoaded', () => {
             cell.classList.remove('selected');
         });
 
-        document.querySelectorAll('.cube-nav-arrow').forEach(a => {
-            a.classList.remove('active-arrow');
-        });
-
         setTimeout(() => {
             calendarPanelTitle.textContent = "SELECT A TEMPORAL NODE";
             calendarPanelDate.textContent = "No cycle loaded";
             calendarEventsList.innerHTML = `
                 <div class="no-events-prompt">Click a highlighted day grid cell to query local verse event timelines.</div>
             `;
-
-            calendarCube.style.transform = 'rotateX(-32deg) rotateY(-45deg)';
+            // Keep the current focused month intact
+            focusMonth(currentMonthIndex);
         }, 300);
     });
 

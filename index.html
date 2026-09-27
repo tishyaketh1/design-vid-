@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="global-bg-layer" class="global-bg-layer"></div>
     <canvas id="starfield-canvas"></canvas>
 
     <nav class="cosmic-nav-wheel hidden-nav" id="cosmic-nav-wheel">
@@ -422,32 +423,37 @@
                         </div>
                     </div>
 
-                    <button class="cube-nav-arrow arrow-top" id="cube-arrow-top" aria-label="View March Events" title="View March Events">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
-                        <span class="arrow-tooltip">MARCH</span>
+                    <div class="cube-month-tracker" id="cube-month-tracker">
+                        <button class="month-pill" data-month-index="0">JAN</button>
+                        <button class="month-pill" data-month-index="1">FEB</button>
+                        <button class="month-pill" data-month-index="2">MAR</button>
+                        <button class="month-pill" data-month-index="3">APR</button>
+                        <button class="month-pill" data-month-index="4">MAY</button>
+                        <button class="month-pill" data-month-index="5">JUN</button>
+                    </div>
+
+                    <button class="cube-rotate-btn btn-prev" id="cube-btn-prev" aria-label="Rotate to Previous Month" title="Previous Month">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                        <span class="rotate-btn-label">PREV</span>
                     </button>
-                    <button class="cube-nav-arrow arrow-left" id="cube-arrow-left" aria-label="View February Events" title="View February Events">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                        <span class="arrow-tooltip">FEB</span>
-                    </button>
-                    <button class="cube-nav-arrow arrow-right" id="cube-arrow-right" aria-label="View April Events" title="View April Events">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                        <span class="arrow-tooltip">APRIL</span>
+                    <button class="cube-rotate-btn btn-next" id="cube-btn-next" aria-label="Rotate to Next Month" title="Next Month">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                        <span class="rotate-btn-label">NEXT</span>
                     </button>
 
                     <div class="calendar-cube" id="calendar-cube">
-
-                        <div class="cube-face face-front" id="face-feb"></div>
-
-                        <div class="cube-face face-top" id="face-mar"></div>
-
-                        <div class="cube-face face-right" id="face-apr"></div>
+                        <div class="cube-face face-front" id="face-jan"></div>
+                        <div class="cube-face face-right" id="face-feb"></div>
+                        <div class="cube-face face-back" id="face-mar"></div>
+                        <div class="cube-face face-left" id="face-apr"></div>
+                        <div class="cube-face face-top" id="face-may"></div>
+                        <div class="cube-face face-bottom" id="face-jun"></div>
                     </div>
                 </div>
 
                 <div class="calendar-tip-hud">
                     <span class="tip-icon">💡</span>
-                    <span class="tip-text">SYSTEM NOTICE: SELECT A MONTH USING NAV ARROWS, THEN CLICK A HIGHLIGHTED DATE CELL FOR DETAIL INDEX.</span>
+                    <span class="tip-text">SYSTEM NOTICE: USE PREV / NEXT BUTTONS TO ROTATE THE CUBE (JAN–JUN). CLICK ANY HIGHLIGHTED DATE CELL FOR DETAIL INDEX.</span>
                 </div>
 
                 <div class="day-events-panel" id="day-events-panel">
