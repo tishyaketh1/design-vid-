@@ -68,6 +68,23 @@ body.portal-entered .global-bg-layer {
     transform: scale(1.04);
 }
 
+body.portal-entered #starfield-canvas {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    display: none !important;
+}
+
+body.portal-entered .comet-orbit-ring,
+body.portal-entered .comet-spinner,
+body.portal-entered .cube-comet {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    display: none !important;
+    animation: none !important;
+}
+
 #starfield-canvas {
     position: fixed;
     top: 0;

@@ -310,6 +310,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fill();
             }
 
+            if (document.body.classList.contains('portal-entered')) {
+                ctx.clearRect(0, 0, width, height);
+                return;
+            }
+
             requestAnimationFrame(render);
         }
         render();
@@ -382,16 +387,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
             portalVideo.ontimeupdate = () => {
                 const currentTime = portalVideo.currentTime;
+                const duration = portalVideo.duration;
 
-                if (currentTime >= 8.6 && !flashTriggered) {
-                    flashTriggered = true;
-                    if (portalFlashOverlay) {
-                        portalFlashOverlay.classList.add('active-flash');
+                if (duration && isFinite(duration) && duration > 0.8) {
+                    if (currentTime >= Math.max(0.2, duration - 0.45) && !flashTriggered) {
+                        flashTriggered = true;
+                        if (portalFlashOverlay) {
+                            portalFlashOverlay.classList.add('active-flash');
+                        }
                     }
-                }
-
-                if (currentTime >= 8.95) {
-                    enterUniverse();
+                    if (currentTime >= Math.max(0.4, duration - 0.1)) {
+                        enterUniverse();
+                    }
+                } else {
+                    if (currentTime >= 8.6 && !flashTriggered) {
+                        flashTriggered = true;
+                        if (portalFlashOverlay) {
+                            portalFlashOverlay.classList.add('active-flash');
+                        }
+                    }
+                    if (currentTime >= 8.95) {
+                        enterUniverse();
+                    }
                 }
             };
 
