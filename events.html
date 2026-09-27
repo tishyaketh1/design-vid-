@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVENTS // PRAVAAH '26 - IIT Bhubaneswar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="subpage-body events-page-body">
+
+    <!-- Global Background Layer -->
+    <div class="global-bg-layer subpage-bg"></div>
+    <div class="subpage-grid-overlay"></div>
+
+    <!-- Cosmic Nav Wheel -->
+    <nav class="cosmic-nav-wheel" id="cosmic-nav-wheel">
+        <div class="nav-wheel-track">
+            <div class="nav-indicator-pill" id="nav-indicator-pill"></div>
+
+            <a href="index.html" class="nav-item">HOME</a>
+            <div class="nav-divider"></div>
+            <a href="events.html" class="nav-item active">EVENTS</a>
+            <div class="nav-divider"></div>
+            <a href="register.html" class="nav-item">REGISTER</a>
+            <div class="nav-divider"></div>
+            <a href="accommodation.html" class="nav-item">ACCOMMODATION</a>
+            <div class="nav-divider"></div>
+            <a href="gallery.html" class="nav-item">GALLERY</a>
+            <div class="nav-divider"></div>
+            <a href="sponsors.html" class="nav-item">SPONSORS</a>
+            <div class="nav-divider"></div>
+            <a href="contact.html" class="nav-item">CONTACT US</a>
+            <div class="nav-divider"></div>
+            <a href="profile.html" class="nav-item">PROFILE</a>
+        </div>
+        <div class="nav-wheel-glow"></div>
+    </nav>
+
+    <!-- Main Events Container -->
+    <main class="subpage-main events-main-fullscreen">
+        <header class="hud-header">
+            <div class="hud-left">
+                <span class="hud-indicator status-green"></span>
+                <span class="hud-title">PRAVAAH TRANSMISSION // MULTIVERSE PORTAL NETWORK & EVENTS</span>
+            </div>
+            <div class="hud-right">
+                <span class="hud-date">OCTOBER 15-18, 2026</span>
+            </div>
+        </header>
+
+        <!-- Interactive Sphere Spawning Multiverse Portal Network -->
+        <section class="events-portal-hero network-undeployed" id="universe-page">
+            <div class="events-hero-header-box">
+                <div class="hero-badge-pill">✦ TOTAL CASH POOL: ₹5,000,000+ ✦</div>
+                <h1 class="events-hero-title spider-title" data-text="MULTIVERSE EVENTS">MULTIVERSE EVENTS</h1>
+                <p class="events-hero-subtitle">Click the central enlarged PRAVAAH Sphere to spawn the 5 Verse Spheres. Then click any verse sphere to reveal its events.</p>
+            </div>
+
+            <div class="network-viewport standalone-network-viewport">
+                <div class="big-bang-flash" id="big-bang-flash"></div>
+                <div class="universe-nebula-glow"></div>
+                <div class="cyber-grid-overlay"></div>
+
+                <div class="hud-bracket bracket-tl"></div>
+                <div class="hud-bracket bracket-tr"></div>
+                <div class="hud-bracket bracket-bl"></div>
+                <div class="hud-bracket bracket-br"></div>
+
+                <div class="telemetry-box telemetry-top-left">
+                    <span class="telemetry-label">SYSTEM SCANNER</span>
+                    <span class="telemetry-value">STATUS: MULTIVERSE ACTIVE</span>
+                    <span class="telemetry-value">TARGET ID: PRV_EVENTS_01</span>
+                </div>
+                <div class="telemetry-box telemetry-top-right">
+                    <span class="telemetry-label">COSMIC TELEMETRY</span>
+                    <span class="telemetry-value">WORMHOLE: 99.4% STABLE</span>
+                    <span class="telemetry-value">GRID FREQ: 432.10Hz</span>
+                </div>
+                <div class="telemetry-box telemetry-bottom-left">
+                    <span class="telemetry-label">DIMENSIONAL CO-ORDINATES</span>
+                    <span class="telemetry-value" id="live-coords">X: 184.2930 | Y: -493.1820</span>
+                    <span class="telemetry-value">MATRIX VECTOR: [0.22, 0.99]</span>
+                </div>
+                <div class="telemetry-box telemetry-bottom-right">
+                    <span class="telemetry-label">TRANSMISSION FEED</span>
+                    <span class="telemetry-value">DECODING SIGNAL... OK</span>
+                    <span class="telemetry-value">PORTAL SPHERE CONVERGENCE: ON</span>
+                </div>
+
+                <div class="portal-network-container" id="portal-network-container">
+                    <div class="core-deploy-prompt" id="core-deploy-prompt">
+                        <span class="prompt-icon">⚡</span>
+                        <span class="prompt-text">VORTEX CORE STABLE<br>CLICK PORTAL CORE TO DEPLOY MULTIVERSE SPHERES</span>
+                    </div>
+
+                    <div class="radar-scan-line"></div>
+
+                    <div class="portal-orbit-wrapper" id="portal-orbit-wrapper">
+                        <svg class="network-svg" id="network-svg"></svg>
+                    </div>
+
+                    <button class="pravaah-core-btn" id="pravaah-core" aria-label="Deploy Multiverse Spheres">
+                        <span class="core-text">PRAVAAH</span>
+                        <span class="core-click-prompt">CLICK TO SPAWN SPHERES</span>
+                        <span class="core-glow-ring"></span>
+                    </button>
+                </div>
+
+                <div class="portal-hud-tip">
+                    <span class="tip-icon">💡</span>
+                    <span>CLICK ANY ORBITING VERSE SPHERE TO GROW EVENT BRANCHES // CLICK AN EVENT NODE FOR DETAILS & REGISTRATION</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Event Detail Modal -->
+    <div id="event-detail-modal" class="modal-overlay hidden">
+        <div class="modal-glow-back"></div>
+        <div class="modal-container">
+            <button id="close-detail-modal" class="close-btn" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal-header">
+                <div class="verse-badge" id="modal-tag">TECH VERSE</div>
+                <h2 id="modal-title" class="verse-title">Event Title</h2>
+                <p id="modal-desc" class="verse-desc">Event description</p>
+            </div>
+            <div class="modal-body-content">
+                <div class="modal-info-grid">
+                    <div class="modal-info-item">
+                        <span class="info-lbl">SCHEDULE</span>
+                        <span class="info-val" id="modal-schedule">Oct 15, 10:00 AM</span>
+                    </div>
+                    <div class="modal-info-item">
+                        <span class="info-lbl">VENUE</span>
+                        <span class="info-val" id="modal-venue">Main Arena</span>
+                    </div>
+                    <div class="modal-info-item">
+                        <span class="info-lbl">PRIZE POOL</span>
+                        <span class="info-val highlight-val" id="modal-prize">₹50,000</span>
+                    </div>
+                    <div class="modal-info-item">
+                        <span class="info-lbl">TEAM SIZE</span>
+                        <span class="info-val" id="modal-team">1 - 4 Members</span>
+                    </div>
+                </div>
+                <div class="modal-guidelines">
+                    <h4 class="guidelines-heading">RULES & GUIDELINES</h4>
+                    <ul class="guidelines-list" id="modal-rules">
+                        <li>All participating teams must be registered via the official portal.</li>
+                        <li>Valid college ID proof is mandatory during reporting at the venue.</li>
+                        <li>Decisions of the judging panel and coordinators are final and binding.</li>
+                    </ul>
+                </div>
+                <div class="modal-actions-row">
+                    <a href="#" id="modal-register-btn" target="_blank" class="register-btn-link modal-cta-btn">PROCEED TO REGISTRATION ✦</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="toast-hidden">
+        <div class="toast-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div class="toast-text">
+            <span class="toast-title">Portal Transmission</span>
+            <span class="toast-msg">Opening registration portal...</span>
+        </div>
+    </div>
+
+    <script src="events.js"></script>
+    <script src="glitch-nav.js"></script>
+</body>
+</html>

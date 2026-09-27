@@ -533,33 +533,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const targetId = item.getAttribute('data-target');
-            const targetSec = document.getElementById(targetId);
-            if (targetSec) {
-                triggerPageGlitch(targetSec);
-                targetSec.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
-
-    const observerOptions = {
-        root: mainScrollContainer,
-        threshold: 0.5
-    };
-
     const glitchOverlay = document.getElementById('screen-glitch-overlay');
-    function triggerPageGlitch(targetSec) {
+    function triggerPageGlitch(targetContainer) {
         if (!glitchOverlay) return;
 
         glitchOverlay.classList.remove('glitch-active');
         void glitchOverlay.offsetWidth;
         glitchOverlay.classList.add('glitch-active');
 
-        const targetContainer = targetSec || document;
-        const titlesToGlitch = targetContainer.querySelectorAll('.spider-title, .logo-title, .calendar-page-heading, .universe-page-heading, .gallery-page-heading, .about-page-heading, .team-page-heading, [data-text]');
+        const container = targetContainer || document;
+        const titlesToGlitch = container.querySelectorAll('.spider-title, .logo-title, .calendar-page-heading, .universe-page-heading, .gallery-page-heading, .about-page-heading, .team-page-heading, [data-text]');
 
         titlesToGlitch.forEach(title => {
             title.classList.remove('spider-glitch-active');
@@ -572,21 +555,36 @@ document.addEventListener('DOMContentLoaded', () => {
             titlesToGlitch.forEach(title => {
                 title.classList.remove('spider-glitch-active');
             });
-        }, 50);
+        }, 220);
     }
+
+    // Trigger glitch on link clicks when navigating
+    document.querySelectorAll('a.nav-item, .footer-links-list a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('#') && href !== 'index.html' && !link.hasAttribute('target')) {
+                e.preventDefault();
+                triggerPageGlitch(document);
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 180);
+            }
+        });
+    });
+
+    const observerOptions = {
+        root: mainScrollContainer,
+        threshold: 0.5
+    };
 
     let lastSectionId = null;
     const navObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const sectionId = entry.target.id;
-
-                if (lastSectionId && lastSectionId !== sectionId) {
-                    const activeSec = document.getElementById(sectionId);
-                    triggerPageGlitch(activeSec);
-                }
                 lastSectionId = sectionId;
 
+                const navItems = document.querySelectorAll('.nav-item');
                 navItems.forEach(item => {
                     if (item.getAttribute('data-target') === sectionId) {
                         item.classList.add('active');
