@@ -3005,7 +3005,7 @@ body.verse-social-active .event-node-label { border-color: rgba(224, 64, 251, 0.
     color: rgba(255, 255, 255, 0.55);
     cursor: pointer;
     padding: 0 18px;
-    border-radius: 24px;
+    border-radius: 9999px;
     transition: var(--transition-smooth);
     outline: none;
     display: flex;
@@ -3014,6 +3014,8 @@ body.verse-social-active .event-node-label { border-color: rgba(224, 64, 251, 0.
     height: 36px;
     position: relative;
     z-index: 2;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
 .nav-item:hover {
@@ -3021,70 +3023,88 @@ body.verse-social-active .event-node-label { border-color: rgba(224, 64, 251, 0.
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
+.nav-item:focus-visible {
+    outline: none;
+    border-radius: 9999px;
+    box-shadow: 0 0 0 2px #00f2fe, 0 0 16px rgba(0, 242, 254, 0.6);
+}
+
+.nav-item.active {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(0, 242, 254, 0.9), 0 0 20px rgba(207, 58, 214, 0.6);
+    font-weight: 900;
+}
+
 .nav-indicator-pill {
     position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     height: 36px;
-    border-radius: 24px;
+    border-radius: 9999px;
     z-index: 1;
     pointer-events: none;
     left: 0;
     width: 0;
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.22) 0%, rgba(207, 58, 214, 0.28) 100%);
+    border: 1.5px solid #00f2fe;
+    box-shadow: 0 0 16px rgba(0, 242, 254, 0.5), inset 0 0 10px rgba(0, 242, 254, 0.25);
+    backdrop-filter: blur(8px);
     transition:
-        left 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        background-color 0.4s ease,
-        border-color 0.4s ease,
-        box-shadow 0.4s ease;
+        left 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
 .cosmic-nav-wheel[data-active-theme="home"] .nav-indicator-pill {
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1), inset 0 0 5px rgba(255, 255, 255, 0.05);
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.22) 0%, rgba(207, 58, 214, 0.28) 100%);
+    border: 1.5px solid #00f2fe;
+    box-shadow: 0 0 18px rgba(0, 242, 254, 0.5), inset 0 0 10px rgba(0, 242, 254, 0.25);
 }
 .cosmic-nav-wheel[data-active-theme="home"] .nav-item.active {
     color: #ffffff !important;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    text-shadow: 0 0 10px rgba(0, 242, 254, 0.9), 0 0 20px rgba(207, 58, 214, 0.6);
 }
 
 .cosmic-nav-wheel[data-active-theme="calendar"] .nav-indicator-pill {
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(0, 242, 254, 0.25);
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.15), inset 0 0 5px rgba(0, 242, 254, 0.1);
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.25) 0%, rgba(0, 168, 255, 0.35) 100%);
+    border: 1.5px solid #00f2fe;
+    box-shadow: 0 0 18px rgba(0, 242, 254, 0.6), inset 0 0 10px rgba(0, 242, 254, 0.3);
 }
 .cosmic-nav-wheel[data-active-theme="calendar"] .nav-item.active {
     color: var(--tech-color) !important;
-    text-shadow: 0 0 10px var(--tech-glow);
+    text-shadow: 0 0 12px var(--tech-glow);
 }
 
 .cosmic-nav-wheel[data-active-theme="portals"] .nav-indicator-pill {
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(189, 94, 255, 0.25);
-    box-shadow: 0 0 15px rgba(189, 94, 255, 0.15), inset 0 0 5px rgba(189, 94, 255, 0.1);
+    background: linear-gradient(135deg, rgba(189, 94, 255, 0.25) 0%, rgba(230, 38, 120, 0.35) 100%);
+    border: 1.5px solid var(--cult-color);
+    box-shadow: 0 0 18px rgba(207, 58, 214, 0.6), inset 0 0 10px rgba(207, 58, 214, 0.3);
 }
 .cosmic-nav-wheel[data-active-theme="portals"] .nav-item.active {
     color: var(--cult-color) !important;
-    text-shadow: 0 0 10px var(--cult-glow);
+    text-shadow: 0 0 12px var(--cult-glow);
 }
 
 .cosmic-nav-wheel[data-active-theme="about"] .nav-indicator-pill {
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(0, 229, 255, 0.25);
-    box-shadow: 0 0 15px rgba(0, 229, 255, 0.15), inset 0 0 5px rgba(0, 229, 255, 0.1);
+    background: linear-gradient(135deg, rgba(255, 42, 75, 0.25) 0%, rgba(255, 158, 0, 0.35) 100%);
+    border: 1.5px solid var(--game-color);
+    box-shadow: 0 0 18px rgba(255, 42, 75, 0.6), inset 0 0 10px rgba(255, 42, 75, 0.3);
 }
 .cosmic-nav-wheel[data-active-theme="about"] .nav-item.active {
     color: var(--game-color) !important;
-    text-shadow: 0 0 10px var(--game-glow);
+    text-shadow: 0 0 12px var(--game-glow);
 }
 
 .cosmic-nav-wheel[data-active-theme="team"] .nav-indicator-pill {
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(224, 64, 251, 0.25);
-    box-shadow: 0 0 15px rgba(224, 64, 251, 0.15), inset 0 0 5px rgba(224, 64, 251, 0.1);
+    background: linear-gradient(135deg, rgba(224, 64, 251, 0.25) 0%, rgba(0, 210, 255, 0.35) 100%);
+    border: 1.5px solid var(--social-color);
+    box-shadow: 0 0 18px rgba(230, 38, 120, 0.6), inset 0 0 10px rgba(230, 38, 120, 0.3);
 }
 .cosmic-nav-wheel[data-active-theme="team"] .nav-item.active {
     color: var(--social-color) !important;
-    text-shadow: 0 0 10px var(--social-glow);
+    text-shadow: 0 0 12px var(--social-glow);
 }
 
 .nav-divider {
@@ -3826,13 +3846,13 @@ body.verse-social-active .event-node-label { border-color: rgba(224, 64, 251, 0.
 }
 
 .cosmic-nav-wheel[data-active-theme="gallery"] .nav-indicator-pill {
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--social-color);
-    box-shadow: 0 0 15px rgba(255, 0, 127, 0.25), inset 0 0 5px rgba(255, 0, 127, 0.15);
+    background: linear-gradient(135deg, rgba(230, 38, 120, 0.25) 0%, rgba(189, 94, 255, 0.35) 100%);
+    border: 1.5px solid var(--social-color);
+    box-shadow: 0 0 18px rgba(230, 38, 120, 0.6), inset 0 0 10px rgba(230, 38, 120, 0.3);
 }
 .cosmic-nav-wheel[data-active-theme="gallery"] .nav-item.active {
     color: var(--social-color) !important;
-    text-shadow: 0 0 10px var(--social-glow);
+    text-shadow: 0 0 12px var(--social-glow);
 }
 
 @media (max-width: 950px) {

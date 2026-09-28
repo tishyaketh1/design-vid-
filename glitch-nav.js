@@ -80,10 +80,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 pill.style.width = `${item.offsetWidth}px`;
             }
         });
+        item.addEventListener('focus', () => {
+            const pill = document.getElementById('nav-indicator-pill');
+            if (pill) {
+                pill.style.left = `${item.offsetLeft}px`;
+                pill.style.width = `${item.offsetWidth}px`;
+            }
+        });
     });
 
     const navTrack = document.querySelector('.nav-wheel-track');
     if (navTrack) {
         navTrack.addEventListener('mouseleave', updateNavPill);
+        navTrack.addEventListener('focusout', (e) => {
+            if (!navTrack.contains(e.relatedTarget)) {
+                updateNavPill();
+            }
+        });
     }
 });
