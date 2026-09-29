@@ -840,7 +840,9 @@ document.addEventListener('DOMContentLoaded', () => {
             modalRules.innerHTML = '<li>Official rules and guidelines apply. Please report 30 mins before schedule.</li>';
         }
 
-        modalRegisterBtn.href = `https://docs.google.com/forms/d/e/1FAIpQLScJp86gL9E-Pravaah2026MockForm/viewform?usp=pp_url&entry.18473822=${encodeURIComponent(event.name)}`;
+        if (modalRegisterBtn) {
+            modalRegisterBtn.href = `register.html?event=${encodeURIComponent(event.name)}&day=${encodeURIComponent(event.day || '1')}&verse=${encodeURIComponent(event.verse)}`;
+        }
 
         modal.classList.remove('hidden');
     }

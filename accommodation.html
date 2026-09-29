@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACCOMMODATION // PRAVAAH '26 - IIT Bhubaneswar</title>
+    <title>PRAVAAH '26 — Campus Residency & Accommodation Portal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="subpage-body">
+<body class="subpage-body accom-page-body">
 
+    <!-- Global Cyber Background Layers -->
     <div class="global-bg-layer subpage-bg"></div>
     <div class="subpage-grid-overlay"></div>
 
@@ -38,92 +40,265 @@
         <div class="nav-wheel-glow"></div>
     </nav>
 
-    <main class="subpage-main">
-        <section class="dummy-page-hero">
-            <div class="hero-badge-pill">✦ CAMPUS RESIDENCY & HOSTEL STAY // OCT 14-19, 2026 ✦</div>
-            <h1 class="spider-title" data-text="ACCOMMODATION PORTAL">ACCOMMODATION PORTAL</h1>
-            <p class="subpage-hero-subtitle">Secure safe, comfortable on-campus hostel residency at IIT Bhubaneswar during the 4 days of Pravaah '26 with 24/7 security and Wi-Fi.</p>
+    <!-- Main Accommodation Shell -->
+    <main class="subpage-main accom-main-container">
+        
+        <!-- Hero Header Box -->
+        <header class="accom-hero-header">
+            <div class="hero-badge-pill">✦ CAMPUS RESIDENCY & HABITAT HUB // OCT 14-19, 2026 ✦</div>
+            <h1 class="events-hero-title spider-title" data-text="ACCOMMODATION PORTAL">ACCOMMODATION PORTAL</h1>
+            <p class="subpage-hero-subtitle">Reserve high-security campus residency at IIT Bhubaneswar during Pravaah '26 with live stay cost calculator, mess dining options, and instant holographic stay pass verification.</p>
+        </header>
 
-            <!-- Accommodation Options -->
-            <div class="accom-grid">
-                <div class="accom-card">
-                    <div class="accom-icon">🏢</div>
-                    <span class="accom-tag">Mahanadi Hall of Residence</span>
-                    <h3 class="accom-title">BOYS HOSTEL WING</h3>
-                    <div class="accom-rate">₹450 <span class="rate-sub">/ Day (Per Head)</span></div>
-                    <p class="accom-desc">Spacious sharing rooms with individual study desks, mattresses, pillows, high-speed Wi-Fi, and hot water facilities.</p>
-                    <ul class="accom-perks">
-                        <li>✦ 24/7 Campus Security & CCTV</li>
-                        <li>✦ High-Speed Campus LAN & Wi-Fi</li>
-                        <li>✦ Mess Food Dining Access</li>
-                        <li>✦ Shuttle Service to Main Arenas</li>
-                    </ul>
+        <!-- Accommodation Workspace Grid -->
+        <div class="accom-workspace-grid">
+            
+            <!-- Left & Main Booking Column -->
+            <div class="accom-configurator-card">
+                
+                <!-- STEP 1: Select Residence Option -->
+                <div class="accom-step-section">
+                    <div class="step-header">
+                        <span class="step-num">01</span>
+                        <h2 class="step-title">SELECT RESIDENCE HALL TIER</h2>
+                    </div>
+
+                    <div class="residence-options-grid" id="residenceGrid">
+                        
+                        <div class="res-card selected" data-hall="Mahanadi Boys Hall" data-rate="450" data-type="Hostel Bed">
+                            <div class="res-icon">🏢</div>
+                            <div class="res-info">
+                                <span class="res-tag">Mahanadi Hall of Residence</span>
+                                <h3 class="res-title">BOYS HOSTEL WING</h3>
+                                <p class="res-rate">₹450 <span>/ NIGHT (PER HEAD)</span></p>
+                                <p class="res-desc">Spacious sharing rooms with individual study desks, mattresses, pillows, Wi-Fi, and 24/7 hot water.</p>
+                            </div>
+                            <div class="res-check"><i class="fa-solid fa-circle-check"></i></div>
+                        </div>
+
+                        <div class="res-card" data-hall="Subarnarekha Girls Hall" data-rate="450" data-type="Hostel Bed">
+                            <div class="res-badge-pill">POPULAR</div>
+                            <div class="res-icon">🌸</div>
+                            <div class="res-info">
+                                <span class="res-tag tag-cult">Subarnarekha Hall of Residence</span>
+                                <h3 class="res-title">GIRLS HOSTEL WING</h3>
+                                <p class="res-rate">₹450 <span>/ NIGHT (PER HEAD)</span></p>
+                                <p class="res-desc">Dedicated secure women's wing with round-the-clock wardens, female security guards, and Wi-Fi.</p>
+                            </div>
+                            <div class="res-check"><i class="fa-solid fa-circle-check"></i></div>
+                        </div>
+
+                        <div class="res-card" data-hall="Campus Guest House" data-rate="1200" data-type="AC Suite">
+                            <div class="res-icon">🏨</div>
+                            <div class="res-info">
+                                <span class="res-tag tag-tech">Guest House Annex</span>
+                                <h3 class="res-title">PREMIUM AC SUITE</h3>
+                                <p class="res-rate">₹1,200 <span>/ NIGHT (TWIN SHARING)</span></p>
+                                <p class="res-desc">Air-conditioned guest suites with attached washrooms, television, room service, and breakfast.</p>
+                            </div>
+                            <div class="res-check"><i class="fa-solid fa-circle-check"></i></div>
+                        </div>
+
+                        <div class="res-card" data-hall="Contingent Hall Dorm" data-rate="350" data-type="Group Dorm">
+                            <div class="res-icon">🏕️</div>
+                            <div class="res-info">
+                                <span class="res-tag tag-social">Community Complex</span>
+                                <h3 class="res-title">CONTINGENT GROUP DORM</h3>
+                                <p class="res-rate">₹350 <span>/ NIGHT (10+ MEMBERS)</span></p>
+                                <p class="res-desc">Large carpeted arena dormitory for college teams and contingents with luggage lockers.</p>
+                            </div>
+                            <div class="res-check"><i class="fa-solid fa-circle-check"></i></div>
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="accom-card featured-accom">
-                    <div class="pass-highlight-banner">POPULAR</div>
-                    <div class="accom-icon">🌸</div>
-                    <span class="accom-tag tag-cult">Subarnarekha Hall of Residence</span>
-                    <h3 class="accom-title">GIRLS HOSTEL WING</h3>
-                    <div class="accom-rate">₹450 <span class="rate-sub">/ Day (Per Head)</span></div>
-                    <p class="accom-desc">Dedicated secure women's residential wing with round-the-clock wardens, sanitization, Wi-Fi, and direct shuttle stop.</p>
-                    <ul class="accom-perks">
-                        <li>✦ Biometric Entry & Female Security</li>
-                        <li>✦ High-Speed Campus LAN & Wi-Fi</li>
-                        <li>✦ Clean Filtered RO Water & Mess</li>
-                        <li>✦ Immediate First-Aid Assistance</li>
-                    </ul>
+                <!-- STEP 2: Select Dates & Guests -->
+                <div class="accom-step-section">
+                    <div class="step-header">
+                        <span class="step-num">02</span>
+                        <h2 class="step-title">DURATION & GUEST ALLOCATION</h2>
+                    </div>
+
+                    <div class="duration-grid">
+                        <div class="input-field">
+                            <label for="check-in-date"><i class="fa-solid fa-calendar-check"></i> CHECK-IN DATE</label>
+                            <select id="check-in-date">
+                                <option value="2026-10-14">Oct 14, 2026 (Day 0 Eve)</option>
+                                <option value="2026-10-15" selected>Oct 15, 2026 (Day 1)</option>
+                                <option value="2026-10-16">Oct 16, 2026 (Day 2)</option>
+                                <option value="2026-10-17">Oct 17, 2026 (Day 3)</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="check-out-date"><i class="fa-solid fa-calendar-minus"></i> CHECK-OUT DATE</label>
+                            <select id="check-out-date">
+                                <option value="2026-10-16">Oct 16, 2026 (1 Night)</option>
+                                <option value="2026-10-17">Oct 17, 2026 (2 Nights)</option>
+                                <option value="2026-10-18" selected>Oct 18, 2026 (3 Nights)</option>
+                                <option value="2026-10-19">Oct 19, 2026 (4 Nights)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="guests-counter-row">
+                        <div class="counter-card">
+                            <span class="c-lbl"><i class="fa-solid fa-person"></i> MALE DELEGATES</span>
+                            <div class="counter-controls">
+                                <button type="button" class="count-btn" id="maleMinus">-</button>
+                                <span class="count-num" id="maleCount">1</span>
+                                <button type="button" class="count-btn" id="malePlus">+</button>
+                            </div>
+                        </div>
+
+                        <div class="counter-card">
+                            <span class="c-lbl"><i class="fa-solid fa-person-dress"></i> FEMALE DELEGATES</span>
+                            <div class="counter-controls">
+                                <button type="button" class="count-btn" id="femaleMinus">-</button>
+                                <span class="count-num" id="femaleCount">0</span>
+                                <button type="button" class="count-btn" id="femalePlus">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mess Dining Addon Toggle -->
+                    <div class="mess-toggle-card">
+                        <label class="mess-toggle-row">
+                            <input type="checkbox" id="messAddonCheckbox" checked>
+                            <div class="mess-info-text">
+                                <span class="mess-title">INCLUDE CAMPUS MESS DINING VOUCHER (+₹180 / DAY PER HEAD)</span>
+                                <span class="mess-sub">Includes Unlimited Breakfast, Lunch, High Tea & Dinner at Student Mess Halls.</span>
+                            </div>
+                        </label>
+                    </div>
                 </div>
 
-                <div class="accom-card">
-                    <div class="accom-icon">🏨</div>
-                    <span class="accom-tag tag-tech">Guest House Annex</span>
-                    <h3 class="accom-title">PREMIUM SUITE (FACULTY/TEAMS)</h3>
-                    <div class="accom-rate">₹1,200 <span class="rate-sub">/ Day (Twin Sharing)</span></div>
-                    <p class="accom-desc">Air-conditioned guest house rooms with attached washrooms, television, room service, and complimentary breakfast.</p>
-                    <ul class="accom-perks">
-                        <li>✦ Air Conditioned Suites</li>
-                        <li>✦ Attached Bathrooms & Toiletries</li>
-                        <li>✦ VIP Lounge & Dining Access</li>
-                        <li>✦ Priority Vehicle Parking</li>
-                    </ul>
+                <!-- STEP 3: Leader Credentials & Submission -->
+                <div class="accom-step-section">
+                    <div class="step-header">
+                        <span class="step-num">03</span>
+                        <h2 class="step-title">LEAD DELEGATE CREDENTIALS</h2>
+                    </div>
+
+                    <form id="accommodationForm" class="delegate-form">
+                        <div class="form-grid">
+                            <div class="input-field">
+                                <label for="acc-name"><i class="fa-solid fa-user"></i> LEAD DELEGATE NAME *</label>
+                                <input type="text" id="acc-name" placeholder="e.g. Alex Mercer" required>
+                            </div>
+                            <div class="input-field">
+                                <label for="acc-email"><i class="fa-solid fa-envelope"></i> EMAIL ADDRESS *</label>
+                                <input type="email" id="acc-email" placeholder="alex@institute.edu" required>
+                            </div>
+                            <div class="input-field">
+                                <label for="acc-phone"><i class="fa-solid fa-phone"></i> CONTACT NUMBER *</label>
+                                <input type="tel" id="acc-phone" placeholder="+91 98765 43210" required>
+                            </div>
+                            <div class="input-field">
+                                <label for="acc-college"><i class="fa-solid fa-graduation-cap"></i> COLLEGE / INSTITUTE *</label>
+                                <input type="text" id="acc-college" placeholder="e.g. IIT Bhubaneswar" required>
+                            </div>
+                            <div class="input-field" style="grid-column: 1 / -1;">
+                                <label for="acc-notes"><i class="fa-solid fa-circle-info"></i> ARRIVAL TIME & SPECIAL REQUESTS</label>
+                                <input type="text" id="acc-notes" placeholder="e.g. Arriving Oct 15 at 10 AM by train / Need ground floor room">
+                            </div>
+                        </div>
+
+                        <!-- Important Security Notice -->
+                        <div class="reg-notice-box">
+                            <span class="notice-icon">🛡️</span>
+                            <span><strong>Hostel Rules:</strong> Biometric/QR check-in required at hostel gates. Alcohol, smoking, or unauthorized visitors are strictly prohibited.</span>
+                        </div>
+
+                        <!-- Submit Bar -->
+                        <div class="form-submit-bar">
+                            <div class="price-summary-display">
+                                <span class="price-lbl">ESTIMATED STAY COST</span>
+                                <span class="price-val" id="totalStayCostDisplay">₹1,890</span>
+                            </div>
+                            <button type="submit" class="transmit-pay-btn" id="submitAccBtn">
+                                <span>TRANSMIT STAY RESERVATION ✦</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Live Holographic Residency Pass Card -->
+            <div class="reg-ticket-preview-column">
+                <div class="ticket-sticky-wrapper">
+                    <div class="ticket-header-label">
+                        <span class="dot-pulse"></span> LIVE RESIDENCY PASS PREVIEW
+                    </div>
+
+                    <div class="cyber-ticket-card accom-pass-card" id="cyberResidencyCard">
+                        <div class="ticket-watermark">PRAVAAH</div>
+                        <div class="ticket-top-row">
+                            <div class="ticket-logo-brand">
+                                <span class="brand-title">PRAVAAH '26</span>
+                                <span class="brand-sub">CAMPUS HABITAT PASS</span>
+                            </div>
+                            <div class="ticket-badge-pill" id="liveHallBadge">MAHANADI BOYS HALL</div>
+                        </div>
+
+                        <div class="ticket-mid-row">
+                            <div class="ticket-delegate-info">
+                                <span class="lbl">LEAD RESIDENT</span>
+                                <h3 class="val-name" id="liveAccName">ALEX MERCER</h3>
+                                <span class="lbl">INSTITUTE</span>
+                                <p class="val-sub" id="liveAccCollege">IIT BHUBANESWAR</p>
+                            </div>
+                            <div class="ticket-qr-box">
+                                <div class="qr-placeholder">
+                                    <i class="fa-solid fa-bed"></i>
+                                </div>
+                                <span class="qr-code-num" id="liveResId">RES-2026-H892</span>
+                            </div>
+                        </div>
+
+                        <div class="ticket-details-grid">
+                            <div class="t-det">
+                                <span class="t-lbl">STAY DURATION</span>
+                                <span class="t-val" id="liveNights">3 NIGHTS</span>
+                            </div>
+                            <div class="t-det">
+                                <span class="t-lbl">TOTAL GUESTS</span>
+                                <span class="t-val" id="liveGuestsCount">1 GUEST</span>
+                            </div>
+                            <div class="t-det">
+                                <span class="t-lbl">MESS DINING</span>
+                                <span class="t-val status-active" id="liveMessStatus">INCLUDED</span>
+                            </div>
+                            <div class="t-det">
+                                <span class="t-lbl">STAY COST</span>
+                                <span class="t-val price-highlight" id="liveStayCost">₹1,890</span>
+                            </div>
+                        </div>
+
+                        <div class="ticket-footer-row">
+                            <span>IIT BHUBANESWAR // ARGUL CAMPUS</span>
+                            <span class="security-chip">CONFIRMED</span>
+                        </div>
+                    </div>
+
+                    <!-- Campus Residency Amenities Checklist -->
+                    <div class="pass-features-card">
+                        <h4 class="features-title">RESIDENCY AMENITIES INCLUDED</h4>
+                        <ul class="features-list">
+                            <li><i class="fa-solid fa-check"></i> Individual Bed, Mattress, Pillow & Desk</li>
+                            <li><i class="fa-solid fa-check"></i> 24/7 Campus Security & Female Wardens</li>
+                            <li><i class="fa-solid fa-check"></i> High-Speed Campus LAN & Wi-Fi</li>
+                            <li><i class="fa-solid fa-check"></i> Internal Campus Shuttle to Arena</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <!-- Booking Form -->
-            <div class="quick-register-hud">
-                <h3 class="hud-box-title">RESERVE ACCOMMODATION SLOT</h3>
-                <form class="quick-form-grid" onsubmit="event.preventDefault(); alert('Accommodation slot inquiry logged! Hospitality coordinators will contact via email.');">
-                    <div class="form-group">
-                        <label>LEADER NAME</label>
-                        <input type="text" placeholder="Full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label>CONTACT NUMBER</label>
-                        <input type="tel" placeholder="+91 XXXXXXXXXX" required>
-                    </div>
-                    <div class="form-group">
-                        <label>CHECK-IN DATE</label>
-                        <input type="date" value="2026-10-14" required>
-                    </div>
-                    <div class="form-group">
-                        <label>CHECK-OUT DATE</label>
-                        <input type="date" value="2026-10-18" required>
-                    </div>
-                    <div class="form-group">
-                        <label>TOTAL GUESTS (MALE / FEMALE)</label>
-                        <input type="text" placeholder="e.g. 3 Males, 2 Females" required>
-                    </div>
-                    <div class="form-group">
-                        <label>INSTITUTE NAME</label>
-                        <input type="text" placeholder="e.g. NIT Rourkela" required>
-                    </div>
-                    <button type="submit" class="submit-hud-btn">TRANSMIT RESERVATION INQUIRY ✦</button>
-                </form>
-            </div>
-        </section>
+        </div>
 
-        <!-- Footer -->
+        <!-- Symmetrical 3-Column Footer -->
         <footer class="pravaah-full-footer">
             <div class="footer-columns-grid">
                 <div class="footer-col footer-brand">
@@ -134,8 +309,8 @@
                     <h4 class="footer-heading">NAVIGATION</h4>
                     <ul class="footer-links-list">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="register.html">Register</a></li>
+                        <li><a href="events.html">Events Directory</a></li>
+                        <li><a href="register.html">Registration & Passes</a></li>
                         <li><a href="accommodation.html">Accommodation</a></li>
                     </ul>
                 </div>
@@ -152,8 +327,46 @@
                 <span>MADE WITH 💜 BY WEB TEAM</span>
             </div>
         </footer>
+
     </main>
 
+    <!-- Reservation Confirmation Modal -->
+    <div class="success-modal-overlay" id="accSuccessModal">
+        <div class="success-modal-box">
+            <div class="success-icon-badge">✓</div>
+            <h3 class="success-modal-title">RESIDENCY SLOT RESERVED!</h3>
+            <p class="success-modal-sub">Your campus accommodation request has been logged. A hospitality coordinator will send confirmation details.</p>
+            
+            <div class="modal-ticket-summary">
+                <div class="summary-row">
+                    <span class="s-lbl">LEAD GUEST:</span>
+                    <span class="s-val" id="modalAccName">Alex Mercer</span>
+                </div>
+                <div class="summary-row">
+                    <span class="s-lbl">HALL & TIER:</span>
+                    <span class="s-val" id="modalHall">Mahanadi Boys Hall</span>
+                </div>
+                <div class="summary-row">
+                    <span class="s-lbl">DATES & NIGHTS:</span>
+                    <span class="s-val" id="modalNights">3 Nights (Oct 15 - Oct 18)</span>
+                </div>
+                <div class="summary-row">
+                    <span class="s-lbl">TOTAL DELEGATES:</span>
+                    <span class="s-val" id="modalGuests">1 Delegate</span>
+                </div>
+                <div class="summary-row">
+                    <span class="s-lbl">ESTIMATED COST:</span>
+                    <span class="s-val total-glow" id="modalAccTotal">₹1,890</span>
+                </div>
+            </div>
+
+            <div class="modal-actions-grid">
+                <button type="button" class="modal-close-cta" id="closeAccModalBtn">CONFIRM & CLOSE</button>
+            </div>
+        </div>
+    </div>
+
     <script src="glitch-nav.js"></script>
+    <script src="accommodation.js"></script>
 </body>
 </html>
