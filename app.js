@@ -31,15 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const calendarPanelDate = document.getElementById('calendar-panel-date');
     const calendarEventsList = document.getElementById('calendar-events-list');
 
-    const portalNetworkContainer = document.getElementById('portal-network-container');
-    const portalOrbitWrapper = document.getElementById('portal-orbit-wrapper');
-    const networkSvg = document.getElementById('network-svg');
-    const pravaahCore = document.getElementById('pravaah-core');
-
-    let orbitAngle = 0;
-    let isOrbitPaused = false;
-    let isNetworkDeployed = false;
-
     const eventModal = document.getElementById('event-modal');
     const closeModalBtn = document.getElementById('close-modal-btn');
     const modalVerseBadge = document.getElementById('modal-verse-badge');
@@ -331,6 +322,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let portalHasPlayedOnce = false;
     let flashTriggered = false;
 
+    // Check if user has already entered the portal during this session
+    const hasAlreadyEnteredPortal = sessionStorage.getItem('portalEntered') === 'true';
+
+    if (hasAlreadyEnteredPortal) {
+        portalHasPlayedOnce = true;
+        document.body.classList.add('portal-entered');
+        if (mainScrollContainer) {
+            mainScrollContainer.classList.add('scroll-enabled');
+        }
+        if (loaderScreen) {
+            loaderScreen.classList.add('hidden');
+            loaderScreen.classList.remove('active-screen');
+        }
+        const navWheel = document.getElementById('cosmic-nav-wheel');
+        if (navWheel) {
+            navWheel.classList.remove('hidden-nav');
+            setTimeout(updateNavPill, 120);
+        }
+        setTimeout(() => {
+            generateCalendarCube();
+        }, 50);
+    }
+
     if (portalVideo) {
         portalVideo.muted = true;
         portalVideo.volume = 0;
@@ -474,6 +488,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function enterUniverse() {
         if (!loaderScreen.classList.contains('active-screen') && !portalPlaybackActive) return;
 
+        try {
+            sessionStorage.setItem('portalEntered', 'true');
+        } catch (e) {
+            console.warn(e);
+        }
+
         if (portalFlashOverlay) {
             portalFlashOverlay.classList.add('active-flash');
         }
@@ -517,8 +537,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             generateCalendarCube();
-
-            renderPortalNetwork();
         }, 350);
     }
 
@@ -620,327 +638,6 @@ document.addEventListener('DOMContentLoaded', () => {
             navWheel.setAttribute('data-active-theme', theme);
         }
     }
-
-    let activeVerse = null;
-
-    function renderPortalNetwork() {
-        if (!portalNetworkContainer) return;
-
-        document.querySelectorAll('.portal-node, .branch-event-node').forEach(el => el.remove());
-        networkSvg.innerHTML = '';
-
-        const rect = portalNetworkContainer.getBoundingClientRect();
-        const cx = rect.width / 2;
-        const cy = rect.height / 2;
-
-        const isMobile = window.innerWidth <= 768;
-        const rPortal = isMobile ? rect.width * 0.28 : rect.width * 0.26;
-        const rEvent = isMobile ? rect.width * 0.46 : rect.width * 0.42;
-
-        const coreRing = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        coreRing.setAttribute("cx", cx);
-        coreRing.setAttribute("cy", cy);
-        coreRing.setAttribute("r", 50);
-        coreRing.setAttribute("stroke", "rgba(255, 223, 122, 0.2)");
-        coreRing.setAttribute("stroke-width", "2");
-        coreRing.setAttribute("fill", "none");
-        coreRing.setAttribute("opacity", isNetworkDeployed ? "1" : "0");
-        coreRing.style.transition = "opacity 1.2s ease 0.4s";
-        networkSvg.appendChild(coreRing);
-
-        verses.forEach((verse) => {
-            const rad = (verse.angle * Math.PI) / 180;
-            const px = cx + Math.cos(rad) * rPortal;
-            const py = cy + Math.sin(rad) * rPortal;
-
-            const coreLine = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            coreLine.setAttribute("d", `M ${cx} ${cy} L ${px} ${py}`);
-            coreLine.setAttribute("stroke", verse.color);
-            coreLine.setAttribute("stroke-width", "2");
-            coreLine.style.filter = `drop-shadow(0 0 2px ${verse.color})`;
-            coreLine.setAttribute("fill", "none");
-            coreLine.setAttribute("id", `path-core-${verse.key}`);
-            coreLine.setAttribute("opacity", isNetworkDeployed ? "0.55" : "0");
-            coreLine.style.transition = "opacity 1.2s ease 0.4s";
-            networkSvg.appendChild(coreLine);
-
-            const portal = document.createElement('div');
-            portal.className = `portal-node portal-${verse.key}`;
-
-            if (isNetworkDeployed) {
-                portal.style.left = `${px}px`;
-                portal.style.top = `${py}px`;
-                portal.style.transform = 'translate(-50%, -50%) scale(1)';
-                portal.style.opacity = '1';
-                portal.style.pointerEvents = 'auto';
-            } else {
-                portal.style.left = `${cx}px`;
-                portal.style.top = `${cy}px`;
-                portal.style.transform = 'translate(-50%, -50%) scale(0)';
-                portal.style.opacity = '0';
-                portal.style.pointerEvents = 'none';
-            }
-            portal.setAttribute('data-target-left', px);
-            portal.setAttribute('data-target-top', py);
-            portal.setAttribute('data-verse', verse.key);
-
-            const numMoons = (verse.key === 'tech' || verse.key === 'game') ? 2 : 1;
-            let moonsHTML = '';
-            for (let m = 0; m < numMoons; m++) {
-                const orbitSpeed = 6 + m * 5;
-                const moonOffset = isMobile ? (35 + m * 6) : (65 + m * 10);
-                const spinAnimation = (m === 1) ? 'spin-counter' : 'spin';
-                moonsHTML += `
-                    <div class="portal-moon-orbit" style="animation-name: ${spinAnimation}; animation-duration: ${orbitSpeed}s;">
-                        <div class="portal-moon" style="background-color: ${verse.color}; box-shadow: 0 0 8px ${verse.color}; top: ${-moonOffset}px;"></div>
-                    </div>
-                `;
-            }
-
-            portal.innerHTML = `
-                <div class="portal-upright-wrapper">
-                    <div class="portal-ring-swirl"></div>
-                    <div class="portal-center">${verse.key.toUpperCase().substring(0, 4)}</div>
-                    <span class="portal-label">${verse.label}</span>
-                    ${moonsHTML}
-                </div>
-            `;
-
-            portal.addEventListener('mouseenter', () => { isOrbitPaused = true; });
-            portal.addEventListener('mouseleave', () => { isOrbitPaused = false; });
-
-            portalOrbitWrapper.appendChild(portal);
-
-            const events = verseData[verse.key].events;
-            events.forEach((evt, idx) => {
-
-                const sweepAngle = isMobile ? 60 : 70;
-                const halfSweep = sweepAngle / 2;
-                const angleStep = sweepAngle / (events.length - 1);
-
-                const evAngle = (verse.angle - halfSweep) + idx * angleStep;
-                const evRad = (evAngle * Math.PI) / 180;
-                const ex = cx + Math.cos(evRad) * rEvent;
-                const ey = cy + Math.sin(evRad) * rEvent;
-
-                const eventLine = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                eventLine.setAttribute("d", `M ${px} ${py} L ${ex} ${ey}`);
-                eventLine.setAttribute("stroke", verse.color);
-                eventLine.setAttribute("stroke-width", "1.5");
-                eventLine.setAttribute("fill", "none");
-                eventLine.setAttribute("class", `path-event-${verse.key}`);
-                networkSvg.appendChild(eventLine);
-
-                const eventNode = document.createElement('div');
-                eventNode.className = `branch-event-node branch-event-${verse.key}`;
-                eventNode.style.left = `${ex}px`;
-                eventNode.style.top = `${ey}px`;
-                eventNode.style.borderColor = verse.color;
-                eventNode.style.color = verse.color;
-                eventNode.innerHTML = `
-                    <div class="event-upright-wrapper">
-                        <div class="node-dot" style="background-color: ${verse.color}"></div>
-                        <div class="event-node-label">${evt.name}</div>
-                    </div>
-                `;
-
-                eventNode.addEventListener('mouseenter', () => { isOrbitPaused = true; });
-                eventNode.addEventListener('mouseleave', () => { isOrbitPaused = false; });
-
-                portalOrbitWrapper.appendChild(eventNode);
-
-                eventNode.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    openEventDetailModal(evt, verse.key);
-                });
-            });
-
-            portal.addEventListener('click', (e) => {
-                e.stopPropagation();
-                activatePortalBranch(verse.key);
-            });
-        });
-    }
-
-    window.addEventListener('resize', () => {
-        renderPortalNetwork();
-        updateNavPill();
-    });
-
-    function activatePortalBranch(verseKey) {
-        activeVerse = verseKey;
-
-        verses.forEach(v => {
-            document.body.classList.remove(`verse-${v.key}-active`);
-        });
-        document.body.classList.add(`verse-${verseKey}-active`);
-
-        document.querySelectorAll('.portal-node').forEach(node => {
-            if (node.getAttribute('data-verse') === verseKey) {
-                node.classList.add('active-portal');
-                node.classList.remove('portal-dimmed');
-            } else {
-                node.classList.remove('active-portal');
-                node.classList.add('portal-dimmed');
-            }
-        });
-
-        verses.forEach(v => {
-            const isTarget = v.key === verseKey;
-
-            const coreLine = document.getElementById(`path-core-${v.key}`);
-            if (coreLine) {
-                if (isTarget) {
-                    coreLine.setAttribute("stroke", v.color);
-                    coreLine.setAttribute("stroke-width", "3.5");
-                    coreLine.style.filter = `drop-shadow(0 0 4px ${v.color})`;
-                    coreLine.setAttribute("opacity", "1.0");
-                } else {
-                    coreLine.setAttribute("stroke", v.color);
-                    coreLine.setAttribute("stroke-width", "1.5");
-                    coreLine.style.filter = "none";
-                    coreLine.setAttribute("opacity", "0.2");
-                }
-            }
-
-            document.querySelectorAll(`.path-event-${v.key}`).forEach(path => {
-                if (isTarget) {
-                    path.classList.add('line-active');
-                } else {
-                    path.classList.remove('line-active');
-                }
-            });
-
-            document.querySelectorAll(`.branch-event-${v.key}`).forEach((node) => {
-                if (isTarget) {
-
-                    setTimeout(() => {
-                        node.classList.add('node-active');
-                    }, 250);
-                } else {
-                    node.classList.remove('node-active');
-                }
-            });
-        });
-    }
-
-    pravaahCore.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (!isNetworkDeployed) {
-            deployBigBang();
-        } else {
-            resetPortalNetwork();
-        }
-    });
-
-    function deployBigBang() {
-        const universePage = document.getElementById('universe-page');
-        const flash = document.getElementById('big-bang-flash');
-        const prompt = document.getElementById('core-deploy-prompt');
-
-        if (flash) {
-            flash.classList.add('flash-active');
-
-            flash.offsetHeight;
-            setTimeout(() => {
-                flash.classList.remove('flash-active');
-            }, 50);
-        }
-
-        pravaahCore.classList.add('core-flash-pulse');
-        setTimeout(() => {
-            pravaahCore.classList.remove('core-flash-pulse');
-        }, 600);
-
-        if (universePage) {
-            universePage.classList.remove('network-undeployed');
-        }
-
-        document.querySelectorAll('.portal-node').forEach((node, idx) => {
-            const targetLeft = node.getAttribute('data-target-left');
-            const targetTop = node.getAttribute('data-target-top');
-            if (targetLeft && targetTop) {
-
-                node.style.transitionDelay = `${idx * 0.12}s`;
-
-                node.style.left = `${targetLeft}px`;
-                node.style.top = `${targetTop}px`;
-                node.style.transform = 'translate(-50%, -50%) scale(1)';
-                node.style.opacity = '1';
-                node.style.pointerEvents = 'auto';
-            }
-        });
-
-        document.querySelectorAll('#network-svg circle, #network-svg path').forEach(svgEl => {
-            const id = svgEl.getAttribute('id');
-            if (id && id.startsWith('path-core-')) {
-                const verseKey = id.replace('path-core-', '');
-                const verseIdx = verses.findIndex(v => v.key === verseKey);
-                if (verseIdx !== -1) {
-                    svgEl.style.transitionDelay = `${verseIdx * 0.12 + 0.08}s`;
-                }
-                svgEl.setAttribute('opacity', '0.55');
-            } else {
-                svgEl.setAttribute('opacity', '1');
-            }
-        });
-
-        if (prompt) {
-            prompt.classList.add('fade-out');
-            setTimeout(() => {
-                prompt.remove();
-            }, 500);
-        }
-
-        isNetworkDeployed = true;
-    }
-
-    pravaahCore.addEventListener('mouseenter', () => { isOrbitPaused = true; });
-    pravaahCore.addEventListener('mouseleave', () => { isOrbitPaused = false; });
-
-    function resetPortalNetwork() {
-        activeVerse = null;
-
-        document.querySelectorAll('.portal-node').forEach(node => {
-            node.classList.remove('active-portal', 'portal-dimmed');
-        });
-
-        document.querySelectorAll('.branch-event-node').forEach(node => {
-            node.classList.remove('node-active');
-        });
-
-        verses.forEach(v => {
-            const coreLine = document.getElementById(`path-core-${v.key}`);
-            if (coreLine) {
-                coreLine.setAttribute("stroke", v.color);
-                coreLine.setAttribute("stroke-width", "2");
-                coreLine.style.filter = `drop-shadow(0 0 2px ${v.color})`;
-                coreLine.setAttribute("opacity", "0.55");
-            }
-            document.querySelectorAll(`.path-event-${v.key}`).forEach(path => {
-                path.classList.remove('line-active');
-            });
-        });
-
-        verses.forEach(v => {
-            document.body.classList.remove(`verse-${v.key}-active`);
-        });
-    }
-
-    const liveCoords = document.getElementById('live-coords');
-    if (liveCoords) {
-        setInterval(() => {
-            const x = (184.29 + Math.random() * 0.05).toFixed(4);
-            const y = (-493.18 - Math.random() * 0.05).toFixed(4);
-            liveCoords.textContent = `X: ${x} | Y: ${y}`;
-        }, 1500);
-    }
-
-    universePage.addEventListener('click', (e) => {
-        if (e.target === universePage || e.target.classList.contains('network-viewport') || e.target.id === 'portal-network-container') {
-            resetPortalNetwork();
-        }
-    });
 
     const calendarEventsData = {
         // March Pravaah Festival Core Events

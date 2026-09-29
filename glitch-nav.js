@@ -48,6 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
                 if (href !== currentPage) {
                     e.preventDefault();
+                    try {
+                        sessionStorage.setItem('portalEntered', 'true');
+                    } catch (err) {}
                     triggerGlitch();
                     setTimeout(() => {
                         window.location.href = href;
