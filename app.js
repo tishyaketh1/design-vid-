@@ -342,6 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         setTimeout(() => {
             generateCalendarCube();
+            if (typeof updateBgParallax === 'function') updateBgParallax();
         }, 50);
     }
 
@@ -537,7 +538,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             generateCalendarCube();
+            updateBgParallax();
         }, 350);
+    }
+
+    const globalBgLayer = document.getElementById('global-bg-layer');
+
+    function updateBgParallax() {
+        if (!mainScrollContainer || !globalBgLayer) return;
+        const scrollTop = mainScrollContainer.scrollTop;
+        const maxScroll = mainScrollContainer.scrollHeight - mainScrollContainer.clientHeight;
+
+        if (maxScroll > 0 && document.body.classList.contains('portal-entered')) {
+            const scrollFraction = Math.min(Math.max(scrollTop / maxScroll, 0), 1);
+            globalBgLayer.style.backgroundPosition = `center ${(scrollFraction * 100).toFixed(2)}%`;
+        }
     }
 
     mainScrollContainer.addEventListener('scroll', () => {
@@ -549,7 +564,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             document.body.classList.remove('universe-active');
         }
-    });
+
+        updateBgParallax();
+    }, { passive: true });
+
+    window.addEventListener('resize', updateBgParallax, { passive: true });
 
     const glitchOverlay = document.getElementById('screen-glitch-overlay');
     function triggerPageGlitch(targetContainer) {
