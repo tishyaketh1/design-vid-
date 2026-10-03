@@ -88,6 +88,11 @@
                         </div>
                     </div>
                 </div>
+                <div style="text-align: center; margin-top: 18px;">
+                    <button class="modal-reg-submit-btn" style="width: auto; padding: 12px 28px; display: inline-flex; align-items: center; gap: 8px; font-family: 'Orbitron', sans-serif; cursor: pointer;" onclick="window.print()">
+                        ⚡ DOWNLOAD DIGITAL TICKET PASS
+                    </button>
+                </div>
             </div>
 
             <!-- Registered Events & Badges Section -->
@@ -178,6 +183,47 @@
                     pill.style.width = `${activeNav.offsetWidth}px`;
                 }, 80);
             }
+
+            // Hydrate profile data from localStorage if available
+            try {
+                const savedReg = localStorage.getItem("pravaahUserRegistration");
+                if (savedReg) {
+                    const data = JSON.parse(savedReg);
+                    const agentName = document.querySelector('.agent-name');
+                    const agentInst = document.querySelector('.agent-inst');
+                    const pVals = document.querySelectorAll('.passport-body-grid .p-val');
+                    const heroPill = document.querySelector('.hero-badge-pill');
+
+                    if (agentName && data.name) agentName.textContent = data.name.toUpperCase();
+                    if (agentInst && data.college) agentInst.textContent = data.college;
+                    if (heroPill && data.ticketId) heroPill.textContent = `✦ AGENT ID: ${data.ticketId} // SECURITY CLEARANCE ✦`;
+
+                    if (pVals && pVals.length >= 3) {
+                        if (data.ticketId) pVals[0].textContent = data.ticketId;
+                        if (data.passType) pVals[2].textContent = `${data.passType.toUpperCase()} (${data.total || 'VERIFIED'})`;
+                    }
+
+                    if (data.eventsList && data.eventsList.length > 0) {
+                        const regList = document.querySelector('.reg-events-list');
+                        if (regList) {
+                            let itemsHTML = '';
+                            data.eventsList.forEach(evName => {
+                                itemsHTML += `
+                                    <div class="reg-event-item">
+                                        <div class="reg-event-badge badge-tech">EVENT</div>
+                                        <div class="reg-event-info">
+                                            <h4>${evName}</h4>
+                                            <span>Multiverse Fest '26 // @ IIT Bhubaneswar</span>
+                                        </div>
+                                        <span class="reg-status-pill">REGISTERED</span>
+                                    </div>
+                                `;
+                            });
+                            regList.innerHTML = itemsHTML;
+                        }
+                    }
+                }
+            } catch (err) {}
         });
     </script>
 </body>

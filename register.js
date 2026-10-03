@@ -338,12 +338,29 @@ document.addEventListener("DOMContentLoaded", () => {
         registrationForm.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            const nameVal = regName ? regName.value : "Alex Mercer";
+            const nameVal = regName && regName.value.trim() ? regName.value.trim() : "Alex Mercer";
+            const collegeVal = regCollege && regCollege.value.trim() ? regCollege.value.trim() : "IIT Bhubaneswar";
+
             if (modalDelegate) modalDelegate.textContent = nameVal;
             if (modalPassType) modalPassType.textContent = selectedPassType;
             if (modalDays) modalDays.textContent = selectedDays.map(d => d.toUpperCase()).join(", ");
             if (modalEvents) modalEvents.textContent = `${selectedEvents.size} Events Selected`;
             if (modalTotal) modalTotal.textContent = totalPriceDisplay ? totalPriceDisplay.textContent : "₹449";
+
+            const registrationData = {
+                name: nameVal,
+                college: collegeVal,
+                ticketId: currentTicketId,
+                passType: selectedPassType,
+                days: selectedDays,
+                eventsCount: selectedEvents.size,
+                eventsList: Array.from(selectedEvents),
+                total: totalPriceDisplay ? totalPriceDisplay.textContent : "₹449",
+                registeredAt: new Date().toISOString()
+            };
+            try {
+                localStorage.setItem("pravaahUserRegistration", JSON.stringify(registrationData));
+            } catch (err) {}
 
             if (successModal) {
                 successModal.classList.add("modal-open");

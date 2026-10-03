@@ -6567,7 +6567,6 @@ body.verse-social-active .hud-bracket { border-color: rgba(224, 64, 251, 0.4); }
     .pravaah-full-footer { padding: 20px 20px 14px 20px; }
 }
 
-<<<<<<< HEAD
 /* ==========================================================================
    EVENTS.HTML - INTERACTIVE MULTIVERSE PORTAL NETWORK & SPHERE STYLES
    ========================================================================== */
@@ -7202,7 +7201,10 @@ body.verse-social-active .hud-bracket { border-color: rgba(224, 64, 251, 0.4); }
         height: 64px;
     }
     .modal-info-grid {
-=======
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Pre-selected Event Redirect Banner & Flow Highlights */
 .event-redirect-banner {
     display: flex;
@@ -7545,13 +7547,10 @@ body.verse-social-active .hud-bracket { border-color: rgba(224, 64, 251, 0.4); }
 
 @media (max-width: 1024px) {
     .accom-workspace-grid {
->>>>>>> 71d5080085aef1f2a677bff986b71fff83f4508f
         grid-template-columns: 1fr;
     }
 }
 
-<<<<<<< HEAD
-=======
 @media (max-width: 768px) {
     .residence-options-grid,
     .duration-grid,
@@ -7929,6 +7928,107 @@ body.verse-social-active .hud-bracket { border-color: rgba(224, 64, 251, 0.4); }
     .grid-3col, .grid-4col, .team-cards-grid, .proposal-form { grid-template-columns: 1fr; }
 }
 
+/* ==========================================================================
+   MULTIVERSE LIVE COUNTDOWN TIMER & ENHANCED MOBILE NAV STYLES
+   ========================================================================== */
+.multiverse-countdown-container {
+    margin: 18px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: rgba(14, 10, 30, 0.55);
+    backdrop-filter: blur(14px);
+    border: 1px dashed rgba(0, 210, 255, 0.4);
+    box-shadow: 0 0 24px rgba(0, 210, 255, 0.2), inset 0 0 15px rgba(0, 210, 255, 0.08);
+    border-radius: 16px;
+    padding: 10px 22px;
+    width: fit-content;
+    z-index: 10;
+}
+
+.countdown-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    color: #00d2ff;
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.7);
+    text-transform: uppercase;
+}
+
+.countdown-units {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.countdown-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(6, 4, 16, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 4px 10px;
+    min-width: 52px;
+}
+
+.count-val {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(0, 210, 255, 0.4);
+}
+
+.count-lbl {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.1em;
+}
+
+.countdown-sep {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #00d2ff;
+    animation: pulseColon 1s infinite alternate;
+}
+
+@keyframes pulseColon {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; text-shadow: 0 0 10px #00d2ff; }
+}
+
+@media (max-width: 900px) {
+    .cosmic-nav-wheel {
+        max-width: 96vw;
+        padding: 0 8px;
+        height: 44px;
+        top: 10px;
+    }
+    .nav-wheel-track {
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding: 0 4px;
+    }
+    .nav-wheel-track::-webkit-scrollbar {
+        display: none;
+    }
+    .nav-item {
+        font-size: 0.62rem;
+        padding: 4px 10px;
+        flex-shrink: 0;
+    }
+    .nav-divider {
+        flex-shrink: 0;
+    }
+}
 
 
->>>>>>> 71d5080085aef1f2a677bff986b71fff83f4508f

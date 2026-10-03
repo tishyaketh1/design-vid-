@@ -1424,6 +1424,41 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    // Multiverse Live Countdown Timer Engine (Target Date: Oct 15, 2026)
+    const daysEl = document.getElementById('cnt-days');
+    const hoursEl = document.getElementById('cnt-hours');
+    const minsEl = document.getElementById('cnt-mins');
+    const secsEl = document.getElementById('cnt-secs');
+
+    if (daysEl && hoursEl && minsEl && secsEl) {
+        const targetDate = new Date('2026-10-15T09:00:00+05:30').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                daysEl.textContent = '00';
+                hoursEl.textContent = '00';
+                minsEl.textContent = '00';
+                secsEl.textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            daysEl.textContent = String(days).padStart(2, '0');
+            hoursEl.textContent = String(hours).padStart(2, '0');
+            minsEl.textContent = String(mins).padStart(2, '0');
+            secsEl.textContent = String(secs).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
 
     tickOrbit();
 });
