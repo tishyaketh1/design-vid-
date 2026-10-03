@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'LHC Complex - Arena A',
             photographer: 'Pravaah Media Team',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0377.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Intense micro-robotics arena competition captured during the finals of Robo Soccer. Autonomous and manual bots maneuvering under neon spotlight arrays.',
             highlights: [
                 'Captured during high-speed goal scoring sequence.',
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Main Stadium Grounds',
             photographer: 'Ayan Mukherjee',
             resolution: '5472 x 3648 (RAW)',
-            image: 'pravaah_pics_2026/0Q3A0001.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: '15,000+ roaring festival pass holders illuminating the central amphitheatre with phone flashlights during the headline EDM artist finale.',
             highlights: [
                 'Wide-angle stadium capture from the central sound mixing tower.',
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Open Air Cage Complex',
             photographer: 'Rohan Sharma',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/0Q3A0171.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: '30kg heavyweight spinner bot impact moment inside the reinforced steel mesh arena, sending sparks flying across the spectator safety barrier.',
             highlights: [
                 'High-speed shutter capture at 1/4000s.',
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Esports Pavilion Stage',
             photographer: 'Devansh Verma',
             resolution: '5760 x 3840 (RAW)',
-            image: 'pravaah_pics_2026/DSC_1631.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Grand final clutch moment on stage as the winning squad celebrates after locking down the match-winning defuse in front of live shoutcasters.',
             highlights: [
                 'Stage lighting synced to team color scheme.',
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Main Auditorium Stage',
             photographer: 'Sneha Mohanty',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_3951.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Avant-garde cyberpunk fashion couture spotlight entry featuring custom neon-infused fabrics and theatrical smoke effects.',
             highlights: [
                 'Dramatic low-angle runway perspective.',
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Amphitheatre Stage',
             photographer: 'Kavya Sharma',
             resolution: '5184 x 3456 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0864.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Lead guitarist performing a solo breakdown under crimson spotlights during the collegiate rock and heavy metal finals.',
             highlights: [
                 'Stage fog diffusion with atmospheric backlighting.',
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Auditorium Hall 2',
             photographer: 'Arjun Das',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_3673.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Student startup founders presenting their AI prototype to a panel of venture capital investors and incubator mentors.',
             highlights: [
                 'Interactive pitch deck slide projection overlay.',
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Outdoor Stadium Track',
             photographer: 'Priya Nayak',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/0Q3A8579.jpg',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'High-speed quadcopter passing through a illuminated neon gate during night obstacle course trials.',
             highlights: [
                 'Motion track trail along LED gate border.',
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Computer Center Lab 3',
             photographer: 'Vikram Singh',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0450.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Ethical hackers decoding cryptographic flags under low ambient matrix green terminal arrays during 24h CTF.',
             highlights: [
                 'Jeopardy CTF scoreboard live update background.',
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Convention Walkway',
             photographer: 'Ananya Roy',
             resolution: '5760 x 3840 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0469.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Handcrafted sci-fi and anime character armor cosplayers gathering for the central festival parade walk.',
             highlights: [
                 'Custom 3D printed mech armor details.',
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Gaming Pavilion Hall B',
             photographer: 'Devansh Verma',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0724.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Final circle battle royale tense moment with dual shoutcaster commentary broadcast live across festival screens.',
             highlights: [
                 'Final circle clutch victory finish.',
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Open Amphitheatre Plaza',
             photographer: 'Kavya Sharma',
             resolution: '5184 x 3456 (RAW)',
-            image: 'pravaah_pics_2026/DSC_1034.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'High-energy popping & locking freestyle cipher battle surrounding by cheering student crowds under evening sun.',
             highlights: [
                 'Mid-air freeze frame capture.',
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Design Gallery Complex',
             photographer: 'Sneha Mohanty',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_1305.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Generative AI visual artwork exhibition featuring ultra-high definition canvas prints created by student designers.',
             highlights: [
                 'Interactive digital screen artwork displays.',
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Main Stage Auditorium',
             photographer: 'Pravaah Media Team',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_5907.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Grand inaugural ceremony torch lighting up the holographic Multiverse logo to mark the start of Pravaah 2026.',
             highlights: [
                 'Holographic logo lighting sequence.',
