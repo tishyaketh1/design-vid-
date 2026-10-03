@@ -518,6 +518,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Dynamic Scroll Hint Fading (fades slightly as camera advances, bright at entrance)
+        const scrollHintEl = document.getElementById('corridor-scroll-hint-text');
+        if (scrollHintEl) {
+            if (currentCameraZ > 300) {
+                scrollHintEl.style.opacity = '0.35';
+            } else {
+                scrollHintEl.style.opacity = '1';
+            }
+        }
+
         // Sync HUD Matrix Tracker
         updateHUDTracker(nearestCardIdx);
 
@@ -614,28 +624,85 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Non-Passive Wheel Listener: Smoothed Input Filter (targetVelocity += clampedDelta * 0.52)
-    if (corridorViewport) {
-        corridorViewport.addEventListener('wheel', (e) => {
+    // Handoff & Scroll State Flags
+    let corridorHandoffComplete = false;
+    let corridorAutoScrolling = false;
+    let handoffTimeoutId = null;
+
+    // Reset handoff state when user scrolls page up above corridor
+    window.addEventListener('scroll', () => {
+        if (!corridorViewport) return;
+        const rect = corridorViewport.getBoundingClientRect();
+        if (currentCameraZ <= 0 && rect.top > 220) {
+            corridorHandoffComplete = false;
+        }
+    }, { passive: true });
+
+    // Wheel Event Handler: Explicit Handoff State Model & Boundary Passthrough
+    window.addEventListener('wheel', (e) => {
+        if (!corridorViewport) return;
+
+        // 1. Ignore wheel events from interactive controls, buttons, links, or modal elements
+        if (e.target.closest('button, a, input, select, textarea, .dossier-modal-overlay, #photo-dossier-modal, .filter-btn, .final-return-btn')) {
+            return;
+        }
+
+        // 2. Normalize wheel delta across pixel / line / page deltaModes
+        let rawDelta = e.deltaY !== 0 ? e.deltaY : e.deltaX;
+        if (e.deltaMode === 1) { // Line mode
+            rawDelta *= 16;
+        } else if (e.deltaMode === 2) { // Page mode
+            rawDelta *= 300;
+        }
+
+        // 3. Boundary Passthrough: Never trap page scrolling
+        if (currentCameraZ <= 0 && rawDelta < 0) {
+            // At entrance and scrolling UP: allow normal page scroll up
+            return;
+        }
+        if (currentCameraZ >= maxCameraZ && rawDelta > 0) {
+            // At Final Frame and scrolling DOWN: allow normal page scroll down
+            return;
+        }
+
+        // 4. Prevent duplicate handoff while smooth page scroll is active
+        if (corridorAutoScrolling) {
             e.preventDefault();
+            return;
+        }
 
-            // 1. Normalize wheel delta across pixel / line / page deltaModes
-            let rawDelta = e.deltaY !== 0 ? e.deltaY : e.deltaX;
-            if (e.deltaMode === 1) { // Line mode
-                rawDelta *= 16;
-            } else if (e.deltaMode === 2) { // Page mode
-                rawDelta *= 300;
-            }
+        // 5. Automatic Page-Scroll-to-Corridor Handoff
+        const rect = corridorViewport.getBoundingClientRect();
+        const navbarOffset = 80; // Account for floating cosmic navbar
 
-            // 2. Multiply by sensitivity scale 0.48 and clamp per event to ±48px
-            const normalizedDelta = rawDelta * 0.48;
-            const clampedDelta = Math.max(-48, Math.min(48, normalizedDelta));
+        if (currentCameraZ <= 0 && rawDelta > 0 && !corridorHandoffComplete && rect.top > navbarOffset + 10) {
+            e.preventDefault();
+            corridorAutoScrolling = true;
 
-            // 3. Add impulse to targetVelocity and clamp targetVelocity to ±24
-            targetVelocity += clampedDelta * 0.52;
-            targetVelocity = Math.max(-24, Math.min(24, targetVelocity));
-        }, { passive: false });
-    }
+            corridorViewport.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+                inline: 'nearest'
+            });
+
+            if (handoffTimeoutId) clearTimeout(handoffTimeoutId);
+            handoffTimeoutId = setTimeout(() => {
+                corridorAutoScrolling = false;
+                corridorHandoffComplete = true;
+            }, 550);
+
+            return;
+        }
+
+        // 6. Camera 3D Movement once handoff is complete or camera is inside corridor
+        e.preventDefault();
+
+        const normalizedDelta = rawDelta * 0.48;
+        const clampedDelta = Math.max(-48, Math.min(48, normalizedDelta));
+
+        targetVelocity += clampedDelta * 0.52;
+        targetVelocity = Math.max(-24, Math.min(24, targetVelocity));
+    }, { passive: false });
 
     // Touch & Drag Pointer Impulse Movement
     let startY = 0;
@@ -644,7 +711,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (corridorViewport) {
         corridorViewport.addEventListener('pointerdown', (e) => {
-            if (e.target.closest('.final-return-btn') || e.target.closest('.card-action-btn')) return;
+            if (e.pointerType === 'touch') return; // Preserve normal vertical page touch scrolling on mobile
+            if (e.target.closest('.final-return-btn') || e.target.closest('.card-action-btn') || e.target.closest('button')) return;
             isDragging = true;
             startY = e.clientY;
             lastY = e.clientY;

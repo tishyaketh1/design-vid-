@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="accommodation.css">
 </head>
 <body class="subpage-body accom-page-body">
 
@@ -31,6 +32,8 @@
             <div class="nav-divider"></div>
             <a href="gallery.html" class="nav-item">GALLERY</a>
             <div class="nav-divider"></div>
+            <a href="photo-gallery.html" class="nav-item">PHOTO GALLERY</a>
+            <div class="nav-divider"></div>
             <a href="sponsors.html" class="nav-item">SPONSORS</a>
             <div class="nav-divider"></div>
             <a href="contact.html" class="nav-item">CONTACT US</a>
@@ -40,265 +43,135 @@
         <div class="nav-wheel-glow"></div>
     </nav>
 
-    <!-- Main Accommodation Shell -->
+    <!-- Main Accommodation Container -->
     <main class="subpage-main accom-main-container">
         
-        <!-- Hero Header Box -->
+        <!-- Section A: Compact Subpage Hero -->
         <header class="accom-hero-header">
-            <div class="hero-badge-pill">✦ CAMPUS RESIDENCY & HABITAT HUB // OCT 14-19, 2026 ✦</div>
-            <h1 class="events-hero-title spider-title" data-text="ACCOMMODATION PORTAL">ACCOMMODATION PORTAL</h1>
-            <p class="subpage-hero-subtitle">Reserve high-security campus residency at IIT Bhubaneswar during Pravaah '26 with live stay cost calculator, mess dining options, and instant holographic stay pass verification.</p>
+            <div class="accom-hero-badge">✦ CAMPUS RESIDENCY & HABITAT HUB ✦</div>
+            <h1 class="accom-hero-title">ACCOMMODATION</h1>
+            <p class="accom-hero-subtitle">Campus residency information and guidelines for Pravaah '26 participants.</p>
         </header>
 
-        <!-- Accommodation Workspace Grid -->
-        <div class="accom-workspace-grid">
+        <!-- Section B: Important Accommodation Rules Card (Screenshot 1) -->
+        <section class="rules-card-container">
+            <div class="rules-card-header">
+                <span class="warning-icon">⚠️</span>
+                <h2 class="rules-card-title">Important Accommodation Rules</h2>
+            </div>
+            <ul class="rules-arrow-list">
+                <li><span class="cyan-arrow">➤</span> IIT Bhubaneswar students do not need accommodation.</li>
+                <li><span class="cyan-arrow">➤</span> A "day" is defined as a 24-hour period starting at 9:00 AM and ending at 9:00 AM the next day.</li>
+                <li><span class="cyan-arrow">➤</span> Accommodation is allotted on a first-come, first-served basis, subject to availability.</li>
+                <li><span class="cyan-arrow">➤</span> The pass is equivalent to a visitor pass. To participate in any other events, you must purchase a Day Pass or Fest Pass.</li>
+                <li><span class="cyan-arrow">➤</span> Food is not included in the accommodation. Participants may pay separately and eat at any available mess.</li>
+                <li><span class="cyan-arrow">➤</span> Any damage to hostel property caused by participants will be chargeable.</li>
+                <li><span class="cyan-arrow">➤</span> There are no unisex hostels. Separate hostels are allotted for boys and girls, and entry into the opposite gender's rooms is strictly prohibited.</li>
+                <li><span class="cyan-arrow">➤</span> Participants must check out by 9:00 AM on the day of departure.</li>
+                <li><span class="cyan-arrow">➤</span> A Single Room with Double Occupancy includes one cot, two mattresses, and basic amenities.</li>
+            </ul>
+        </section>
+
+        <!-- Section C: IIT Bhubaneswar Student Notice Callout (Screenshot 2) -->
+        <section class="notice-callout-outer">
+            <div class="notice-inner-box">
+                <p class="notice-highlight-text">IIT Bhubaneswar students do not need accommodation.</p>
+            </div>
+        </section>
+
+        <!-- Section D: Accommodation Guidelines Grid (Screenshot 3) -->
+        <section class="guidelines-section">
+            <h2 class="guidelines-main-title">Accommodation Guidelines</h2>
             
-            <!-- Left & Main Booking Column -->
-            <div class="accom-configurator-card">
+            <div class="dos-donts-grid">
+                <!-- Do's Card -->
+                <div class="guideline-card">
+                    <div class="card-top-icon">🛏️</div>
+                    <h3 class="card-title">Do's</h3>
+                    <ul class="bullet-list">
+                        <li><span class="dot-marker">•</span> Carry your college ID and registration confirmation.</li>
+                        <li><span class="dot-marker">•</span> Maintain cleanliness in rooms and surroundings.</li>
+                        <li><span class="dot-marker">•</span> Respect hostel and campus rules.</li>
+                        <li><span class="dot-marker">•</span> Use facilities responsibly.</li>
+                    </ul>
+                </div>
+
+                <!-- Don'ts Card -->
+                <div class="guideline-card">
+                    <div class="card-top-icon">🚫</div>
+                    <h3 class="card-title">Don'ts</h3>
+                    <ul class="bullet-list">
+                        <li><span class="dot-marker">•</span> No loud music or parties in hostel premises.</li>
+                        <li><span class="dot-marker">•</span> No damage to property or furniture.</li>
+                        <li><span class="dot-marker">•</span> Alcohol or prohibited substances are strictly banned.</li>
+                        <li><span class="dot-marker">•</span> Visitors are not allowed without prior permission.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section E: Accommodation Booking Form -->
+        <section class="booking-section-container">
+            <div class="booking-header">
+                <h2 class="booking-section-title">CAMPUS RESIDENCY ALLOCATION</h2>
+                <p class="booking-section-sub">Select your category and hostel preference to view allocation status.</p>
+            </div>
+
+            <form id="accommodationBookingForm" class="booking-form-grid" onsubmit="return false;">
                 
-                <!-- STEP 1: Select Residence Option -->
-                <div class="accom-step-section">
-                    <div class="step-header">
-                        <span class="step-num">01</span>
-                        <h2 class="step-title">SELECT RESIDENCE HALL TIER</h2>
-                    </div>
+                <div class="form-field-group">
+                    <label for="acc-fullname" class="form-label">FULL NAME *</label>
+                    <input type="text" id="acc-fullname" name="fullname" class="form-input" required placeholder="e.g. Alex Mercer">
+                </div>
 
-                    <div class="residence-options-grid" id="residenceGrid">
-                        
-                        <div class="res-card selected" data-hall="Mahanadi Boys Hall" data-rate="450" data-type="Hostel Bed">
-                            <div class="res-icon">🏢</div>
-                            <div class="res-info">
-                                <span class="res-tag">Mahanadi Hall of Residence</span>
-                                <h3 class="res-title">BOYS HOSTEL WING</h3>
-                                <p class="res-rate">₹450 <span>/ NIGHT (PER HEAD)</span></p>
-                                <p class="res-desc">Spacious sharing rooms with individual study desks, mattresses, pillows, Wi-Fi, and 24/7 hot water.</p>
-                            </div>
-                            <div class="res-check"><i class="fa-solid fa-circle-check"></i></div>
-                        </div>
+                <div class="form-field-group">
+                    <label for="acc-email" class="form-label">EMAIL ADDRESS *</label>
+                    <input type="email" id="acc-email" name="email" class="form-input" required placeholder="e.g. alex@institution.edu">
+                </div>
 
-                        <div class="res-card" data-hall="Subarnarekha Girls Hall" data-rate="450" data-type="Hostel Bed">
-                            <div class="res-badge-pill">POPULAR</div>
-                            <div class="res-icon">🌸</div>
-                            <div class="res-info">
-                                <span class="res-tag tag-cult">Subarnarekha Hall of Residence</span>
-                                <h3 class="res-title">GIRLS HOSTEL WING</h3>
-                                <p class="res-rate">₹450 <span>/ NIGHT (PER HEAD)</span></p>
-                                <p class="res-desc">Dedicated secure women's wing with round-the-clock wardens, female security guards, and Wi-Fi.</p>
-                            </div>
-                            <div class="res-check"><i class="fa-solid fa-circle-check"></i></div>
-                        </div>
+                <div class="form-field-group">
+                    <label for="acc-phone" class="form-label">PHONE NUMBER *</label>
+                    <input type="tel" id="acc-phone" name="phone" class="form-input" required placeholder="e.g. +91 98765 43210">
+                </div>
 
-                        <div class="res-card" data-hall="Campus Guest House" data-rate="1200" data-type="AC Suite">
-                            <div class="res-icon">🏨</div>
-                            <div class="res-info">
-                                <span class="res-tag tag-tech">Guest House Annex</span>
-                                <h3 class="res-title">PREMIUM AC SUITE</h3>
-                                <p class="res-rate">₹1,200 <span>/ NIGHT (TWIN SHARING)</span></p>
-                                <p class="res-desc">Air-conditioned guest suites with attached washrooms, television, room service, and breakfast.</p>
-                            </div>
-                            <div class="res-check"><i class="fa-solid fa-circle-check"></i></div>
-                        </div>
+                <div class="form-field-group">
+                    <label for="acc-college" class="form-label">COLLEGE / INSTITUTION *</label>
+                    <input type="text" id="acc-college" name="college" class="form-input" required placeholder="e.g. IIT Bhubaneswar">
+                </div>
 
-                        <div class="res-card" data-hall="Contingent Hall Dorm" data-rate="350" data-type="Group Dorm">
-                            <div class="res-icon">🏕️</div>
-                            <div class="res-info">
-                                <span class="res-tag tag-social">Community Complex</span>
-                                <h3 class="res-title">CONTINGENT GROUP DORM</h3>
-                                <p class="res-rate">₹350 <span>/ NIGHT (10+ MEMBERS)</span></p>
-                                <p class="res-desc">Large carpeted arena dormitory for college teams and contingents with luggage lockers.</p>
-                            </div>
-                            <div class="res-check"><i class="fa-solid fa-circle-check"></i></div>
-                        </div>
+                <div class="form-field-group">
+                    <label for="acc-category" class="form-label">PARTICIPANT CATEGORY *</label>
+                    <select id="acc-category" name="category" class="form-select" required>
+                        <option value="" disabled selected>-- Select category --</option>
+                        <option value="girls">Girls</option>
+                        <option value="boys">Boys</option>
+                    </select>
+                </div>
 
+                <div class="form-field-group">
+                    <label for="acc-hostel" class="form-label">HOSTEL / HALL SELECTION *</label>
+                    <select id="acc-hostel" name="hostel" class="form-select" required disabled>
+                        <option value="" disabled selected>-- Select category first --</option>
+                    </select>
+                </div>
+
+                <div class="form-field-group full-width">
+                    <div class="fee-display-box">
+                        <span class="fee-status-badge" id="feeStatusDisplay">[ ACCOMMODATION FEE — TO BE ANNOUNCED ]</span>
                     </div>
                 </div>
 
-                <!-- STEP 2: Select Dates & Guests -->
-                <div class="accom-step-section">
-                    <div class="step-header">
-                        <span class="step-num">02</span>
-                        <h2 class="step-title">DURATION & GUEST ALLOCATION</h2>
-                    </div>
-
-                    <div class="duration-grid">
-                        <div class="input-field">
-                            <label for="check-in-date"><i class="fa-solid fa-calendar-check"></i> CHECK-IN DATE</label>
-                            <select id="check-in-date">
-                                <option value="2026-10-14">Oct 14, 2026 (Day 0 Eve)</option>
-                                <option value="2026-10-15" selected>Oct 15, 2026 (Day 1)</option>
-                                <option value="2026-10-16">Oct 16, 2026 (Day 2)</option>
-                                <option value="2026-10-17">Oct 17, 2026 (Day 3)</option>
-                            </select>
-                        </div>
-
-                        <div class="input-field">
-                            <label for="check-out-date"><i class="fa-solid fa-calendar-minus"></i> CHECK-OUT DATE</label>
-                            <select id="check-out-date">
-                                <option value="2026-10-16">Oct 16, 2026 (1 Night)</option>
-                                <option value="2026-10-17">Oct 17, 2026 (2 Nights)</option>
-                                <option value="2026-10-18" selected>Oct 18, 2026 (3 Nights)</option>
-                                <option value="2026-10-19">Oct 19, 2026 (4 Nights)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="guests-counter-row">
-                        <div class="counter-card">
-                            <span class="c-lbl"><i class="fa-solid fa-person"></i> MALE DELEGATES</span>
-                            <div class="counter-controls">
-                                <button type="button" class="count-btn" id="maleMinus">-</button>
-                                <span class="count-num" id="maleCount">1</span>
-                                <button type="button" class="count-btn" id="malePlus">+</button>
-                            </div>
-                        </div>
-
-                        <div class="counter-card">
-                            <span class="c-lbl"><i class="fa-solid fa-person-dress"></i> FEMALE DELEGATES</span>
-                            <div class="counter-controls">
-                                <button type="button" class="count-btn" id="femaleMinus">-</button>
-                                <span class="count-num" id="femaleCount">0</span>
-                                <button type="button" class="count-btn" id="femalePlus">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Mess Dining Addon Toggle -->
-                    <div class="mess-toggle-card">
-                        <label class="mess-toggle-row">
-                            <input type="checkbox" id="messAddonCheckbox" checked>
-                            <div class="mess-info-text">
-                                <span class="mess-title">INCLUDE CAMPUS MESS DINING VOUCHER (+₹180 / DAY PER HEAD)</span>
-                                <span class="mess-sub">Includes Unlimited Breakfast, Lunch, High Tea & Dinner at Student Mess Halls.</span>
-                            </div>
-                        </label>
-                    </div>
+                <div class="form-field-group full-width payment-action-block">
+                    <button type="button" class="disabled-payment-btn" disabled>
+                        PAYMENT PORTAL — COMING SOON
+                    </button>
+                    <p class="payment-notice-text">Accommodation booking and payment will open after official fee and allocation details are announced.</p>
                 </div>
 
-                <!-- STEP 3: Leader Credentials & Submission -->
-                <div class="accom-step-section">
-                    <div class="step-header">
-                        <span class="step-num">03</span>
-                        <h2 class="step-title">LEAD DELEGATE CREDENTIALS</h2>
-                    </div>
+            </form>
+        </section>
 
-                    <form id="accommodationForm" class="delegate-form">
-                        <div class="form-grid">
-                            <div class="input-field">
-                                <label for="acc-name"><i class="fa-solid fa-user"></i> LEAD DELEGATE NAME *</label>
-                                <input type="text" id="acc-name" placeholder="e.g. Alex Mercer" required>
-                            </div>
-                            <div class="input-field">
-                                <label for="acc-email"><i class="fa-solid fa-envelope"></i> EMAIL ADDRESS *</label>
-                                <input type="email" id="acc-email" placeholder="alex@institute.edu" required>
-                            </div>
-                            <div class="input-field">
-                                <label for="acc-phone"><i class="fa-solid fa-phone"></i> CONTACT NUMBER *</label>
-                                <input type="tel" id="acc-phone" placeholder="+91 98765 43210" required>
-                            </div>
-                            <div class="input-field">
-                                <label for="acc-college"><i class="fa-solid fa-graduation-cap"></i> COLLEGE / INSTITUTE *</label>
-                                <input type="text" id="acc-college" placeholder="e.g. IIT Bhubaneswar" required>
-                            </div>
-                            <div class="input-field" style="grid-column: 1 / -1;">
-                                <label for="acc-notes"><i class="fa-solid fa-circle-info"></i> ARRIVAL TIME & SPECIAL REQUESTS</label>
-                                <input type="text" id="acc-notes" placeholder="e.g. Arriving Oct 15 at 10 AM by train / Need ground floor room">
-                            </div>
-                        </div>
-
-                        <!-- Important Security Notice -->
-                        <div class="reg-notice-box">
-                            <span class="notice-icon">🛡️</span>
-                            <span><strong>Hostel Rules:</strong> Biometric/QR check-in required at hostel gates. Alcohol, smoking, or unauthorized visitors are strictly prohibited.</span>
-                        </div>
-
-                        <!-- Submit Bar -->
-                        <div class="form-submit-bar">
-                            <div class="price-summary-display">
-                                <span class="price-lbl">ESTIMATED STAY COST</span>
-                                <span class="price-val" id="totalStayCostDisplay">₹1,890</span>
-                            </div>
-                            <button type="submit" class="transmit-pay-btn" id="submitAccBtn">
-                                <span>TRANSMIT STAY RESERVATION ✦</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-
-            <!-- Right Column: Live Holographic Residency Pass Card -->
-            <div class="reg-ticket-preview-column">
-                <div class="ticket-sticky-wrapper">
-                    <div class="ticket-header-label">
-                        <span class="dot-pulse"></span> LIVE RESIDENCY PASS PREVIEW
-                    </div>
-
-                    <div class="cyber-ticket-card accom-pass-card" id="cyberResidencyCard">
-                        <div class="ticket-watermark">PRAVAAH</div>
-                        <div class="ticket-top-row">
-                            <div class="ticket-logo-brand">
-                                <span class="brand-title">PRAVAAH '26</span>
-                                <span class="brand-sub">CAMPUS HABITAT PASS</span>
-                            </div>
-                            <div class="ticket-badge-pill" id="liveHallBadge">MAHANADI BOYS HALL</div>
-                        </div>
-
-                        <div class="ticket-mid-row">
-                            <div class="ticket-delegate-info">
-                                <span class="lbl">LEAD RESIDENT</span>
-                                <h3 class="val-name" id="liveAccName">ALEX MERCER</h3>
-                                <span class="lbl">INSTITUTE</span>
-                                <p class="val-sub" id="liveAccCollege">IIT BHUBANESWAR</p>
-                            </div>
-                            <div class="ticket-qr-box">
-                                <div class="qr-placeholder">
-                                    <i class="fa-solid fa-bed"></i>
-                                </div>
-                                <span class="qr-code-num" id="liveResId">RES-2026-H892</span>
-                            </div>
-                        </div>
-
-                        <div class="ticket-details-grid">
-                            <div class="t-det">
-                                <span class="t-lbl">STAY DURATION</span>
-                                <span class="t-val" id="liveNights">3 NIGHTS</span>
-                            </div>
-                            <div class="t-det">
-                                <span class="t-lbl">TOTAL GUESTS</span>
-                                <span class="t-val" id="liveGuestsCount">1 GUEST</span>
-                            </div>
-                            <div class="t-det">
-                                <span class="t-lbl">MESS DINING</span>
-                                <span class="t-val status-active" id="liveMessStatus">INCLUDED</span>
-                            </div>
-                            <div class="t-det">
-                                <span class="t-lbl">STAY COST</span>
-                                <span class="t-val price-highlight" id="liveStayCost">₹1,890</span>
-                            </div>
-                        </div>
-
-                        <div class="ticket-footer-row">
-                            <span>IIT BHUBANESWAR // ARGUL CAMPUS</span>
-                            <span class="security-chip">CONFIRMED</span>
-                        </div>
-                    </div>
-
-                    <!-- Campus Residency Amenities Checklist -->
-                    <div class="pass-features-card">
-                        <h4 class="features-title">RESIDENCY AMENITIES INCLUDED</h4>
-                        <ul class="features-list">
-                            <li><i class="fa-solid fa-check"></i> Individual Bed, Mattress, Pillow & Desk</li>
-                            <li><i class="fa-solid fa-check"></i> 24/7 Campus Security & Female Wardens</li>
-                            <li><i class="fa-solid fa-check"></i> High-Speed Campus LAN & Wi-Fi</li>
-                            <li><i class="fa-solid fa-check"></i> Internal Campus Shuttle to Arena</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Symmetrical 3-Column Footer -->
+        <!-- Shared Symmetrical 3-Column Footer -->
         <footer class="pravaah-full-footer">
             <div class="footer-columns-grid">
                 <div class="footer-col footer-brand">
@@ -329,42 +202,6 @@
         </footer>
 
     </main>
-
-    <!-- Reservation Confirmation Modal -->
-    <div class="success-modal-overlay" id="accSuccessModal">
-        <div class="success-modal-box">
-            <div class="success-icon-badge">✓</div>
-            <h3 class="success-modal-title">RESIDENCY SLOT RESERVED!</h3>
-            <p class="success-modal-sub">Your campus accommodation request has been logged. A hospitality coordinator will send confirmation details.</p>
-            
-            <div class="modal-ticket-summary">
-                <div class="summary-row">
-                    <span class="s-lbl">LEAD GUEST:</span>
-                    <span class="s-val" id="modalAccName">Alex Mercer</span>
-                </div>
-                <div class="summary-row">
-                    <span class="s-lbl">HALL & TIER:</span>
-                    <span class="s-val" id="modalHall">Mahanadi Boys Hall</span>
-                </div>
-                <div class="summary-row">
-                    <span class="s-lbl">DATES & NIGHTS:</span>
-                    <span class="s-val" id="modalNights">3 Nights (Oct 15 - Oct 18)</span>
-                </div>
-                <div class="summary-row">
-                    <span class="s-lbl">TOTAL DELEGATES:</span>
-                    <span class="s-val" id="modalGuests">1 Delegate</span>
-                </div>
-                <div class="summary-row">
-                    <span class="s-lbl">ESTIMATED COST:</span>
-                    <span class="s-val total-glow" id="modalAccTotal">₹1,890</span>
-                </div>
-            </div>
-
-            <div class="modal-actions-grid">
-                <button type="button" class="modal-close-cta" id="closeAccModalBtn">CONFIRM & CLOSE</button>
-            </div>
-        </div>
-    </div>
 
     <script src="glitch-nav.js"></script>
     <script src="accommodation.js"></script>
