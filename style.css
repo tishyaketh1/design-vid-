@@ -51,25 +51,22 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('bg_multiverse.jpeg');
+    background-image: url('page1_hero.jpg');
     background-size: cover;
-    background-position: center top;
+    background-position: center center;
     background-repeat: no-repeat;
     z-index: 0;
     pointer-events: none;
     transform: scale(1.0);
     filter: blur(0px);
-    transition: background-image 1s ease, filter 0.8s ease, transform 0.6s ease;
-    will-change: background-position, transform;
+    transition: opacity 0.8s ease, filter 0.8s ease;
+    will-change: opacity, transform;
 }
 
 body.portal-entered .global-bg-layer {
-    background-image: url('vertical_draft2.jpg'), url('vertical_draft2');
-    background-size: cover;
-    background-position: center 0%;
-    background-repeat: no-repeat;
-    filter: brightness(0.88) contrast(1.04);
-    transform: scale(1.0);
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
 }
 
 body.portal-entered #starfield-canvas {
@@ -151,7 +148,27 @@ section {
 }
 
 #splash-screen {
-    background: transparent;
+    background: url('page1_hero.jpg') center center / cover no-repeat;
+}
+
+#about-page {
+    background: url('page2_about.jpg') center center / cover no-repeat;
+}
+
+#calendar-page {
+    background: url('page3_calendar.jpg') center center / cover no-repeat;
+}
+
+#universe-page {
+    background: url('page4_featured.jpg') center center / cover no-repeat;
+}
+
+#gallery-page {
+    background: url('page5_gallery.jpg') center center / cover no-repeat;
+}
+
+#team-page {
+    background: url('page6_team.jpg') center center / cover no-repeat;
 }
 
 .glow-core {
@@ -668,15 +685,67 @@ body.portal-entered .home-swipe-prompt {
 }
 
 .snap-page {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
     scroll-snap-align: start;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll;
+}
+
+.snap-page::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(6, 3, 14, 0.12) 0%, rgba(6, 3, 14, 0.38) 85%, rgba(6, 3, 14, 0.6) 100%),
+                linear-gradient(to bottom, rgba(6, 3, 14, 0.35) 0%, transparent 12%, transparent 88%, rgba(6, 3, 14, 0.35) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.snap-page > * {
+    position: relative;
+    z-index: 5;
+}
+
+#splash-screen.snap-page {
+    background-image: url('page1_hero.jpg') !important;
+}
+
+#about-page.snap-page {
+    background-image: url('page2_about.jpg') !important;
+}
+
+#calendar-page.snap-page {
+    background-image: url('page3_calendar.jpg') !important;
+}
+
+#universe-page.snap-page {
+    background-image: url('page4_featured.jpg') !important;
+}
+
+#gallery-page.snap-page {
+    background-image: url('page5_gallery.jpg') !important;
+}
+
+#team-page.snap-page {
+    background-image: url('page6_team.jpg') !important;
 }
 
 .hud-header {
@@ -753,7 +822,7 @@ body.portal-entered .home-swipe-prompt {
 }
 
 #calendar-page {
-    background: transparent;
+    /* Background defined in section backgrounds */
 }
 
 .calendar-layout-container {
@@ -4744,9 +4813,9 @@ body.portal-entered .home-swipe-prompt {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('vertical_draft2.jpg'), url('vertical_draft2');
+    background-image: url('bg_portals.jpeg');
     background-size: cover;
-    background-position: center 50%;
+    background-position: center center;
     background-repeat: no-repeat;
     filter: brightness(0.85) contrast(1.05) blur(3px);
     opacity: 0.65;
