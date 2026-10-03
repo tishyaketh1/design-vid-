@@ -492,8 +492,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const cy = rect.height / 2;
 
         const isMobile = window.innerWidth <= 768;
-        const rPortal = isMobile ? rect.width * 0.28 : rect.width * 0.26;
-        const rEvent = isMobile ? rect.width * 0.46 : rect.width * 0.42;
+
+        const minDimension = Math.min(
+            rect.width,
+            rect.height
+        );
+
+        const rPortal = isMobile
+            ? minDimension * 0.27
+            : minDimension * 0.29;
+
+        const rEvent = isMobile
+            ? minDimension * 0.42
+            : minDimension * 0.44;
 
         // Core Ring
         const coreRing = document.createElementNS("http://www.w3.org/2000/svg", "circle");

@@ -58,19 +58,25 @@ body.photo-gallery-body {
     z-index: -1;
 }
 
-/* Navigation Wheel Override Support */
+/* Cosmic Nav Wheel Styles (Matches shared site navbar in style.css) */
 .cosmic-nav-wheel {
     position: fixed;
-    top: 1.25rem;
+    top: 16px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 100;
-    background: rgba(2, 6, 23, 0.85);
-    border: 1px solid rgba(0, 242, 254, 0.3);
-    border-radius: 9999px;
-    padding: 0.4rem 0.8rem;
-    backdrop-filter: blur(16px);
-    box-shadow: 0 0 25px rgba(0, 242, 254, 0.15);
+    z-index: 150;
+    background: rgba(8, 8, 20, 0.55);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 40px;
+    padding: 0 16px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+    pointer-events: all;
     max-width: 95vw;
     overflow-x: auto;
 }
@@ -78,69 +84,104 @@ body.photo-gallery-body {
 .nav-wheel-track {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
+    height: 100%;
+    position: relative;
     white-space: nowrap;
 }
 
 .nav-item {
-    color: #94a3b8;
+    background: transparent;
+    border: 1px solid transparent;
     font-family: var(--font-orbitron);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    padding: 0.4rem 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    padding: 0 18px;
     border-radius: 9999px;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    position: relative;
+    z-index: 2;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
-.nav-item:hover, .nav-item.active {
-    color: #ffffff;
-    background: rgba(0, 242, 254, 0.15);
-    text-shadow: 0 0 8px rgba(0, 242, 254, 0.6);
+.nav-item:hover {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.nav-item.active {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(0, 242, 254, 0.9), 0 0 20px rgba(207, 58, 214, 0.6);
+    font-weight: 900;
 }
 
 .nav-divider {
-    width: 3px;
-    height: 3px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
-    background: rgba(0, 242, 254, 0.4);
+    background: rgba(0, 242, 254, 0.35);
+    flex-shrink: 0;
+}
+
+.nav-indicator-pill {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 36px;
+    border-radius: 9999px;
+    z-index: 1;
+    pointer-events: none;
+    left: 0;
+    width: 0;
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.22) 0%, rgba(207, 58, 214, 0.28) 100%);
+    transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1), width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3), inset 0 0 10px rgba(0, 242, 254, 0.2);
+    border: 1px solid rgba(0, 242, 254, 0.4);
 }
 
 /* Main Layout Shell */
 .photo-gallery-main {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 6.5rem 1.5rem 2.5rem 1.5rem;
+    padding: 5.2rem 1.25rem 1.5rem 1.25rem;
 }
 
 /* Header Section */
 .gallery-header {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
 }
 
 .badge-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.4rem 1.2rem;
+    padding: 0.35rem 1rem;
     border-radius: 9999px;
     background: rgba(2, 6, 23, 0.9);
     border: 1px solid rgba(0, 242, 254, 0.4);
     color: var(--cyan-primary);
     font-family: var(--font-orbitron);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.4rem;
 }
 
 .gallery-hero-title {
     font-family: var(--font-orbitron);
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(1.75rem, 3.8vw, 2.6rem);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: -0.02em;
@@ -148,15 +189,15 @@ body.photo-gallery-body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 0 25px rgba(0, 242, 254, 0.35));
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.25rem;
 }
 
 .gallery-subtitle {
     color: #94a3b8;
-    font-size: 0.88rem;
-    max-width: 680px;
-    margin: 0 auto 1.25rem auto;
-    line-height: 1.5;
+    font-size: 0.82rem;
+    max-width: 650px;
+    margin: 0 auto 0.75rem auto;
+    line-height: 1.4;
 }
 
 /* Category Filter Buttons */
@@ -165,21 +206,21 @@ body.photo-gallery-body {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
-    margin-top: 0.5rem;
+    gap: 0.45rem;
+    margin-top: 0.35rem;
 }
 
 .filter-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.48rem 1.1rem;
+    gap: 0.45rem;
+    padding: 0.38rem 0.9rem;
     border-radius: 12px;
     background: rgba(15, 23, 42, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #94a3b8;
     font-family: var(--font-orbitron);
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -221,16 +262,23 @@ body.photo-gallery-body {
 .corridor-viewport {
     position: relative;
     width: 100%;
+    min-height: 600px;
     height: 600px;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+    scroll-margin-top: 4.5rem;
     perspective: 1000px;
     perspective-origin: 50% 50%;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    touch-action: none;
+    touch-action: pan-y;
     user-select: none;
+    outline: none;
+}
+
+.corridor-viewport:focus-visible {
+    box-shadow: 0 0 0 2px var(--cyan-primary);
 }
 
 /* 3D Architectural Floor, Ceiling, & Wall Guide Planes */
@@ -296,26 +344,40 @@ body.photo-gallery-body {
 /* Scroll Hint Overlay */
 .corridor-scroll-hint {
     position: absolute;
-    bottom: 15px;
+    bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 200;
     pointer-events: none;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.4rem 1rem;
+    gap: 0.2rem;
+    padding: 0.45rem 1.2rem;
     border-radius: 9999px;
-    background: rgba(2, 6, 23, 0.85);
-    border: 1px solid rgba(0, 242, 254, 0.3);
+    background: rgba(2, 6, 23, 0.88);
+    border: 1px solid rgba(0, 242, 254, 0.35);
     color: var(--cyan-primary);
     font-family: var(--font-orbitron);
-    font-size: 0.68rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.25);
+    text-align: center;
+    transition: opacity 0.5s ease;
+    animation: bounceUpDown 2.2s infinite ease-in-out;
+}
+
+.corridor-scroll-hint .hint-main {
+    font-size: 0.72rem;
+    font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
-    animation: bounceUpDown 2.2s infinite ease-in-out;
+}
+
+.corridor-scroll-hint .hint-sub {
+    font-size: 0.58rem;
+    font-family: var(--font-inter);
+    color: #94a3b8;
+    letter-spacing: 0.04em;
 }
 
 @keyframes bounceUpDown {
@@ -323,41 +385,35 @@ body.photo-gallery-body {
     50% { transform: translate(-50%, -6px); }
 }
 
-/* Camera Forward / Backward Jump Controls */
-.corridor-nav-btn {
+/* Compact Return to Entrance Control (Centered Top) */
+.return-entrance-btn {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2000;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(2, 6, 23, 0.85);
-    border: 1.5px solid rgba(0, 242, 254, 0.5);
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 250;
+    padding: 0.35rem 0.9rem;
+    border-radius: 9999px;
+    background: rgba(2, 6, 23, 0.88);
+    border: 1px solid rgba(0, 242, 254, 0.4);
     color: var(--cyan-primary);
-    font-size: 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-family: var(--font-orbitron);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     cursor: pointer;
     backdrop-filter: blur(12px);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
     transition: all 0.25s ease;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
 }
 
-.corridor-nav-btn.prev {
-    left: 1.5rem;
-}
-
-.corridor-nav-btn.next {
-    right: 1.5rem;
-}
-
-.corridor-nav-btn:hover {
-    background: var(--cyan-primary);
-    color: #020617;
-    box-shadow: 0 0 30px rgba(0, 242, 254, 0.8);
-    transform: translateY(-50%) scale(1.1);
+.return-entrance-btn:hover {
+    background: rgba(0, 242, 254, 0.18);
+    color: #ffffff;
+    border-color: #00f2fe;
+    box-shadow: 0 0 22px rgba(0, 242, 254, 0.45);
+    transform: translateX(-50%) translateY(-1px);
 }
 
 /* 3D Wall-Mounted Photo Cards */
@@ -669,47 +725,51 @@ body.photo-gallery-body {
     color: #ffffff;
 }
 
-/* HUD Matrix Tracker */
-.hud-matrix-tracker {
-    margin-top: 1.5rem;
-    padding: 1.1rem 1.4rem;
-    border-radius: 16px;
-    background: rgba(2, 6, 23, 0.85);
-    border: 1px solid rgba(0, 242, 254, 0.3);
-    backdrop-filter: blur(12px);
-    max-width: 650px;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 0 25px rgba(0, 242, 254, 0.15);
-}
-
-.hud-info-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--font-orbitron);
-    font-size: 0.7rem;
-    color: var(--cyan-primary);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
+/* Compact Photo Progress / Seek Line (Positioned directly above scroll hint text with clear 18px gap) */
+.hud-progress-container {
+    position: absolute;
+    bottom: 72px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    max-width: 260px;
+    z-index: 210;
+    cursor: pointer;
+    padding: 6px 0;
+    pointer-events: auto;
 }
 
 .hud-progress-bg {
+    position: relative;
     width: 100%;
-    height: 6px;
-    background: rgba(15, 23, 42, 0.9);
+    height: 3px;
+    background: rgba(15, 23, 42, 0.85);
     border-radius: 9999px;
-    overflow: hidden;
-    border: 1px solid rgba(0, 242, 254, 0.2);
+    overflow: visible;
+    border: 1px solid rgba(0, 242, 254, 0.35);
 }
 
 .hud-progress-fill {
     height: 100%;
-    width: 100%;
-    background: linear-gradient(to right, var(--cyan-primary), var(--magenta-primary), #a855f7);
+    width: 0%;
+    background: linear-gradient(to right, var(--cyan-primary), var(--magenta-primary));
     border-radius: 9999px;
-    transition: width 0.1s linear;
+    transition: width 0.08s ease-out;
+}
+
+.hud-progress-thumb {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--cyan-primary);
+    border: 1.5px solid #020617;
+    box-shadow: 0 0 8px var(--cyan-primary);
+    pointer-events: none;
+    transition: left 0.08s ease-out;
 }
 
 /* Modal Popup (Photo Dossier) */

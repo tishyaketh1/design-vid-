@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'LHC Complex - Arena A',
             photographer: 'Pravaah Media Team',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0377.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Intense micro-robotics arena competition captured during the finals of Robo Soccer. Autonomous and manual bots maneuvering under neon spotlight arrays.',
             highlights: [
                 'Captured during high-speed goal scoring sequence.',
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Main Stadium Grounds',
             photographer: 'Ayan Mukherjee',
             resolution: '5472 x 3648 (RAW)',
-            image: 'pravaah_pics_2026/0Q3A0001.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: '15,000+ roaring festival pass holders illuminating the central amphitheatre with phone flashlights during the headline EDM artist finale.',
             highlights: [
                 'Wide-angle stadium capture from the central sound mixing tower.',
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Open Air Cage Complex',
             photographer: 'Rohan Sharma',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/0Q3A0171.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: '30kg heavyweight spinner bot impact moment inside the reinforced steel mesh arena, sending sparks flying across the spectator safety barrier.',
             highlights: [
                 'High-speed shutter capture at 1/4000s.',
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Esports Pavilion Stage',
             photographer: 'Devansh Verma',
             resolution: '5760 x 3840 (RAW)',
-            image: 'pravaah_pics_2026/DSC_1631.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Grand final clutch moment on stage as the winning squad celebrates after locking down the match-winning defuse in front of live shoutcasters.',
             highlights: [
                 'Stage lighting synced to team color scheme.',
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Main Auditorium Stage',
             photographer: 'Sneha Mohanty',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_3951.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Avant-garde cyberpunk fashion couture spotlight entry featuring custom neon-infused fabrics and theatrical smoke effects.',
             highlights: [
                 'Dramatic low-angle runway perspective.',
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Amphitheatre Stage',
             photographer: 'Kavya Sharma',
             resolution: '5184 x 3456 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0864.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Lead guitarist performing a solo breakdown under crimson spotlights during the collegiate rock and heavy metal finals.',
             highlights: [
                 'Stage fog diffusion with atmospheric backlighting.',
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Auditorium Hall 2',
             photographer: 'Arjun Das',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_3673.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Student startup founders presenting their AI prototype to a panel of venture capital investors and incubator mentors.',
             highlights: [
                 'Interactive pitch deck slide projection overlay.',
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Outdoor Stadium Track',
             photographer: 'Priya Nayak',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/0Q3A8579.jpg',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'High-speed quadcopter passing through a illuminated neon gate during night obstacle course trials.',
             highlights: [
                 'Motion track trail along LED gate border.',
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Computer Center Lab 3',
             photographer: 'Vikram Singh',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0450.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Ethical hackers decoding cryptographic flags under low ambient matrix green terminal arrays during 24h CTF.',
             highlights: [
                 'Jeopardy CTF scoreboard live update background.',
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Convention Walkway',
             photographer: 'Ananya Roy',
             resolution: '5760 x 3840 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0469.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Handcrafted sci-fi and anime character armor cosplayers gathering for the central festival parade walk.',
             highlights: [
                 'Custom 3D printed mech armor details.',
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Gaming Pavilion Hall B',
             photographer: 'Devansh Verma',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0724.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Final circle battle royale tense moment with dual shoutcaster commentary broadcast live across festival screens.',
             highlights: [
                 'Final circle clutch victory finish.',
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Open Amphitheatre Plaza',
             photographer: 'Kavya Sharma',
             resolution: '5184 x 3456 (RAW)',
-            image: 'pravaah_pics_2026/DSC_1034.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'High-energy popping & locking freestyle cipher battle surrounding by cheering student crowds under evening sun.',
             highlights: [
                 'Mid-air freeze frame capture.',
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Design Gallery Complex',
             photographer: 'Sneha Mohanty',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_1305.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Generative AI visual artwork exhibition featuring ultra-high definition canvas prints created by student designers.',
             highlights: [
                 'Interactive digital screen artwork displays.',
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
             location: 'Main Stage Auditorium',
             photographer: 'Pravaah Media Team',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_5907.JPG',
+            image: 'pravaah_pics_2026/C3182T01.jpg',
             description: 'Grand inaugural ceremony torch lighting up the holographic Multiverse logo to mark the start of Pravaah 2026.',
             highlights: [
                 'Holographic logo lighting sequence.',
@@ -254,6 +254,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let cameraVelocity = 0;
     let targetVelocity = 0;
     let lastTimestamp = 0;
+    let isReturningToEntrance = false;
+    let returnCooldownActive = false;
+    let returnCooldownTimer = null;
     
     // Bounds: 0 to 13,000px (14 cards * 900 = 12,600px + 400px end space)
     let endSceneZ = -(filteredCollection.length * zStep); // -12,600px
@@ -264,11 +267,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const corridorViewport = document.getElementById('corridor-viewport');
     const floorPlane = document.getElementById('floor-plane');
     const ceilingPlane = document.getElementById('ceiling-plane');
-    const prevBtn = document.getElementById('corridor-prev-btn');
-    const nextBtn = document.getElementById('corridor-next-btn');
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const hudCounter = document.getElementById('hud-counter');
+    const hudProgressContainer = document.getElementById('hud-progress-container');
     const hudProgressBar = document.getElementById('hud-progress-bar');
+    const hudProgressThumb = document.getElementById('hud-progress-thumb');
     
     // Modal Elements
     const modalOverlay = document.getElementById('photo-dossier-modal');
@@ -293,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const isMobile = window.innerWidth <= 768;
         const wallOffset = isMobile ? 170 : 380;
-        const wallAngle = isMobile ? 22 : 32;
+        const wallAngle = isMobile ? 12 : 18;
 
         // Render Photo Cards on alternating Left/Right walls
         filteredCollection.forEach((photo, idx) => {
@@ -372,14 +374,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         corridorStage.appendChild(finalFrame);
 
-        // Return to Entrance button resets position smoothly to entrance
+        // Return to Entrance button triggers smooth return animation
         const returnBtn = finalFrame.querySelector('#final-return-btn');
         if (returnBtn) {
             returnBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                currentCameraZ = 0;
-                cameraVelocity = 0;
+                if (isReturningToEntrance) return;
+                isReturningToEntrance = true;
                 targetVelocity = 0;
+                cameraVelocity = 0;
             });
         }
     }
@@ -391,30 +394,52 @@ document.addEventListener('DOMContentLoaded', () => {
         const deltaTime = Math.min((timestamp - lastTimestamp) / 16.6667, 2);
         lastTimestamp = timestamp;
 
-        // 2. Smoothly approach targetVelocity from input (0.16 smoothing factor)
-        cameraVelocity += (targetVelocity - cameraVelocity) * 0.16;
-
-        // 3. Update currentCameraZ scaled by deltaTime
-        currentCameraZ += cameraVelocity * deltaTime;
-
-        // 4. Frame-rate independent friction damping applied to targetVelocity
-        targetVelocity *= Math.pow(0.90, deltaTime);
-
-        // 5. Zero out near-zero threshold values to prevent infinite micro-floating
-        if (Math.abs(targetVelocity) < 0.01 && Math.abs(cameraVelocity) < 0.01) {
-            targetVelocity = 0;
-            cameraVelocity = 0;
-        }
-
-        // 6. Clamp currentCameraZ to [0, 13000px] bounds & zero velocities at boundaries
-        if (currentCameraZ <= 0) {
-            currentCameraZ = 0;
+        // Smooth Return to Entrance Animation & Cooldown State Management
+        if (isReturningToEntrance) {
+            currentCameraZ += (0 - currentCameraZ) * 0.14 * deltaTime;
             cameraVelocity = 0;
             targetVelocity = 0;
-        } else if (currentCameraZ >= maxCameraZ) {
-            currentCameraZ = maxCameraZ;
-            cameraVelocity = 0;
-            targetVelocity = 0;
+
+            if (currentCameraZ <= 0.8) {
+                currentCameraZ = 0;
+                cameraVelocity = 0;
+                targetVelocity = 0;
+                isReturningToEntrance = false;
+
+                returnCooldownActive = true;
+                if (returnCooldownTimer) clearTimeout(returnCooldownTimer);
+                returnCooldownTimer = setTimeout(() => {
+                    returnCooldownActive = false;
+                }, 400);
+
+                updateHUDTracker();
+            }
+        } else {
+            // 2. Smoothly approach targetVelocity from input (0.16 smoothing factor)
+            cameraVelocity += (targetVelocity - cameraVelocity) * 0.16;
+
+            // 3. Update currentCameraZ scaled by deltaTime
+            currentCameraZ += cameraVelocity * deltaTime;
+
+            // 4. Frame-rate independent friction damping applied to targetVelocity
+            targetVelocity *= Math.pow(0.90, deltaTime);
+
+            // 5. Zero out near-zero threshold values to prevent infinite micro-floating
+            if (Math.abs(targetVelocity) < 0.01 && Math.abs(cameraVelocity) < 0.01) {
+                targetVelocity = 0;
+                cameraVelocity = 0;
+            }
+
+            // 6. Clamp currentCameraZ to [0, 13000px] bounds & zero velocities at boundaries
+            if (currentCameraZ <= 0) {
+                currentCameraZ = 0;
+                cameraVelocity = 0;
+                targetVelocity = 0;
+            } else if (currentCameraZ >= maxCameraZ) {
+                currentCameraZ = maxCameraZ;
+                cameraVelocity = 0;
+                targetVelocity = 0;
+            }
         }
 
         // 7. Extremely subtle & capped velocity-responsive sway
@@ -474,7 +499,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const opacity = Math.max(0.12, depthRatio);
                 const blurPx = (1 - depthRatio) * 6;
 
-                card.style.transform = `translate3d(${origX}px, 0px, ${cardZ}px) rotateY(${origRotateY}deg) scale(${scale})`;
+                // Dynamic rotation: ease front/active card closer to straight ahead (absRelZ < 650)
+                let activeRotateY = origRotateY;
+                if (absRelZ < 650) {
+                    const alignFactor = Math.min(1, absRelZ / 650);
+                    activeRotateY = origRotateY * (0.35 + 0.65 * alignFactor);
+                }
+
+                card.style.transform = `translate3d(${origX}px, 0px, ${cardZ}px) rotateY(${activeRotateY}deg) scale(${scale})`;
                 card.style.opacity = opacity;
                 card.style.filter = `blur(${blurPx}px)`;
                 card.style.pointerEvents = opacity > 0.3 ? 'auto' : 'none';
@@ -518,6 +550,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Dynamic Scroll Hint Fading (fades slightly as camera advances, bright at entrance)
+        const scrollHintEl = document.getElementById('corridor-scroll-hint-text');
+        if (scrollHintEl) {
+            if (currentCameraZ > 300) {
+                scrollHintEl.style.opacity = '0.35';
+            } else {
+                scrollHintEl.style.opacity = '1';
+            }
+        }
+
         // Sync HUD Matrix Tracker
         updateHUDTracker(nearestCardIdx);
 
@@ -525,23 +567,19 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(updateCorridorFrame);
     }
 
-    // Update HUD Matrix Progress Bar & Text
-    function updateHUDTracker(nearestIdx) {
-        if (filteredCollection.length === 0) {
-            if (hudCounter) hudCounter.textContent = 'NO ARCHIVES AVAILABLE';
-            if (hudProgressBar) hudProgressBar.style.width = '0%';
-            return;
-        }
-
-        const safeIdx = Math.min(filteredCollection.length - 1, Math.max(0, nearestIdx));
-        const photo = filteredCollection[safeIdx];
+    // Update Compact Progress / Seek Line Fill, Thumb, and ARIA Value
+    function updateHUDTracker() {
         const progress = maxCameraZ > 0 ? Math.min(1, Math.max(0, currentCameraZ / maxCameraZ)) : 0;
+        const pctStr = `${progress * 100}%`;
 
-        if (hudCounter) {
-            hudCounter.textContent = `PHOTO [0${safeIdx + 1}] OF [${filteredCollection.length}] — ${photo.title}`;
-        }
         if (hudProgressBar) {
-            hudProgressBar.style.width = `${progress * 100}%`;
+            hudProgressBar.style.width = pctStr;
+        }
+        if (hudProgressThumb) {
+            hudProgressThumb.style.left = pctStr;
+        }
+        if (hudProgressContainer) {
+            hudProgressContainer.setAttribute('aria-valuenow', Math.round(progress * 100));
         }
     }
 
@@ -599,43 +637,173 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Camera Navigation Buttons (Impulse Addition)
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            targetVelocity -= 14;
-            targetVelocity = Math.max(-24, Math.min(24, targetVelocity));
+    // Return to Entrance Button (smoothly returns corridor/camera to entrance/first card)
+    const returnEntranceBtn = document.getElementById('return-entrance-btn');
+    if (returnEntranceBtn) {
+        returnEntranceBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isReturningToEntrance) return;
+            isReturningToEntrance = true;
+            targetVelocity = 0;
+            cameraVelocity = 0;
         });
     }
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            targetVelocity += 14;
-            targetVelocity = Math.max(-24, Math.min(24, targetVelocity));
+    // Interactive Progress Seek Line (Click & Drag to Seek Corridor)
+    if (hudProgressContainer) {
+        let isSeeking = false;
+
+        function seekToPosition(e) {
+            const rect = hudProgressContainer.getBoundingClientRect();
+            const clickX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+            const ratio = clickX / rect.width;
+            currentCameraZ = ratio * maxCameraZ;
+            cameraVelocity = 0;
+            targetVelocity = 0;
+        }
+
+        hudProgressContainer.addEventListener('pointerdown', (e) => {
+            if (isReturningToEntrance || returnCooldownActive) return;
+            e.stopPropagation();
+            isSeeking = true;
+            seekToPosition(e);
+            try { hudProgressContainer.setPointerCapture(e.pointerId); } catch (err) {}
         });
-    }
 
-    // Non-Passive Wheel Listener: Smoothed Input Filter (targetVelocity += clampedDelta * 0.52)
-    if (corridorViewport) {
-        corridorViewport.addEventListener('wheel', (e) => {
-            e.preventDefault();
-
-            // 1. Normalize wheel delta across pixel / line / page deltaModes
-            let rawDelta = e.deltaY !== 0 ? e.deltaY : e.deltaX;
-            if (e.deltaMode === 1) { // Line mode
-                rawDelta *= 16;
-            } else if (e.deltaMode === 2) { // Page mode
-                rawDelta *= 300;
+        hudProgressContainer.addEventListener('pointermove', (e) => {
+            if (isReturningToEntrance || returnCooldownActive) return;
+            if (isSeeking) {
+                e.stopPropagation();
+                seekToPosition(e);
             }
+        });
 
-            // 2. Multiply by sensitivity scale 0.48 and clamp per event to ±48px
-            const normalizedDelta = rawDelta * 0.48;
-            const clampedDelta = Math.max(-48, Math.min(48, normalizedDelta));
+        hudProgressContainer.addEventListener('pointerup', (e) => {
+            if (isSeeking) {
+                e.stopPropagation();
+                isSeeking = false;
+                try { hudProgressContainer.releasePointerCapture(e.pointerId); } catch (err) {}
+            }
+        });
 
-            // 3. Add impulse to targetVelocity and clamp targetVelocity to ±24
-            targetVelocity += clampedDelta * 0.52;
-            targetVelocity = Math.max(-24, Math.min(24, targetVelocity));
-        }, { passive: false });
+        hudProgressContainer.addEventListener('pointercancel', () => {
+            isSeeking = false;
+        });
     }
+
+    // Handoff & Scroll State Flags
+    let corridorHandoffComplete = false;
+    let corridorAutoScrolling = false;
+    let handoffTimeoutId = null;
+    let finalFrameScrollImpulse = 0;
+
+    // Reset handoff state when user scrolls page up above corridor
+    window.addEventListener('scroll', () => {
+        if (!corridorViewport) return;
+        const rect = corridorViewport.getBoundingClientRect();
+        if (currentCameraZ <= 0 && rect.top > 220) {
+            corridorHandoffComplete = false;
+        }
+    }, { passive: true });
+
+    // Wheel Event Handler: Explicit Handoff State Model & Boundary Passthrough
+    window.addEventListener('wheel', (e) => {
+        if (!corridorViewport) return;
+
+        // Block navigation input during smooth return animation and neutral-input cooldown
+        if (isReturningToEntrance || returnCooldownActive) {
+            e.preventDefault();
+            if (returnCooldownActive) {
+                if (returnCooldownTimer) clearTimeout(returnCooldownTimer);
+                returnCooldownTimer = setTimeout(() => {
+                    returnCooldownActive = false;
+                }, 400);
+            }
+            return;
+        }
+
+        // 1. Ignore wheel events from interactive controls, buttons, links, or modal elements
+        if (e.target.closest('button, a, input, select, textarea, .dossier-modal-overlay, #photo-dossier-modal, .filter-btn, .final-return-btn')) {
+            return;
+        }
+
+        // 2. Normalize wheel delta across pixel / line / page deltaModes
+        let rawDelta = e.deltaY !== 0 ? e.deltaY : e.deltaX;
+        if (e.deltaMode === 1) { // Line mode
+            rawDelta *= 16;
+        } else if (e.deltaMode === 2) { // Page mode
+            rawDelta *= 300;
+        }
+
+        // 3. Boundary Passthrough & Final Frame Secondary Downward Scroll Return
+        if (currentCameraZ <= 0 && rawDelta < 0) {
+            // At entrance and scrolling UP: allow normal page scroll up
+            finalFrameScrollImpulse = 0;
+            return;
+        }
+
+        // Deliberate secondary scroll-down at Final Frame smoothly returns camera to entrance
+        if (currentCameraZ >= maxCameraZ - 80) {
+            if (rawDelta > 0) {
+                finalFrameScrollImpulse += Math.abs(rawDelta);
+                // Dead zone threshold (requires ~180px accumulated downward scroll at end scene)
+                if (finalFrameScrollImpulse >= 180) {
+                    finalFrameScrollImpulse = 0;
+                    e.preventDefault();
+                    if (!isReturningToEntrance && !returnCooldownActive) {
+                        isReturningToEntrance = true;
+                        targetVelocity = 0;
+                        cameraVelocity = 0;
+                    }
+                    return;
+                }
+                e.preventDefault();
+                return;
+            } else {
+                finalFrameScrollImpulse = 0;
+            }
+        } else {
+            finalFrameScrollImpulse = 0;
+        }
+
+        // 4. Prevent duplicate handoff while smooth page scroll is active
+        if (corridorAutoScrolling) {
+            e.preventDefault();
+            return;
+        }
+
+        // 5. Automatic Page-Scroll-to-Corridor Handoff
+        const rect = corridorViewport.getBoundingClientRect();
+        const navbarOffset = 80; // Account for floating cosmic navbar
+
+        if (currentCameraZ <= 0 && rawDelta > 0 && !corridorHandoffComplete && rect.top > navbarOffset + 10) {
+            e.preventDefault();
+            corridorAutoScrolling = true;
+
+            corridorViewport.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+                inline: 'nearest'
+            });
+
+            if (handoffTimeoutId) clearTimeout(handoffTimeoutId);
+            handoffTimeoutId = setTimeout(() => {
+                corridorAutoScrolling = false;
+                corridorHandoffComplete = true;
+            }, 550);
+
+            return;
+        }
+
+        // 6. Camera 3D Movement once handoff is complete or camera is inside corridor
+        e.preventDefault();
+
+        const normalizedDelta = rawDelta * 0.48;
+        const clampedDelta = Math.max(-48, Math.min(48, normalizedDelta));
+
+        targetVelocity += clampedDelta * 0.52;
+        targetVelocity = Math.max(-24, Math.min(24, targetVelocity));
+    }, { passive: false });
 
     // Touch & Drag Pointer Impulse Movement
     let startY = 0;
@@ -644,7 +812,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (corridorViewport) {
         corridorViewport.addEventListener('pointerdown', (e) => {
-            if (e.target.closest('.final-return-btn') || e.target.closest('.card-action-btn')) return;
+            if (isReturningToEntrance || returnCooldownActive) return;
+            if (e.pointerType === 'touch') return; // Preserve normal vertical page touch scrolling on mobile
+            if (e.target.closest('.final-return-btn') || e.target.closest('.card-action-btn') || e.target.closest('button')) return;
             isDragging = true;
             startY = e.clientY;
             lastY = e.clientY;
@@ -652,6 +822,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         corridorViewport.addEventListener('pointermove', (e) => {
+            if (isReturningToEntrance || returnCooldownActive) return;
             if (!isDragging) return;
             const deltaY = lastY - e.clientY;
             lastY = e.clientY;
@@ -672,6 +843,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Keyboard Arrow Keys Impulse
     document.addEventListener('keydown', (e) => {
+        if (isReturningToEntrance || returnCooldownActive) return;
         if (modalOverlay && modalOverlay.classList.contains('active')) {
             if (e.key === 'Escape') closeDossierModal();
             return;

@@ -1,186 +1,60 @@
 /**
- * PRAVAAH 2026 - HOLOGRAPHIC ACCESS PASS MATRIX & REGISTRATION ENGINE
+ * PRAVAAH 2026 - REGISTRATION PORTAL
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Nav indicator alignment
+    // 1. Nav indicator pill alignment for active REGISTER nav item
     const activeNav = document.querySelector('.nav-item.active');
     const pill = document.getElementById('nav-indicator-pill');
+    
     if (activeNav && pill) {
-        setTimeout(() => {
+        const updatePill = () => {
             pill.style.left = `${activeNav.offsetLeft}px`;
             pill.style.width = `${activeNav.offsetWidth}px`;
-        }, 100);
+        };
+
+        updatePill();
+        setTimeout(updatePill, 100);
+        window.addEventListener('resize', updatePill);
     }
 
-    // Complete Event Definitions mapped by day and verse
-    const EVENTS_DATA = [
-        // TECH VERSE
-        { id: "tech-1", name: "Robo Soccer", verse: "TECH", day: "day1", dayLabel: "DAY 1", icon: "🤖" },
-        { id: "tech-2", name: "Code-A-Thon 24H", verse: "TECH", day: "day2", dayLabel: "DAY 2", icon: "💻" },
-        { id: "tech-3", name: "AI Odyssey Hack", verse: "TECH", day: "day3", dayLabel: "DAY 3", icon: "🧠" },
-        { id: "tech-4", name: "WebCraft UI/UX", verse: "TECH", day: "day1", dayLabel: "DAY 1", icon: "🌐" },
-        { id: "tech-5", name: "Mech-Trix CAD Design", verse: "TECH", day: "day3", dayLabel: "DAY 3", icon: "⚙️" },
+    // 2. Interactive Pass Selection
+    const passCards = document.querySelectorAll(".pass-card");
+    const selectedPassTitle = document.getElementById("selectedPassTitle");
+    const selectedCardTitle = document.getElementById("selectedCardTitle");
+    const selectedCardNotice = document.getElementById("selectedCardNotice");
 
-        // CULT VERSE
-        { id: "cult-1", name: "Step Up Group Dance", verse: "CULT", day: "day2", dayLabel: "DAY 2", icon: "💃" },
-        { id: "cult-2", name: "Symphony Rock Battle", verse: "CULT", day: "day3", dayLabel: "DAY 3", icon: "🎸" },
-        { id: "cult-3", name: "Dramatics Street Play", verse: "CULT", day: "day1", dayLabel: "DAY 1", icon: "🎭" },
-        { id: "cult-4", name: "Voice of Pravaah Solo", verse: "CULT", day: "day2", dayLabel: "DAY 2", icon: "🎤" },
-        { id: "cult-5", name: "Vogue Cosmic Fashion", verse: "CULT", day: "day3", dayLabel: "DAY 3", icon: "✨" },
+    if (passCards.length > 0) {
+        passCards.forEach(card => {
+            card.addEventListener("click", () => {
+                // Toggle active state
+                passCards.forEach(c => c.classList.remove("selected"));
+                card.classList.add("selected");
 
-        // GAMING VERSE
-        { id: "game-1", name: "Cyber League BGMI", verse: "GAME", day: "day1", dayLabel: "DAY 1", icon: "🎮" },
-        { id: "game-2", name: "Valorant Cyber Arena", verse: "GAME", day: "day2", dayLabel: "DAY 2", icon: "🎯" },
-        { id: "game-3", name: "FIFA Console Clash", verse: "GAME", day: "day3", dayLabel: "DAY 3", icon: "⚽" },
-        { id: "game-4", name: "Tekken 8 Showdown", verse: "GAME", day: "day1", dayLabel: "DAY 1", icon: "👊" },
-        { id: "game-5", name: "Chess Grandmaster Blitz", verse: "GAME", day: "day2", dayLabel: "DAY 2", icon: "♟️" },
+                const name = card.dataset.name || "Pass";
+                const notice = card.dataset.notice || "";
 
-        // ENTREPRENEUR VERSE
-        { id: "ent-1", name: "B-Plan Pitch Tank", verse: "ENT", day: "day2", dayLabel: "DAY 2", icon: "💼" },
-        { id: "ent-2", name: "IPL Auction Simulation", verse: "ENT", day: "day3", dayLabel: "DAY 3", icon: "🔨" },
-        { id: "ent-3", name: "Startup Expo & Summit", verse: "ENT", day: "day1", dayLabel: "DAY 1", icon: "🚀" },
-        { id: "ent-4", name: "Cryptic Market Hunt", verse: "ENT", day: "day2", dayLabel: "DAY 2", icon: "📈" },
-        { id: "ent-5", name: "Product Design Sprint", verse: "ENT", day: "day3", dayLabel: "DAY 3", icon: "💡" },
-
-        // SOCIAL VERSE
-        { id: "social-1", name: "Eco Hack Climate Challenge", verse: "SOCIAL", day: "day1", dayLabel: "DAY 1", icon: "🌿" },
-        { id: "social-2", name: "Blood Drive & Health Camp", verse: "SOCIAL", day: "day2", dayLabel: "DAY 2", icon: "🩸" },
-        { id: "social-3", name: "Rural Tech Innovation", verse: "SOCIAL", day: "day3", dayLabel: "DAY 3", icon: "🌾" },
-        { id: "social-4", name: "Cyber Safety Workshop", verse: "SOCIAL", day: "day1", dayLabel: "DAY 1", icon: "🛡️" },
-        { id: "social-5", name: "Inclusive Tech Summit", verse: "SOCIAL", day: "day2", dayLabel: "DAY 2", icon: "🤝" }
-    ];
-
-    const PRICES = {
-        "Fest Pass": 449,
-        "Starnite VIP Pass": 99,
-        "Day Pass": { day0: 75, day1: 149, day2: 149, day3: 199 },
-        "Visitor Pass": { day0: 75, day1: 99, day2: 99, day3: 149 }
-    };
-
-    // DOM Elements
-    const tierCards = document.querySelectorAll(".tier-card");
-    const daySelectorBlock = document.getElementById("daySelectorBlock");
-    const daySelectorRow = document.getElementById("daySelectorRow");
-    const verseFilterPills = document.getElementById("verseFilterPills");
-    const eventsListContainer = document.getElementById("eventsListContainer");
-    
-    // Live Pass Preview Targets
-    const livePassBadge = document.getElementById("livePassBadge");
-    const liveDelegateName = document.getElementById("liveDelegateName");
-    const liveCollege = document.getElementById("liveCollege");
-    const liveDays = document.getElementById("liveDays");
-    const liveEventsCount = document.getElementById("liveEventsCount");
-    const livePrice = document.getElementById("livePrice");
-    const totalPriceDisplay = document.getElementById("totalPriceDisplay");
-    const liveTicketId = document.getElementById("liveTicketId");
-
-    // Form inputs
-    const regName = document.getElementById("reg-name");
-    const regCollege = document.getElementById("reg-college");
-    const registrationForm = document.getElementById("registrationForm");
-
-    // Modal targets
-    const successModal = document.getElementById("successModal");
-    const closeModalBtn = document.getElementById("closeModalBtn");
-    const modalDelegate = document.getElementById("modalDelegate");
-    const modalPassType = document.getElementById("modalPassType");
-    const modalDays = document.getElementById("modalDays");
-    const modalEvents = document.getElementById("modalEvents");
-    const modalTotal = document.getElementById("modalTotal");
-
-    // State
-    let selectedPassType = "Fest Pass";
-    let selectedDays = ["day0", "day1", "day2", "day3"];
-    let selectedVerseFilter = "all";
-    let selectedEvents = new Set();
-    let currentTicketId = "PRV-2026-" + Math.floor(1000 + Math.random() * 9000);
-
-    if (liveTicketId) liveTicketId.textContent = currentTicketId;
-
-    // Initialize Pass Card Selectors
-    tierCards.forEach(card => {
-        card.addEventListener("click", () => {
-            const passType = card.dataset.type;
-            setPassType(passType);
-        });
-    });
-
-    function setPassType(passType) {
-        selectedPassType = passType;
-
-        tierCards.forEach(c => {
-            if (c.dataset.type === passType) {
-                c.classList.add("selected");
-            } else {
-                c.classList.remove("selected");
-            }
-        });
-
-        if (passType === "Fest Pass") {
-            selectedDays = ["day0", "day1", "day2", "day3"];
-            daySelectorBlock.style.display = "none";
-        } else if (passType === "Day Pass") {
-            selectedDays = ["day1"];
-            daySelectorBlock.style.display = "block";
-            renderDayPills("Day Pass");
-        } else if (passType === "Visitor Pass") {
-            selectedDays = ["day1"];
-            daySelectorBlock.style.display = "block";
-            renderDayPills("Visitor Pass");
-        } else if (passType === "Starnite VIP Pass") {
-            selectedDays = ["day3"];
-            daySelectorBlock.style.display = "none";
-        }
-
-        renderEvents();
-        updateCalculations();
-    }
-
-    function renderDayPills(passType) {
-        daySelectorRow.innerHTML = "";
-        const days = [
-            { key: "day0", label: "Day 0 (Oct 15)", price: passType === "Day Pass" ? 75 : 75 },
-            { key: "day1", label: "Day 1 (Oct 16)", price: passType === "Day Pass" ? 149 : 99 },
-            { key: "day2", label: "Day 2 (Oct 17)", price: passType === "Day Pass" ? 149 : 99 },
-            { key: "day3", label: "Day 3 (Oct 18)", price: passType === "Day Pass" ? 199 : 149 }
-        ];
-
-        days.forEach(d => {
-            const pill = document.createElement("button");
-            pill.type = "button";
-            pill.className = `day-pill-btn ${selectedDays.includes(d.key) ? "active" : ""}`;
-            pill.innerHTML = `<span>${d.label}</span> <strong>₹${d.price}</strong>`;
-
-            pill.addEventListener("click", () => {
-                if (selectedDays.includes(d.key)) {
-                    if (selectedDays.length > 1) {
-                        selectedDays = selectedDays.filter(k => k !== d.key);
-                        pill.classList.remove("active");
-                    }
-                } else {
-                    selectedDays.push(d.key);
-                    pill.classList.add("active");
+                // Update selected pass details display
+                if (selectedPassTitle) {
+                    selectedPassTitle.textContent = `Selected: ${name}`;
                 }
-                renderEvents();
-                updateCalculations();
-            });
-
-            daySelectorRow.appendChild(pill);
-        });
-    }
-
-    // Verse filter tabs
-    if (verseFilterPills) {
-        verseFilterPills.querySelectorAll(".verse-tab-btn").forEach(btn => {
-            btn.addEventListener("click", () => {
-                verseFilterPills.querySelectorAll(".verse-tab-btn").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                selectedVerseFilter = btn.dataset.verse;
-                renderEvents();
+                if (selectedCardTitle) {
+                    selectedCardTitle.textContent = name;
+                }
+                if (selectedCardNotice) {
+                    // Exact required text for Starnite Pass
+                    if (name.toLowerCase().includes("starnite")) {
+                        selectedCardNotice.textContent = "IITBBS students need not register for Starnite.";
+                        selectedCardNotice.style.color = "#00ff88";
+                    } else {
+                        selectedCardNotice.textContent = notice;
+                        selectedCardNotice.style.color = "rgba(255, 255, 255, 0.85)";
+                    }
+                }
             });
         });
     }
+<<<<<<< HEAD
 
     function renderEvents(targetEventToHighlight) {
         eventsListContainer.innerHTML = "";
@@ -378,4 +252,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Run Initializer
     checkUrlParameters();
+=======
+>>>>>>> 43b8c90539d211ad37c10c9f2a1596fc225a4e33
 });
