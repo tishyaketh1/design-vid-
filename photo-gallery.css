@@ -725,14 +725,14 @@ body.photo-gallery-body {
     color: #ffffff;
 }
 
-/* Compact Photo Progress / Seek Line (Positioned directly above scroll hint text) */
+/* Compact Photo Progress / Seek Line (Positioned directly above scroll hint text with clear 18px gap) */
 .hud-progress-container {
     position: absolute;
-    bottom: 54px;
+    bottom: 72px;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
-    max-width: 220px;
+    width: 240px;
+    max-width: 260px;
     z-index: 210;
     cursor: pointer;
     padding: 6px 0;

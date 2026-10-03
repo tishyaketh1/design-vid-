@@ -254,6 +254,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let cameraVelocity = 0;
     let targetVelocity = 0;
     let lastTimestamp = 0;
+    let isReturningToEntrance = false;
+    let returnCooldownActive = false;
+    let returnCooldownTimer = null;
     
     // Bounds: 0 to 13,000px (14 cards * 900 = 12,600px + 400px end space)
     let endSceneZ = -(filteredCollection.length * zStep); // -12,600px
@@ -371,14 +374,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         corridorStage.appendChild(finalFrame);
 
-        // Return to Entrance button resets position smoothly to entrance
+        // Return to Entrance button triggers smooth return animation
         const returnBtn = finalFrame.querySelector('#final-return-btn');
         if (returnBtn) {
             returnBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                currentCameraZ = 0;
-                cameraVelocity = 0;
+                if (isReturningToEntrance) return;
+                isReturningToEntrance = true;
                 targetVelocity = 0;
+                cameraVelocity = 0;
             });
         }
     }
@@ -390,30 +394,52 @@ document.addEventListener('DOMContentLoaded', () => {
         const deltaTime = Math.min((timestamp - lastTimestamp) / 16.6667, 2);
         lastTimestamp = timestamp;
 
-        // 2. Smoothly approach targetVelocity from input (0.16 smoothing factor)
-        cameraVelocity += (targetVelocity - cameraVelocity) * 0.16;
-
-        // 3. Update currentCameraZ scaled by deltaTime
-        currentCameraZ += cameraVelocity * deltaTime;
-
-        // 4. Frame-rate independent friction damping applied to targetVelocity
-        targetVelocity *= Math.pow(0.90, deltaTime);
-
-        // 5. Zero out near-zero threshold values to prevent infinite micro-floating
-        if (Math.abs(targetVelocity) < 0.01 && Math.abs(cameraVelocity) < 0.01) {
-            targetVelocity = 0;
-            cameraVelocity = 0;
-        }
-
-        // 6. Clamp currentCameraZ to [0, 13000px] bounds & zero velocities at boundaries
-        if (currentCameraZ <= 0) {
-            currentCameraZ = 0;
+        // Smooth Return to Entrance Animation & Cooldown State Management
+        if (isReturningToEntrance) {
+            currentCameraZ += (0 - currentCameraZ) * 0.14 * deltaTime;
             cameraVelocity = 0;
             targetVelocity = 0;
-        } else if (currentCameraZ >= maxCameraZ) {
-            currentCameraZ = maxCameraZ;
-            cameraVelocity = 0;
-            targetVelocity = 0;
+
+            if (currentCameraZ <= 0.8) {
+                currentCameraZ = 0;
+                cameraVelocity = 0;
+                targetVelocity = 0;
+                isReturningToEntrance = false;
+
+                returnCooldownActive = true;
+                if (returnCooldownTimer) clearTimeout(returnCooldownTimer);
+                returnCooldownTimer = setTimeout(() => {
+                    returnCooldownActive = false;
+                }, 400);
+
+                updateHUDTracker();
+            }
+        } else {
+            // 2. Smoothly approach targetVelocity from input (0.16 smoothing factor)
+            cameraVelocity += (targetVelocity - cameraVelocity) * 0.16;
+
+            // 3. Update currentCameraZ scaled by deltaTime
+            currentCameraZ += cameraVelocity * deltaTime;
+
+            // 4. Frame-rate independent friction damping applied to targetVelocity
+            targetVelocity *= Math.pow(0.90, deltaTime);
+
+            // 5. Zero out near-zero threshold values to prevent infinite micro-floating
+            if (Math.abs(targetVelocity) < 0.01 && Math.abs(cameraVelocity) < 0.01) {
+                targetVelocity = 0;
+                cameraVelocity = 0;
+            }
+
+            // 6. Clamp currentCameraZ to [0, 13000px] bounds & zero velocities at boundaries
+            if (currentCameraZ <= 0) {
+                currentCameraZ = 0;
+                cameraVelocity = 0;
+                targetVelocity = 0;
+            } else if (currentCameraZ >= maxCameraZ) {
+                currentCameraZ = maxCameraZ;
+                cameraVelocity = 0;
+                targetVelocity = 0;
+            }
         }
 
         // 7. Extremely subtle & capped velocity-responsive sway
@@ -616,9 +642,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (returnEntranceBtn) {
         returnEntranceBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            currentCameraZ = 0;
-            cameraVelocity = 0;
+            if (isReturningToEntrance) return;
+            isReturningToEntrance = true;
             targetVelocity = 0;
+            cameraVelocity = 0;
         });
     }
 
@@ -636,6 +663,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         hudProgressContainer.addEventListener('pointerdown', (e) => {
+            if (isReturningToEntrance || returnCooldownActive) return;
             e.stopPropagation();
             isSeeking = true;
             seekToPosition(e);
@@ -643,6 +671,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         hudProgressContainer.addEventListener('pointermove', (e) => {
+            if (isReturningToEntrance || returnCooldownActive) return;
             if (isSeeking) {
                 e.stopPropagation();
                 seekToPosition(e);
@@ -666,6 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let corridorHandoffComplete = false;
     let corridorAutoScrolling = false;
     let handoffTimeoutId = null;
+    let finalFrameScrollImpulse = 0;
 
     // Reset handoff state when user scrolls page up above corridor
     window.addEventListener('scroll', () => {
@@ -680,6 +710,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('wheel', (e) => {
         if (!corridorViewport) return;
 
+        // Block navigation input during smooth return animation and neutral-input cooldown
+        if (isReturningToEntrance || returnCooldownActive) {
+            e.preventDefault();
+            if (returnCooldownActive) {
+                if (returnCooldownTimer) clearTimeout(returnCooldownTimer);
+                returnCooldownTimer = setTimeout(() => {
+                    returnCooldownActive = false;
+                }, 400);
+            }
+            return;
+        }
+
         // 1. Ignore wheel events from interactive controls, buttons, links, or modal elements
         if (e.target.closest('button, a, input, select, textarea, .dossier-modal-overlay, #photo-dossier-modal, .filter-btn, .final-return-btn')) {
             return;
@@ -693,14 +735,35 @@ document.addEventListener('DOMContentLoaded', () => {
             rawDelta *= 300;
         }
 
-        // 3. Boundary Passthrough: Never trap page scrolling
+        // 3. Boundary Passthrough & Final Frame Secondary Downward Scroll Return
         if (currentCameraZ <= 0 && rawDelta < 0) {
             // At entrance and scrolling UP: allow normal page scroll up
+            finalFrameScrollImpulse = 0;
             return;
         }
-        if (currentCameraZ >= maxCameraZ && rawDelta > 0) {
-            // At Final Frame and scrolling DOWN: allow normal page scroll down
-            return;
+
+        // Deliberate secondary scroll-down at Final Frame smoothly returns camera to entrance
+        if (currentCameraZ >= maxCameraZ - 80) {
+            if (rawDelta > 0) {
+                finalFrameScrollImpulse += Math.abs(rawDelta);
+                // Dead zone threshold (requires ~180px accumulated downward scroll at end scene)
+                if (finalFrameScrollImpulse >= 180) {
+                    finalFrameScrollImpulse = 0;
+                    e.preventDefault();
+                    if (!isReturningToEntrance && !returnCooldownActive) {
+                        isReturningToEntrance = true;
+                        targetVelocity = 0;
+                        cameraVelocity = 0;
+                    }
+                    return;
+                }
+                e.preventDefault();
+                return;
+            } else {
+                finalFrameScrollImpulse = 0;
+            }
+        } else {
+            finalFrameScrollImpulse = 0;
         }
 
         // 4. Prevent duplicate handoff while smooth page scroll is active
@@ -749,6 +812,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (corridorViewport) {
         corridorViewport.addEventListener('pointerdown', (e) => {
+            if (isReturningToEntrance || returnCooldownActive) return;
             if (e.pointerType === 'touch') return; // Preserve normal vertical page touch scrolling on mobile
             if (e.target.closest('.final-return-btn') || e.target.closest('.card-action-btn') || e.target.closest('button')) return;
             isDragging = true;
@@ -758,6 +822,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         corridorViewport.addEventListener('pointermove', (e) => {
+            if (isReturningToEntrance || returnCooldownActive) return;
             if (!isDragging) return;
             const deltaY = lastY - e.clientY;
             lastY = e.clientY;
@@ -778,6 +843,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Keyboard Arrow Keys Impulse
     document.addEventListener('keydown', (e) => {
+        if (isReturningToEntrance || returnCooldownActive) return;
         if (modalOverlay && modalOverlay.classList.contains('active')) {
             if (e.key === 'Escape') closeDossierModal();
             return;
