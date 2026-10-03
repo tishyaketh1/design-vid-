@@ -264,11 +264,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const corridorViewport = document.getElementById('corridor-viewport');
     const floorPlane = document.getElementById('floor-plane');
     const ceilingPlane = document.getElementById('ceiling-plane');
-    const prevBtn = document.getElementById('corridor-prev-btn');
-    const nextBtn = document.getElementById('corridor-next-btn');
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const hudCounter = document.getElementById('hud-counter');
+    const hudProgressContainer = document.getElementById('hud-progress-container');
     const hudProgressBar = document.getElementById('hud-progress-bar');
+    const hudProgressThumb = document.getElementById('hud-progress-thumb');
     
     // Modal Elements
     const modalOverlay = document.getElementById('photo-dossier-modal');
@@ -293,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const isMobile = window.innerWidth <= 768;
         const wallOffset = isMobile ? 170 : 380;
-        const wallAngle = isMobile ? 22 : 32;
+        const wallAngle = isMobile ? 12 : 18;
 
         // Render Photo Cards on alternating Left/Right walls
         filteredCollection.forEach((photo, idx) => {
@@ -474,7 +473,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const opacity = Math.max(0.12, depthRatio);
                 const blurPx = (1 - depthRatio) * 6;
 
-                card.style.transform = `translate3d(${origX}px, 0px, ${cardZ}px) rotateY(${origRotateY}deg) scale(${scale})`;
+                // Dynamic rotation: ease front/active card closer to straight ahead (absRelZ < 650)
+                let activeRotateY = origRotateY;
+                if (absRelZ < 650) {
+                    const alignFactor = Math.min(1, absRelZ / 650);
+                    activeRotateY = origRotateY * (0.35 + 0.65 * alignFactor);
+                }
+
+                card.style.transform = `translate3d(${origX}px, 0px, ${cardZ}px) rotateY(${activeRotateY}deg) scale(${scale})`;
                 card.style.opacity = opacity;
                 card.style.filter = `blur(${blurPx}px)`;
                 card.style.pointerEvents = opacity > 0.3 ? 'auto' : 'none';
@@ -535,23 +541,19 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(updateCorridorFrame);
     }
 
-    // Update HUD Matrix Progress Bar & Text
-    function updateHUDTracker(nearestIdx) {
-        if (filteredCollection.length === 0) {
-            if (hudCounter) hudCounter.textContent = 'NO ARCHIVES AVAILABLE';
-            if (hudProgressBar) hudProgressBar.style.width = '0%';
-            return;
-        }
-
-        const safeIdx = Math.min(filteredCollection.length - 1, Math.max(0, nearestIdx));
-        const photo = filteredCollection[safeIdx];
+    // Update Compact Progress / Seek Line Fill, Thumb, and ARIA Value
+    function updateHUDTracker() {
         const progress = maxCameraZ > 0 ? Math.min(1, Math.max(0, currentCameraZ / maxCameraZ)) : 0;
+        const pctStr = `${progress * 100}%`;
 
-        if (hudCounter) {
-            hudCounter.textContent = `PHOTO [0${safeIdx + 1}] OF [${filteredCollection.length}] — ${photo.title}`;
-        }
         if (hudProgressBar) {
-            hudProgressBar.style.width = `${progress * 100}%`;
+            hudProgressBar.style.width = pctStr;
+        }
+        if (hudProgressThumb) {
+            hudProgressThumb.style.left = pctStr;
+        }
+        if (hudProgressContainer) {
+            hudProgressContainer.setAttribute('aria-valuenow', Math.round(progress * 100));
         }
     }
 
@@ -609,18 +611,54 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Camera Navigation Buttons (Impulse Addition)
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            targetVelocity -= 14;
-            targetVelocity = Math.max(-24, Math.min(24, targetVelocity));
+    // Return to Entrance Button (smoothly returns corridor/camera to entrance/first card)
+    const returnEntranceBtn = document.getElementById('return-entrance-btn');
+    if (returnEntranceBtn) {
+        returnEntranceBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentCameraZ = 0;
+            cameraVelocity = 0;
+            targetVelocity = 0;
         });
     }
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            targetVelocity += 14;
-            targetVelocity = Math.max(-24, Math.min(24, targetVelocity));
+    // Interactive Progress Seek Line (Click & Drag to Seek Corridor)
+    if (hudProgressContainer) {
+        let isSeeking = false;
+
+        function seekToPosition(e) {
+            const rect = hudProgressContainer.getBoundingClientRect();
+            const clickX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+            const ratio = clickX / rect.width;
+            currentCameraZ = ratio * maxCameraZ;
+            cameraVelocity = 0;
+            targetVelocity = 0;
+        }
+
+        hudProgressContainer.addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            isSeeking = true;
+            seekToPosition(e);
+            try { hudProgressContainer.setPointerCapture(e.pointerId); } catch (err) {}
+        });
+
+        hudProgressContainer.addEventListener('pointermove', (e) => {
+            if (isSeeking) {
+                e.stopPropagation();
+                seekToPosition(e);
+            }
+        });
+
+        hudProgressContainer.addEventListener('pointerup', (e) => {
+            if (isSeeking) {
+                e.stopPropagation();
+                isSeeking = false;
+                try { hudProgressContainer.releasePointerCapture(e.pointerId); } catch (err) {}
+            }
+        });
+
+        hudProgressContainer.addEventListener('pointercancel', () => {
+            isSeeking = false;
         });
     }
 
