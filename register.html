@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="register.css">
 </head>
 <body class="subpage-body register-page-body">
 
@@ -31,6 +32,8 @@
             <div class="nav-divider"></div>
             <a href="gallery.html" class="nav-item">GALLERY</a>
             <div class="nav-divider"></div>
+            <a href="photo-gallery.html" class="nav-item">PHOTO GALLERY</a>
+            <div class="nav-divider"></div>
             <a href="sponsors.html" class="nav-item">SPONSORS</a>
             <div class="nav-divider"></div>
             <a href="contact.html" class="nav-item">CONTACT US</a>
@@ -43,244 +46,123 @@
     <!-- Main Registration Shell -->
     <main class="subpage-main register-main-container">
         
-        <!-- Hero Header Box -->
+        <!-- Section A: Compact Registration Hero -->
         <header class="register-hero-header">
-            <div class="hero-badge-pill">✦ PRAVAAH '26 // DIMENSIONAL PASS REGISTRY ✦</div>
-            <h1 class="events-hero-title spider-title" data-text="REGISTRATION PORTAL">REGISTRATION PORTAL</h1>
-            <p class="subpage-hero-subtitle">Select your festival pass tier, configure verse events, and generate your official PRAVAAH '26 holographic delegate pass.</p>
-
-            <!-- Multiverse Event Detected Redirect Banner -->
-            <div id="event-redirect-banner" class="event-redirect-banner hidden">
-                <span class="banner-icon">⚡</span>
-                <span class="banner-text">MULTIVERSE EVENT LINKED: <strong id="banner-event-name">Robo Soccer</strong> — Pre-selected below!</span>
-            </div>
+            <div class="register-hero-badge">✦ FESTIVAL PASS TIER REGISTRY ✦</div>
+            <h1 class="register-hero-title">REGISTRATION</h1>
+            <p class="register-hero-subtitle">Select your festival pass tier, view pass rules, and prepare for Pravaah '26.</p>
         </header>
 
-        <!-- Registration Layout Grid (Configurator + Live Ticket Card Preview) -->
-        <div class="reg-workspace-grid">
-            
-            <!-- Left & Main Form Column -->
-            <div class="reg-configurator-card">
+        <!-- Section B: Pravaha Passes Container (Screenshot 1) -->
+        <section class="passes-card-container">
+            <div class="passes-header">
+                <h2 class="passes-title"><span>🎟️</span> PRAVAAH PASSES</h2>
+                <p class="passes-subtitle">Select a pass type. Configure days/events and participants. Price updates live.</p>
+            </div>
+
+            <div class="passes-grid" id="passesGrid">
                 
-                <!-- STEP 1: Select Pass Tier -->
-                <div class="reg-step-section">
-                    <div class="step-header">
-                        <span class="step-num">01</span>
-                        <h2 class="step-title">SELECT ACCESS PASS TIER</h2>
-                    </div>
-                    <div class="pass-tiers-grid" id="passGrid">
-                        
-                        <div class="tier-card selected" data-type="Fest Pass" data-price="449">
-                            <div class="tier-icon">🌌</div>
-                            <div class="tier-info">
-                                <h3 class="tier-name">FEST ALL-ACCESS PASS</h3>
-                                <p class="tier-price">₹449 <span>/ ALL 4 DAYS</span></p>
-                                <p class="tier-desc">Unlocks all 4 festival days, all 25 Verse events, and celebrity Starnite concert.</p>
-                            </div>
-                            <div class="tier-check"><i class="fa-solid fa-circle-check"></i></div>
-                        </div>
-
-                        <div class="tier-card" data-type="Day Pass" data-price="149">
-                            <div class="tier-icon">⚡</div>
-                            <div class="tier-info">
-                                <h3 class="tier-name">FLEX DAY PASS</h3>
-                                <p class="tier-price">FROM ₹75 <span>/ DAY</span></p>
-                                <p class="tier-desc">Select specific festival days (Day 0, 1, 2, or 3) and participate in events.</p>
-                            </div>
-                            <div class="tier-check"><i class="fa-solid fa-circle-check"></i></div>
-                        </div>
-
-                        <div class="tier-card" data-type="Starnite VIP Pass" data-price="99">
-                            <div class="tier-icon">🎸</div>
-                            <div class="tier-info">
-                                <h3 class="tier-name">STARNITE VIP CONCERT PASS</h3>
-                                <p class="tier-price">₹99 <span>/ DAY 3 NIGHT</span></p>
-                                <p class="tier-desc">Exclusive entry pass to the Grand Celebrity Starnite Live Concert.</p>
-                            </div>
-                            <div class="tier-check"><i class="fa-solid fa-circle-check"></i></div>
-                        </div>
-
-                        <div class="tier-card" data-type="Visitor Pass" data-price="99">
-                            <div class="tier-icon">🛸</div>
-                            <div class="tier-info">
-                                <h3 class="tier-name">VISITOR CAMPUS PASS</h3>
-                                <p class="tier-price">FROM ₹75 <span>/ DAY</span></p>
-                                <p class="tier-desc">Campus access for spectators, parents, and visitors. Event viewing included.</p>
-                            </div>
-                            <div class="tier-check"><i class="fa-solid fa-circle-check"></i></div>
-                        </div>
-
-                    </div>
+                <!-- Day Pass -->
+                <div class="pass-card" data-name="Day Pass" data-price="₹75 · ₹149 · ₹149 · ₹199" data-desc="Choose one or more days. Events selectable." data-notice="Select active days to participate in verse events.">
+                    <span class="check-badge">✓</span>
+                    <h3 class="pass-name">Day Pass</h3>
+                    <p class="pass-price">₹75 · ₹149 · ₹149 · ₹199</p>
+                    <p class="pass-desc">Choose one or more days. Events selectable.</p>
                 </div>
 
-                <!-- STEP 2: Configure Days & Events -->
-                <div class="reg-step-section">
-                    <div class="step-header">
-                        <span class="step-num">02</span>
-                        <h2 class="step-title">CUSTOMIZE DAYS & VERSE EVENTS</h2>
-                    </div>
-
-                    <!-- Day Selector Pills (Visible for Day Pass & Visitor Pass) -->
-                    <div id="daySelectorBlock" class="day-selector-block" style="display: none;">
-                        <label class="section-sublabel">SELECT ACTIVE DAYS</label>
-                        <div class="day-pills-row" id="daySelectorRow">
-                            <!-- Populated dynamically -->
-                        </div>
-                    </div>
-
-                    <!-- Verse Filter & Events List -->
-                    <div class="events-selector-block">
-                        <div class="verse-filter-pills" id="verseFilterPills">
-                            <button type="button" class="verse-tab-btn active" data-verse="all">ALL VERSES</button>
-                            <button type="button" class="verse-tab-btn verse-tech" data-verse="TECH">TECH</button>
-                            <button type="button" class="verse-tab-btn verse-cult" data-verse="CULT">CULT</button>
-                            <button type="button" class="verse-tab-btn verse-game" data-verse="GAME">GAMING</button>
-                            <button type="button" class="verse-tab-btn verse-ent" data-verse="ENT">ENTREPRENEUR</button>
-                            <button type="button" class="verse-tab-btn verse-social" data-verse="SOCIAL">SOCIAL</button>
-                        </div>
-
-                        <div class="events-list-container" id="eventsListContainer">
-                            <!-- Populated dynamically -->
-                        </div>
-                    </div>
+                <!-- Fest Pass -->
+                <div class="pass-card" data-name="Fest Pass" data-price="₹449 (All 4 days)" data-desc="All 4 days. Price fixed. Select events per day." data-notice="Includes access to all 4 days, all verse events, and Starnite concert.">
+                    <span class="check-badge">✓</span>
+                    <h3 class="pass-name">Fest Pass</h3>
+                    <p class="pass-price">₹449 (All 4 days)</p>
+                    <p class="pass-desc">All 4 days. Price fixed. Select events per day.</p>
                 </div>
 
-                <!-- STEP 3: Delegate Credentials -->
-                <div class="reg-step-section">
-                    <div class="step-header">
-                        <span class="step-num">03</span>
-                        <h2 class="step-title">DELEGATE CREDENTIALS</h2>
-                    </div>
+                <!-- Visitor Pass -->
+                <div class="pass-card" data-name="Visitor Pass" data-price="₹75 · ₹99 · ₹99 · ₹149" data-desc="Choose days to visit. Events display only." data-notice="Campus access for spectators and visitors. Event viewing included.">
+                    <span class="check-badge">✓</span>
+                    <h3 class="pass-name">Visitor Pass</h3>
+                    <p class="pass-price">₹75 · ₹99 · ₹99 · ₹149</p>
+                    <p class="pass-desc">Choose days to visit. Events display only.</p>
+                </div>
 
-                    <form id="registrationForm" class="delegate-form">
-                        <div class="form-grid">
-                            <div class="input-field">
-                                <label for="reg-name"><i class="fa-solid fa-user"></i> FULL NAME *</label>
-                                <input type="text" id="reg-name" placeholder="e.g. Alex Mercer" required>
-                            </div>
-                            <div class="input-field">
-                                <label for="reg-email"><i class="fa-solid fa-envelope"></i> EMAIL ADDRESS *</label>
-                                <input type="email" id="reg-email" placeholder="alex@institute.edu" required>
-                            </div>
-                            <div class="input-field">
-                                <label for="reg-phone"><i class="fa-solid fa-phone"></i> PHONE NUMBER *</label>
-                                <input type="tel" id="reg-phone" placeholder="+91 98765 43210" required>
-                            </div>
-                            <div class="input-field">
-                                <label for="reg-college"><i class="fa-solid fa-graduation-cap"></i> COLLEGE / INSTITUTE *</label>
-                                <input type="text" id="reg-college" placeholder="e.g. IIT Bhubaneswar" required>
-                            </div>
-                            <div class="input-field">
-                                <label for="reg-roll"><i class="fa-solid fa-id-card"></i> ROLL / STUDENT ID *</label>
-                                <input type="text" id="reg-roll" placeholder="e.g. 23CS01042" required>
-                            </div>
-                            <div class="input-field">
-                                <label for="reg-year"><i class="fa-solid fa-calendar"></i> ACADEMIC YEAR</label>
-                                <select id="reg-year">
-                                    <option>1st Year (B.Tech / UG)</option>
-                                    <option selected>2nd Year (B.Tech / UG)</option>
-                                    <option>3rd Year (B.Tech / UG)</option>
-                                    <option>4th Year (B.Tech / UG)</option>
-                                    <option>Postgraduate (M.Tech / PhD)</option>
-                                    <option>Faculty / Visitor</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Important Payment Note Banner -->
-                        <div class="reg-notice-box">
-                            <span class="notice-icon">💡</span>
-                            <span><strong>Mandatory:</strong> Valid College ID proof is required during on-campus reporting at IIT Bhubaneswar gates.</span>
-                        </div>
-
-                        <!-- Submit Bar -->
-                        <div class="form-submit-bar">
-                            <div class="price-summary-display">
-                                <span class="price-lbl">TOTAL AMOUNT</span>
-                                <span class="price-val" id="totalPriceDisplay">₹449</span>
-                            </div>
-                            <button type="submit" class="transmit-pay-btn" id="submitBtn">
-                                <span>TRANSMIT & PROCEED TO PAY ✦</span>
-                            </button>
-                        </div>
-                    </form>
+                <!-- Starnite Pass (Selected by Default) -->
+                <div class="pass-card selected" data-name="Starnite Pass" data-price="₹99" data-desc="Standalone concert-night access." data-notice="IITBBS students need not register for Starnite.">
+                    <span class="check-badge">✓</span>
+                    <h3 class="pass-name">Starnite Pass</h3>
+                    <p class="pass-price">₹99</p>
+                    <p class="pass-desc">Standalone concert-night access.</p>
                 </div>
 
             </div>
+        </section>
 
-            <!-- Right Column: Live Holographic Ticket Pass Card Preview -->
-            <div class="reg-ticket-preview-column">
-                <div class="ticket-sticky-wrapper">
-                    <div class="ticket-header-label">
-                        <span class="dot-pulse"></span> LIVE HOLOGRAPHIC PASS PREVIEW
-                    </div>
-
-                    <div class="cyber-ticket-card" id="cyberTicketCard">
-                        <div class="ticket-watermark">PRAVAAH</div>
-                        <div class="ticket-top-row">
-                            <div class="ticket-logo-brand">
-                                <span class="brand-title">PRAVAAH '26</span>
-                                <span class="brand-sub">IIT BHUBANESWAR</span>
-                            </div>
-                            <div class="ticket-badge-pill" id="livePassBadge">FEST ALL-ACCESS</div>
-                        </div>
-
-                        <div class="ticket-mid-row">
-                            <div class="ticket-delegate-info">
-                                <span class="lbl">DELEGATE NAME</span>
-                                <h3 class="val-name" id="liveDelegateName">ALEX MERCER</h3>
-                                <span class="lbl">COLLEGE / INST</span>
-                                <p class="val-sub" id="liveCollege">IIT BHUBANESWAR</p>
-                            </div>
-                            <div class="ticket-qr-box">
-                                <div class="qr-placeholder">
-                                    <i class="fa-solid fa-qrcode"></i>
-                                </div>
-                                <span class="qr-code-num" id="liveTicketId">PRV-2026-X842</span>
-                            </div>
-                        </div>
-
-                        <div class="ticket-details-grid">
-                            <div class="t-det">
-                                <span class="t-lbl">ACTIVE DAYS</span>
-                                <span class="t-val" id="liveDays">ALL 4 DAYS</span>
-                            </div>
-                            <div class="t-det">
-                                <span class="t-lbl">SELECTED EVENTS</span>
-                                <span class="t-val" id="liveEventsCount">8 EVENTS</span>
-                            </div>
-                            <div class="t-det">
-                                <span class="t-lbl">STATUS</span>
-                                <span class="t-val status-active">VALIDATED</span>
-                            </div>
-                            <div class="t-det">
-                                <span class="t-lbl">PASS PRICE</span>
-                                <span class="t-val price-highlight" id="livePrice">₹449</span>
-                            </div>
-                        </div>
-
-                        <div class="ticket-footer-row">
-                            <span>OCTOBER 15-18, 2026 // ARGUL CAMPUS</span>
-                            <span class="security-chip">OFFICIAL PASS</span>
-                        </div>
-                    </div>
-
-                    <!-- Pass Features Checklist -->
-                    <div class="pass-features-card">
-                        <h4 class="features-title">PASS BENEFITS INCLUDED</h4>
-                        <ul class="features-list">
-                            <li><i class="fa-solid fa-check"></i> Entry to Main Festival Arena</li>
-                            <li><i class="fa-solid fa-check"></i> Participation in selected Verse Events</li>
-                            <li><i class="fa-solid fa-check"></i> Digital Certificate of Participation</li>
-                            <li><i class="fa-solid fa-check"></i> Official Pravaah Merch Kit discounts</li>
-                        </ul>
-                    </div>
-                </div>
+        <!-- Section C: Delegate Information Form -->
+        <section class="delegate-info-container">
+            <div class="delegate-header">
+                <h2 class="delegate-title">DELEGATE INFORMATION</h2>
+                <p class="delegate-sub">Enter your details to prepare your registration.</p>
             </div>
 
+            <form id="delegateForm" class="delegate-form-grid" onsubmit="return false;">
+                <div class="form-field-group">
+                    <label for="reg-fullname" class="form-label">FULL NAME *</label>
+                    <input type="text" id="reg-fullname" name="fullname" class="form-input" required placeholder="e.g. Alex Mercer">
+                </div>
+
+                <div class="form-field-group">
+                    <label for="reg-email" class="form-label">EMAIL ADDRESS *</label>
+                    <input type="email" id="reg-email" name="email" class="form-input" required placeholder="e.g. alex@institution.edu">
+                </div>
+
+                <div class="form-field-group">
+                    <label for="reg-phone" class="form-label">PHONE NUMBER *</label>
+                    <input type="tel" id="reg-phone" name="phone" class="form-input" required placeholder="e.g. +91 98765 43210">
+                </div>
+
+                <div class="form-field-group">
+                    <label for="reg-college" class="form-label">COLLEGE / INSTITUTION *</label>
+                    <input type="text" id="reg-college" name="college" class="form-input" required placeholder="e.g. IIT Bhubaneswar">
+                </div>
+
+                <div class="form-field-group full-width">
+                    <p class="delegate-prep-note">These details are for registration preparation only. Online registration and payment will open when official pass sales go live.</p>
+                </div>
+            </form>
+        </section>
+
+        <!-- Section D: Important Notes Before Payment (Screenshot 2) -->
+        <section class="notes-card-container">
+            <div class="notes-card-header">
+                <span class="warning-icon">⚠️</span>
+                <h2 class="notes-card-title">Important Notes Before Payment</h2>
+            </div>
+            <ul class="notes-arrow-list">
+                <li><span class="cyan-arrow">➤</span> People who take a Fest Pass, Day 3 Pass, or Visitor Pass (Day 3) do not need to buy a separate Starnite pass.</li>
+                <li><span class="cyan-arrow">➤</span> Enter your full name correctly.</li>
+                <li><span class="cyan-arrow">➤</span> If you select a Day Pass, you can participate in all the events on that day. Select the events you are interested in for the day.</li>
+            </ul>
+        </section>
+
+        <!-- Section E: Selected Pass Details & Notice Box (Screenshot 2) -->
+        <section class="selected-pass-container">
+            <h2 class="selected-pass-heading" id="selectedPassTitle">Selected: Starnite Pass</h2>
+            
+            <div class="selected-pass-inner-box">
+                <h3 class="selected-card-title" id="selectedCardTitle">Starnite Pass</h3>
+                <p class="selected-card-notice" id="selectedCardNotice">IITBBS students need not register for Starnite.</p>
+            </div>
+        </section>
+
+        <!-- Section F: Coming Soon Payment Action -->
+        <div class="payment-action-container">
+            <button type="button" class="disabled-payment-btn" disabled>
+                PAYMENT & REGISTRATION PORTAL — COMING SOON
+            </button>
+            <p class="payment-notice-text">Online registration and payment gateway will open after official pass sales go live.</p>
         </div>
 
-        <!-- Symmetrical 3-Column Footer -->
+        <!-- Shared Symmetrical 3-Column Footer -->
         <footer class="pravaah-full-footer">
             <div class="footer-columns-grid">
                 <div class="footer-col footer-brand">
@@ -311,42 +193,6 @@
         </footer>
 
     </main>
-
-    <!-- Confirmation Modal -->
-    <div class="success-modal-overlay" id="successModal">
-        <div class="success-modal-box">
-            <div class="success-icon-badge">✓</div>
-            <h3 class="success-modal-title">REGISTRATION CONFIRMED!</h3>
-            <p class="success-modal-sub">Your PRAVAAH '26 delegate pass has been generated and recorded on the portal ledger.</p>
-            
-            <div class="modal-ticket-summary">
-                <div class="summary-row">
-                    <span class="s-lbl">DELEGATE:</span>
-                    <span class="s-val" id="modalDelegate">Alex Mercer</span>
-                </div>
-                <div class="summary-row">
-                    <span class="s-lbl">PASS TYPE:</span>
-                    <span class="s-val" id="modalPassType">Fest All-Access Pass</span>
-                </div>
-                <div class="summary-row">
-                    <span class="s-lbl">ACTIVE DAYS:</span>
-                    <span class="s-val" id="modalDays">All 4 Days</span>
-                </div>
-                <div class="summary-row">
-                    <span class="s-lbl">EVENTS:</span>
-                    <span class="s-val" id="modalEvents">8 Events Selected</span>
-                </div>
-                <div class="summary-row">
-                    <span class="s-lbl">TOTAL AMOUNT:</span>
-                    <span class="s-val total-glow" id="modalTotal">₹449</span>
-                </div>
-            </div>
-
-            <div class="modal-actions-grid">
-                <button type="button" class="modal-close-cta" id="closeModalBtn">CONFIRM & CLOSE</button>
-            </div>
-        </div>
-    </div>
 
     <script src="glitch-nav.js"></script>
     <script src="register.js"></script>

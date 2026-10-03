@@ -1,277 +1,263 @@
-/**
- * PHOTO GALLERY — CONTINUOUS VELOCITY-DRIVEN 3D WALL CORRIDOR ENGINE
- * Features 14 wall-mounted photo cards at 900px depth spacing, targetVelocity filtering,
- * frame-rate independent deltaTime lerping, capped sway, and "THE FINAL FRAME" portal.
- */
+/* ==========================================================================
+   ORBIT PHOTO GALLERY — 3D WALL CORRIDOR FLY-THROUGH ARCHIVE ENGINE
+   Custom 3D Spatial Geometry Engine for 14 High-Definition Fest Captures
+   ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 14 Photo Dossier Collection
+    // 14 High-Definition Fest Photo Dossier Records
     const photoCollection = [
         {
-            id: 'photo-1',
+            id: 'photo-01',
             title: 'ROBO SOCCER ARENA CLASH',
             category: 'TECH & ROBOTICS',
-            badge: 'FLAGSHIP TECH',
+            badge: 'FLAGSHIP',
+            image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80',
+            description: 'Custom-built autonomous kinetic bots engaged in a high-speed strategic field showdown inside the packed LHC Main Arena.',
             edition: 'PRAVAAH 2026',
-            location: 'LHC Complex - Arena A',
-            photographer: 'Pravaah Media Team',
+            location: 'LHC Arena Complex',
+            photographer: 'Pravaha Lens Squad',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0377.JPG',
-            description: 'Intense micro-robotics arena competition captured during the finals of Robo Soccer. Autonomous and manual bots maneuvering under neon spotlight arrays.',
             highlights: [
-                'Captured during high-speed goal scoring sequence.',
-                'Multi-angle arena lighting with cyan backdrop glow.',
-                'Featured in Pravaah 2026 Official Aftermovie.'
+                'Microsecond sensor tracking recorded on center turf.',
+                'Record crowd turnout exceeding 2,400 spectators.',
+                'Championship match decided in sudden death overtime.'
             ]
         },
         {
-            id: 'photo-2',
-            title: 'SINGULARITY PRONITE CROWD',
+            id: 'photo-02',
+            title: 'EDM NIGHT STARLIGHT RESONANCE',
             category: 'CULTURAL & PRONITES',
-            badge: 'STAR NIGHT',
+            badge: 'PRONITE',
+            image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=80',
+            description: 'Massive mainstage laser arrays illuminating thousands of festival attendees during the climax of the EDM headliner set.',
             edition: 'PRAVAAH 2026',
-            location: 'Main Stadium Grounds',
-            photographer: 'Ayan Mukherjee',
-            resolution: '5472 x 3648 (RAW)',
-            image: 'pravaah_pics_2026/0Q3A0001.JPG',
-            description: '15,000+ roaring festival pass holders illuminating the central amphitheatre with phone flashlights during the headline EDM artist finale.',
-            highlights: [
-                'Wide-angle stadium capture from the central sound mixing tower.',
-                'Synchronized pyrotechnic laser beam array overhead.',
-                'Peak festival attendance record moment.'
-            ]
-        },
-        {
-            id: 'photo-3',
-            title: 'MECHA COMBAT ARENA FINALS',
-            category: 'TECH & ROBOTICS',
-            badge: 'COMBAT ARENA',
-            edition: 'PRAVAAH 2026',
-            location: 'Open Air Cage Complex',
-            photographer: 'Rohan Sharma',
+            location: 'Central Festival Grounds',
+            photographer: 'Media Cell Lead',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/0Q3A0171.JPG',
-            description: '30kg heavyweight spinner bot impact moment inside the reinforced steel mesh arena, sending sparks flying across the spectator safety barrier.',
             highlights: [
-                'High-speed shutter capture at 1/4000s.',
-                'Full arena spark ignition frame.',
-                'Judged as Best Action Shot of Pravaah 2026.'
+                'Multi-spectrum laser synchronization across 40m main stage.',
+                'Over 18,000 active wristband luminary sync nodes.',
+                'Uninterrupted 3-hour live DJ performance.'
             ]
         },
         {
-            id: 'photo-4',
-            title: 'VALORANT LAN CHAMPIONSHIP',
+            id: 'photo-03',
+            title: 'VALORANT CHAMPIONS STAGE',
             category: 'ESPORTS ARENA',
-            badge: '5v5 LAN',
+            badge: 'GRAND FINALS',
+            image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
+            description: 'Pro-tier tournament setup featuring high-refresh monitors, custom LED soundproof booths, and real-time caster shoutcasting.',
             edition: 'PRAVAAH 2026',
-            location: 'Esports Pavilion Stage',
-            photographer: 'Devansh Verma',
-            resolution: '5760 x 3840 (RAW)',
-            image: 'pravaah_pics_2026/DSC_1631.JPG',
-            description: 'Grand final clutch moment on stage as the winning squad celebrates after locking down the match-winning defuse in front of live shoutcasters.',
-            highlights: [
-                'Stage lighting synced to team color scheme.',
-                'Live shoutcasting booth visible in foreground background.',
-                'Over 500 spectators in live audience seating.'
-            ]
-        },
-        {
-            id: 'photo-5',
-            title: 'VERVE FUTURISTIC RUNWAY',
-            category: 'STAGE & SHOWCASE',
-            badge: 'RUNWAY',
-            edition: 'PRAVAAH 2026',
-            location: 'Main Auditorium Stage',
-            photographer: 'Sneha Mohanty',
+            location: 'SAC Esports Pavilion',
+            photographer: 'Esports Media Team',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_3951.JPG',
-            description: 'Avant-garde cyberpunk fashion couture spotlight entry featuring custom neon-infused fabrics and theatrical smoke effects.',
             highlights: [
-                'Dramatic low-angle runway perspective.',
-                'Custom neon LED attire illumination.',
-                'National inter-college fashion competition winner.'
+                '240Hz ultra-low latency tournament rigs.',
+                'Live broadcast streamed to 45,000 online viewers.',
+                'Intense 5-map clutch victory on Haven.'
             ]
         },
         {
-            id: 'photo-6',
-            title: 'EUPHONY BATTLE OF BANDS',
+            id: 'photo-04',
+            title: 'COSMIC DRONE LIGHT GRID',
+            category: 'STAGE & SHOWCASE',
+            badge: 'AERIAL SHOW',
+            image: 'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1200&q=80',
+            description: '300 synchronized light drones forming dynamic 3D multiverse constellations high above the campus stadium skyline.',
+            edition: 'PRAVAAH 2026',
+            location: 'Main Stadium Sky Vault',
+            photographer: 'Aerial Aero Team',
+            resolution: '6000 x 4000 (RAW)',
+            highlights: [
+                '3D real-time constellation shape shifts.',
+                'Zero-collision precision flight control matrix.',
+                'Custom Pravaah emblem formation in mid-air.'
+            ]
+        },
+        {
+            id: 'photo-05',
+            title: 'HACKATHON MIDNIGHT SPRINT',
+            category: 'TECH & ROBOTICS',
+            badge: '24-HR HACK',
+            image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80',
+            description: 'Developers, designers, and AI engineers collaborating past 3 AM on next-gen decentralized spatial compute prototypes.',
+            edition: 'PRAVAAH 2026',
+            location: 'Research Park Tech Hub',
+            photographer: 'Innovations Desk',
+            resolution: '6000 x 4000 (RAW)',
+            highlights: [
+                'Over 120 teams competing continuously for 24 hours.',
+                'Mentorship from top tech architecture leads.',
+                '$10,000 grand prize pool awarded.'
+            ]
+        },
+        {
+            id: 'photo-06',
+            title: 'BATTLE OF THE BANDS AMPLIFIED',
             category: 'CULTURAL & PRONITES',
             badge: 'LIVE MUSIC',
+            image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80',
+            description: 'High-octane rock guitar solo under intense magenta pyrotechnics at the Open Air Theater sound stage.',
             edition: 'PRAVAAH 2026',
-            location: 'Amphitheatre Stage',
-            photographer: 'Kavya Sharma',
-            resolution: '5184 x 3456 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0864.JPG',
-            description: 'Lead guitarist performing a solo breakdown under crimson spotlights during the collegiate rock and heavy metal finals.',
-            highlights: [
-                'Stage fog diffusion with atmospheric backlighting.',
-                'Action motion blur on drum kit background.',
-                'Captured during peak 90-second guitar solo.'
-            ]
-        },
-        {
-            id: 'photo-7',
-            title: 'STARTUP PITCH SUMMIT',
-            category: 'STAGE & SHOWCASE',
-            badge: 'VENTURE PITCH',
-            edition: 'PRAVAAH 2026',
-            location: 'Auditorium Hall 2',
-            photographer: 'Arjun Das',
+            location: 'Open Air Theater (OAT)',
+            photographer: 'Cult Comm Team',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_3673.JPG',
-            description: 'Student startup founders presenting their AI prototype to a panel of venture capital investors and incubator mentors.',
             highlights: [
-                'Interactive pitch deck slide projection overlay.',
-                'Q&A jury panel engaged response.',
-                '₹1.5 Lakh seed grant award ceremony moment.'
+                '11 finalist college rock bands from across India.',
+                'Custom acoustic wall paneling for pristine clarity.',
+                'Standing-room crowd of 5,000+ music fans.'
             ]
         },
         {
-            id: 'photo-8',
-            title: 'AUTONOMOUS DRONE CIRCUIT',
+            id: 'photo-07',
+            title: 'AUTONOMOUS ROVER TERRAIN RACE',
             category: 'TECH & ROBOTICS',
-            badge: 'FPV RACING',
+            badge: 'OUTDOOR LAB',
+            image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80',
+            description: 'Heavy-duty Martian terrain rovers navigating steep rock barriers, sand traps, and simulated alien topographies.',
             edition: 'PRAVAAH 2026',
-            location: 'Outdoor Stadium Track',
-            photographer: 'Priya Nayak',
+            location: 'Robotics Outdoor Track',
+            photographer: 'Robotics Society',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/0Q3A8579.jpg',
-            description: 'High-speed quadcopter passing through a illuminated neon gate during night obstacle course trials.',
             highlights: [
-                'Motion track trail along LED gate border.',
-                'Autonomous flight path telemetry verified.',
-                'Record lap time finish moment.'
+                'LiDAR & depth camera obstacle navigation.',
+                'Extreme 45-degree incline climb challenge.',
+                'Sample collection and autonomous deposit test.'
             ]
         },
         {
-            id: 'photo-9',
-            title: 'CYBERSECURITY CTF ARENA',
-            category: 'TECH & ROBOTICS',
-            badge: 'HACKATHON',
+            id: 'photo-08',
+            title: 'FASHION SHOW RUNWAY MATRIX',
+            category: 'CULTURAL & PRONITES',
+            badge: 'COUTURE',
+            image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80',
+            description: 'Futuristic cyberpunk wardrobe designs presented along a mirror-finish illuminated runway path.',
             edition: 'PRAVAAH 2026',
-            location: 'Computer Center Lab 3',
-            photographer: 'Vikram Singh',
+            location: 'Auditorium Hall A',
+            photographer: 'Style & Glam Crew',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0450.JPG',
-            description: 'Ethical hackers decoding cryptographic flags under low ambient matrix green terminal arrays during 24h CTF.',
             highlights: [
-                'Jeopardy CTF scoreboard live update background.',
-                '24-hour non-stop hacking challenge.',
-                'Top 3 qualifying teams from 120 national entries.'
+                'Avant-garde LED integrated textile garments.',
+                'Industry judge panel from leading fashion houses.',
+                'Choreographed light-and-beat sync walk.'
+            ]
+        },
+        {
+            id: 'photo-09',
+            title: 'BGMI LAN TOURNAMENT FINALS',
+            category: 'ESPORTS ARENA',
+            badge: 'LAN FINALS',
+            image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80',
+            description: '16 top squad tables battling simultaneously under high-intensity red and cyan spotlighting.',
+            edition: 'PRAVAAH 2026',
+            location: 'Indoor Sports Complex',
+            photographer: 'Gaming Guild',
+            resolution: '6000 x 4000 (RAW)',
+            highlights: [
+                '16 team LAN setup with dedicated server nodes.',
+                'Live tactical map analysis on overhead screens.',
+                'Final circle clutch victory in Erangel.'
             ]
         },
         {
             id: 'photo-10',
-            title: 'COSPLAY ALLEY & ANIME VERSE',
+            title: 'STREET DANCE BATTLE CIRCLE',
             category: 'CULTURAL & PRONITES',
-            badge: 'COSPLAY ARENA',
+            badge: 'HIP-HOP',
+            image: 'https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80',
+            description: 'Raw energy breaking and popping cyphers surrounded by an enthusiastic ring of festgoers.',
             edition: 'PRAVAAH 2026',
-            location: 'Convention Walkway',
-            photographer: 'Ananya Roy',
-            resolution: '5760 x 3840 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0469.JPG',
-            description: 'Handcrafted sci-fi and anime character armor cosplayers gathering for the central festival parade walk.',
+            location: 'Student Activity Center Yard',
+            photographer: 'Street Culture Desk',
+            resolution: '6000 x 4000 (RAW)',
             highlights: [
-                'Custom 3D printed mech armor details.',
-                'Crowd interaction and photography showcase.',
-                'Judged on armor craftsmanship and stage walk.'
+                '1v1 all-styles elimination battles.',
+                'International guest judges and beatboxers.',
+                'Spontaneous crowd cyphers after sunset.'
             ]
         },
         {
             id: 'photo-11',
-            title: 'BGMI ESPORTS SHOWDOWN',
-            category: 'ESPORTS ARENA',
-            badge: 'MOBILE LAN',
+            title: 'AI ART & GENERATIVE EXHIBIT',
+            category: 'STAGE & SHOWCASE',
+            badge: 'EXHIBIT',
+            image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1200&q=80',
+            description: 'Interactive neural art installations responding to visitor movement and brainwave EEG signals.',
             edition: 'PRAVAAH 2026',
-            location: 'Gaming Pavilion Hall B',
-            photographer: 'Devansh Verma',
+            location: 'Design Gallery Wing',
+            photographer: 'Media Arts Lab',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_0724.JPG',
-            description: 'Final circle battle royale tense moment with dual shoutcaster commentary broadcast live across festival screens.',
             highlights: [
-                'Final circle clutch victory finish.',
-                'Live audience shouting reaction.',
-                'Over 10,000 online live streaming viewers.'
+                'Real-time generative projection mapping.',
+                'EEG sensor headband responsive visuals.',
+                'Curated digital gallery of 50 student creators.'
             ]
         },
         {
             id: 'photo-12',
-            title: 'SOLO DANCE STREET CLASH',
+            title: 'PRO NITE POP HEADLINER',
             category: 'CULTURAL & PRONITES',
-            badge: 'STREET DANCE',
+            badge: 'CELEBRITY',
+            image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80',
+            description: 'Chart-topping vocalist performing under golden confetti showers to an audience of 20,000+ fans.',
             edition: 'PRAVAAH 2026',
-            location: 'Open Amphitheatre Plaza',
-            photographer: 'Kavya Sharma',
-            resolution: '5184 x 3456 (RAW)',
-            image: 'pravaah_pics_2026/DSC_1034.JPG',
-            description: 'High-energy popping & locking freestyle cipher battle surrounding by cheering student crowds under evening sun.',
+            location: 'Main Grounds Stadium',
+            photographer: 'Fest Chief Editor',
+            resolution: '6000 x 4000 (RAW)',
             highlights: [
-                'Mid-air freeze frame capture.',
-                'Live beatbox background accompaniment.',
-                'Inter-college street battle championship.'
+                'Full 90-minute live band performance set.',
+                'Confetti cannon blast at final chorus.',
+                'Record attendance in fest history.'
             ]
         },
         {
             id: 'photo-13',
-            title: 'AI ART & GRAPHIC EXPO',
-            category: 'STAGE & SHOWCASE',
-            badge: 'DESIGN EXPO',
+            title: 'SPEED CUBING & LOGIC ARENA',
+            category: 'TECH & ROBOTICS',
+            badge: 'COMPETITION',
+            image: 'https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1200&q=80',
+            description: 'Sub-6-second Rubik\'s cube solves recorded with high-frame-rate cameras and digital timers.',
             edition: 'PRAVAAH 2026',
-            location: 'Design Gallery Complex',
-            photographer: 'Sneha Mohanty',
+            location: 'LHC Hall 3',
+            photographer: 'Logic Club Media',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_1305.JPG',
-            description: 'Generative AI visual artwork exhibition featuring ultra-high definition canvas prints created by student designers.',
             highlights: [
-                'Interactive digital screen artwork displays.',
-                'Generative prompt art gallery tour.',
-                'Exhibition attended by industry design directors.'
+                'WCA official timing equipment used.',
+                'National record attempt witnessed live.',
+                'Blindfolded solve showcase category.'
             ]
         },
         {
             id: 'photo-14',
-            title: 'OPENING CEREMONY ILLUMINATION',
+            title: 'VALEDICTORIAN CELEBRATION SHOT',
             category: 'STAGE & SHOWCASE',
-            badge: 'INAUGURATION',
+            badge: 'CLOSING CEREMONY',
+            image: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1200&q=80',
+            description: 'Core organizing committee and winners celebrating with trophy presentations and sparkler fountains.',
             edition: 'PRAVAAH 2026',
-            location: 'Main Stage Auditorium',
-            photographer: 'Pravaah Media Team',
+            location: 'Grand Auditorium Stage',
+            photographer: 'Official Convenor Desk',
             resolution: '6000 x 4000 (RAW)',
-            image: 'pravaah_pics_2026/DSC_5907.JPG',
-            description: 'Grand inaugural ceremony torch lighting up the holographic Multiverse logo to mark the start of Pravaah 2026.',
             highlights: [
-                'Holographic logo lighting sequence.',
-                'Official festival launch ceremony moment.',
-                'Dignitaries and student committee stage assembly.'
+                'Over 80 championship trophies awarded.',
+                'Official handover to next year\'s leads.',
+                'Grand pyro fountain finale spectacle.'
             ]
         }
     ];
 
-    // Camera Physics & Geometry Configuration
-    let filteredCollection = [...photoCollection];
-    const zStep = 900; // Fixed 900px depth spacing between cards
-    let currentCameraZ = 0;
-    let cameraVelocity = 0;
-    let targetVelocity = 0;
-    let lastTimestamp = 0;
-    
-    // Bounds: 0 to 13,000px (14 cards * 900 = 12,600px + 400px end space)
-    let endSceneZ = -(filteredCollection.length * zStep); // -12,600px
-    let maxCameraZ = 13000;
-
     // DOM Elements
-    const corridorStage = document.getElementById('corridor-stage');
     const corridorViewport = document.getElementById('corridor-viewport');
-    const floorPlane = document.getElementById('floor-plane');
-    const ceilingPlane = document.getElementById('ceiling-plane');
+    const corridorStage = document.getElementById('corridor-stage');
     const prevBtn = document.getElementById('corridor-prev-btn');
     const nextBtn = document.getElementById('corridor-next-btn');
     const filterButtons = document.querySelectorAll('.filter-btn');
     const hudCounter = document.getElementById('hud-counter');
     const hudProgressBar = document.getElementById('hud-progress-bar');
-    
+
     // Modal Elements
     const modalOverlay = document.getElementById('photo-dossier-modal');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
     const modalImage = document.getElementById('modal-img');
     const modalBadge = document.getElementById('modal-badge');
     const modalTitle = document.getElementById('modal-title');
@@ -281,220 +267,198 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalPhotographer = document.getElementById('spec-photographer');
     const modalResolution = document.getElementById('spec-resolution');
     const modalHighlightsList = document.getElementById('modal-highlights-list');
-    const modalCloseBtn = document.getElementById('modal-close-btn');
 
-    // Build 3D Stage (14 Wall Cards on Left/Right walls + THE FINAL FRAME End Scene)
+    // Active Filter State
+    let filteredCollection = [...photoCollection];
+
+    // 3D Spatial Geometry Config (900px Z-Spacing)
+    const Z_SPACING = 900;
+    const X_OFFSET = 360;
+    const Y_OFFSET = 0;
+    const ROTATION_Y = 18;
+
+    // Camera State Variables
+    let currentCameraZ = 0;
+    let cameraVelocity = 0;
+    let targetVelocity = 0;
+    let maxCameraZ = (photoCollection.length - 1) * Z_SPACING + 1200;
+
+    let cardElements = [];
+    let finalFrame = null;
+
+    // Build 3D Corridor Stage (Wall-Mounted Photo Cards + THE FINAL FRAME)
     function buildCorridorStage() {
         if (!corridorStage) return;
-
         corridorStage.innerHTML = '';
-        endSceneZ = -(filteredCollection.length * zStep);
-        maxCameraZ = 13000;
+        cardElements = [];
 
-        const isMobile = window.innerWidth <= 768;
-        const wallOffset = isMobile ? 170 : 380;
-        const wallAngle = isMobile ? 22 : 32;
+        maxCameraZ = (filteredCollection.length - 1) * Z_SPACING + 1200;
 
-        // Render Photo Cards on alternating Left/Right walls
         filteredCollection.forEach((photo, idx) => {
+            const isLeft = idx % 2 === 0;
+            const cardZ = -idx * Z_SPACING;
+            const cardX = isLeft ? -X_OFFSET : X_OFFSET;
+            const rotateY = isLeft ? ROTATION_Y : -ROTATION_Y;
+
             const card = document.createElement('article');
             card.className = 'orbit-corridor-card';
             card.setAttribute('data-id', photo.id);
-            card.setAttribute('data-index', idx);
-
-            const cardZ = -idx * zStep;
-            const isLeftWall = idx % 2 === 0;
-            const origX = isLeftWall ? -wallOffset : wallOffset;
-            const origRotateY = isLeftWall ? wallAngle : -wallAngle;
-
-            card.dataset.cardZ = cardZ;
-            card.dataset.origX = origX;
-            card.dataset.origRotateY = origRotateY;
+            card.setAttribute('data-idx', idx);
+            card.setAttribute('data-z', cardZ);
+            card.setAttribute('data-x', cardX);
+            card.setAttribute('data-ry', rotateY);
 
             card.innerHTML = `
                 <div class="corridor-card-img-box">
                     <img src="${photo.image}" alt="${photo.title}" loading="lazy" />
                     <div class="card-img-overlay"></div>
                     <span class="card-badge-left">${photo.badge}</span>
-                    <span class="card-badge-right">${photo.edition}</span>
+                    <span class="card-badge-right">#0${idx + 1}</span>
                 </div>
-                
                 <div class="card-text-body">
-                    <span class="card-category-tag">${photo.category}</span>
-                    <h3 class="card-title">${photo.title}</h3>
+                    <span class="card-category-tag">✦ ${photo.category}</span>
+                    <h2 class="card-title">${photo.title}</h2>
                     <p class="card-description">${photo.description}</p>
                 </div>
-
                 <div class="card-details-row">
                     <div class="meta-item">
                         <span class="meta-icon">📍</span>
-                        <span class="truncate">${photo.location}</span>
+                        <span>${photo.location}</span>
                     </div>
                     <div class="meta-item">
-                        <span class="meta-icon-magenta">📷</span>
-                        <span class="truncate">${photo.photographer}</span>
+                        <span class="meta-icon meta-icon-magenta">📷</span>
+                        <span>${photo.photographer}</span>
                     </div>
+                    <button class="card-action-btn" type="button" aria-label="Inspect ${photo.title} Dossier">
+                        <span>INSPECT DOSSIER</span>
+                        <span>✦</span>
+                    </button>
                 </div>
-
-                <button class="card-action-btn" type="button">
-                    <span>✦ INSPECT DOSSIER</span>
-                </button>
             `;
 
-            card.addEventListener('click', () => {
-                openDossierModal(photo);
+            // Click to Open Dossier Modal or Jump Camera to Card
+            card.addEventListener('click', (e) => {
+                const targetZ = idx * Z_SPACING;
+                const diff = Math.abs(currentCameraZ - targetZ);
+
+                if (diff < 300 || e.target.closest('.card-action-btn')) {
+                    openDossierModal(photo);
+                } else {
+                    targetVelocity += (targetZ - currentCameraZ) * 0.08;
+                }
             });
 
             corridorStage.appendChild(card);
+            cardElements.push({
+                element: card,
+                baseZ: cardZ,
+                baseX: cardX,
+                baseRY: rotateY,
+                photo: photo,
+                idx: idx
+            });
         });
 
-        // Append "THE FINAL FRAME" End-of-Corridor Portal Scene at Z = -12,600px
-        const finalFrame = document.createElement('div');
+        // THE FINAL FRAME — Destination End Scene
+        const endSceneZ = -filteredCollection.length * Z_SPACING - 300;
+        finalFrame = document.createElement('div');
         finalFrame.className = 'corridor-final-frame';
-        finalFrame.id = 'corridor-final-frame';
-        finalFrame.dataset.cardZ = endSceneZ;
-        finalFrame.dataset.origX = 0;
-        finalFrame.dataset.origRotateY = 0;
+        finalFrame.setAttribute('data-z', endSceneZ);
         finalFrame.style.setProperty('--fz', `${endSceneZ}px`);
 
         finalFrame.innerHTML = `
             <div class="final-frame-content">
-                <span class="final-badge">✦ ARCHIVE DESTINATION ✦</span>
+                <span class="final-badge">✦ CORRIDOR ARCHIVE COMPLETED ✦</span>
                 <h2 class="final-heading">THE FINAL FRAME</h2>
-                <p class="final-subtext">“Every moment leaves a light behind.”</p>
-                <div class="final-small-line">END OF ARCHIVE // PRAVAAH VISUAL MEMORY</div>
+                <p class="final-subtext">"Across infinite dimensions, every capture leaves an indelible cosmic mark."</p>
+                <div class="final-small-line">PRAVAAH 2026 MULTIVERSE FESTIVAL</div>
             </div>
-
             <button class="final-return-btn" id="final-return-btn" type="button">
-                <span>✦ RETURN TO ENTRANCE ✦</span>
+                <span>✦ RE-ENTER CORRIDOR ENTRANCE ✦</span>
             </button>
         `;
 
         corridorStage.appendChild(finalFrame);
 
-        // Return to Entrance button resets position smoothly to entrance
         const returnBtn = finalFrame.querySelector('#final-return-btn');
         if (returnBtn) {
-            returnBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                currentCameraZ = 0;
-                cameraVelocity = 0;
-                targetVelocity = 0;
+            returnBtn.addEventListener('click', () => {
+                targetVelocity = -currentCameraZ * 0.12;
             });
         }
     }
 
-    // Frame-Rate Independent Animation Frame Loop with Smoothed Target Velocity Physics
-    function updateCorridorFrame(timestamp) {
-        // 1. Calculate frame-rate independent deltaTime (normalized around 60fps = 16.6667ms)
-        if (!lastTimestamp) lastTimestamp = timestamp;
-        const deltaTime = Math.min((timestamp - lastTimestamp) / 16.6667, 2);
-        lastTimestamp = timestamp;
+    // Smooth Continuous Animation & Render Loop
+    function updateCorridorFrame() {
+        // Friction & Inertia Physics Damping
+        cameraVelocity += (targetVelocity - cameraVelocity) * 0.12;
+        targetVelocity *= 0.88;
+        currentCameraZ += cameraVelocity;
 
-        // 2. Smoothly approach targetVelocity from input (0.16 smoothing factor)
-        cameraVelocity += (targetVelocity - cameraVelocity) * 0.16;
-
-        // 3. Update currentCameraZ scaled by deltaTime
-        currentCameraZ += cameraVelocity * deltaTime;
-
-        // 4. Frame-rate independent friction damping applied to targetVelocity
-        targetVelocity *= Math.pow(0.90, deltaTime);
-
-        // 5. Zero out near-zero threshold values to prevent infinite micro-floating
-        if (Math.abs(targetVelocity) < 0.01 && Math.abs(cameraVelocity) < 0.01) {
-            targetVelocity = 0;
-            cameraVelocity = 0;
-        }
-
-        // 6. Clamp currentCameraZ to [0, 13000px] bounds & zero velocities at boundaries
-        if (currentCameraZ <= 0) {
-            currentCameraZ = 0;
+        // Clamp Camera Z within valid corridor range [-200, maxCameraZ]
+        if (currentCameraZ < -200) {
+            currentCameraZ = -200;
             cameraVelocity = 0;
             targetVelocity = 0;
-        } else if (currentCameraZ >= maxCameraZ) {
+        } else if (currentCameraZ > maxCameraZ) {
             currentCameraZ = maxCameraZ;
             cameraVelocity = 0;
             targetVelocity = 0;
         }
 
-        // 7. Extremely subtle & capped velocity-responsive sway
-        const velSwayY = Math.max(-3, Math.min(3, cameraVelocity * 0.12));
-        const velRoll = Math.max(-0.35, Math.min(0.35, cameraVelocity * 0.018));
-
-        const swayY = Math.sin(currentCameraZ * 0.0012) * 2 + velSwayY;
-        const swayRoll = Math.cos(currentCameraZ * 0.0012) * 0.12 + velRoll;
-
-        // Apply 3D Stage Camera Transform
-        if (corridorStage) {
-            corridorStage.style.transform = `translate3d(0px, ${swayY}px, ${currentCameraZ}px) rotateZ(${swayRoll}deg)`;
-        }
-
-        // Multi-Layer Parallax for Floor & Ceiling Planes
-        const parallaxZ = currentCameraZ * 0.25;
-        if (floorPlane) {
-            floorPlane.style.transform = `rotateX(85deg) translateY(${parallaxZ * 0.3}px)`;
-        }
-        if (ceilingPlane) {
-            ceilingPlane.style.transform = `rotateX(-85deg) translateY(${-parallaxZ * 0.3}px)`;
-        }
-
-        // Update Wall Photo Cards
-        const cards = corridorStage.querySelectorAll('.orbit-corridor-card');
         let nearestCardIdx = 0;
-        let minAbsZ = Infinity;
+        let minAbsDist = Infinity;
 
-        cards.forEach((card, idx) => {
-            const cardZ = parseFloat(card.dataset.cardZ);
-            const origX = parseFloat(card.dataset.origX);
-            const origRotateY = parseFloat(card.dataset.origRotateY);
+        // Render & Positioning of Wall Cards
+        cardElements.forEach(item => {
+            const relZ = item.baseZ + currentCameraZ;
+            const absZ = Math.abs(relZ);
 
-            const relZ = cardZ + currentCameraZ;
-            const absRelZ = Math.abs(relZ);
-
-            if (absRelZ < minAbsZ) {
-                minAbsZ = absRelZ;
-                nearestCardIdx = idx;
+            if (absZ < minAbsDist) {
+                minAbsDist = absZ;
+                nearestCardIdx = item.idx;
             }
 
-            if (relZ > 180) {
-                // Passed camera: drift outward along wall and fade out
-                const exitRatio = Math.min(1, (relZ - 180) / 450);
-                const exitX = origX >= 0 ? origX + 340 * exitRatio : origX - 340 * exitRatio;
-                const exitRotate = origX >= 0 ? origRotateY - 18 * exitRatio : origRotateY + 18 * exitRatio;
+            // Depth Culling & Visibility Range Check
+            if (relZ > 250 || relZ < -3400) {
+                item.element.style.opacity = 0;
+                item.element.style.pointerEvents = 'none';
+                item.element.style.transform = `translate3d(${item.baseX}px, 0px, ${item.baseZ}px) rotateY(${item.baseRY}deg)`;
+                item.element.classList.remove('is-nearest');
+                return;
+            }
 
-                card.style.transform = `translate3d(${exitX}px, 0px, ${cardZ}px) rotateY(${exitRotate}deg) scale(${1 + 0.25 * exitRatio})`;
-                card.style.opacity = Math.max(0, 1 - exitRatio * 1.25);
-                card.style.filter = `blur(${exitRatio * 8}px)`;
-                card.style.pointerEvents = 'none';
-                card.classList.remove('is-nearest');
-            } else if (relZ >= -3600) {
-                // Visible inside 3D corridor view
-                const depthRatio = 1 - Math.abs(relZ) / 3600;
-                const scale = 0.35 + 0.75 * depthRatio;
-                const opacity = Math.max(0.12, depthRatio);
-                const blurPx = (1 - depthRatio) * 6;
+            // Opacity & Blur Fade Math
+            let opacity = 1;
+            let blurVal = 0;
 
-                card.style.transform = `translate3d(${origX}px, 0px, ${cardZ}px) rotateY(${origRotateY}deg) scale(${scale})`;
-                card.style.opacity = opacity;
-                card.style.filter = `blur(${blurPx}px)`;
-                card.style.pointerEvents = opacity > 0.3 ? 'auto' : 'none';
+            if (relZ > 0) {
+                // Fade out as card moves behind camera
+                opacity = 1 - relZ / 250;
+            } else if (relZ < -1800) {
+                // Fade out deep in distance fog
+                opacity = 1 - (-relZ - 1800) / 1600;
+                blurVal = (-relZ - 1800) / 400;
+            }
 
-                if (absRelZ < 400) {
-                    card.classList.add('is-nearest');
-                } else {
-                    card.classList.remove('is-nearest');
-                }
+            opacity = Math.max(0, Math.min(1, opacity));
+            blurVal = Math.min(8, blurVal);
+
+            item.element.style.opacity = opacity;
+            item.element.style.filter = blurVal > 0.5 ? `blur(${blurVal}px)` : 'none';
+            item.element.style.pointerEvents = opacity > 0.4 ? 'auto' : 'none';
+            item.element.style.transform = `translate3d(${item.baseX}px, 0px, ${item.baseZ}px) rotateY(${item.baseRY}deg)`;
+
+            if (absZ < 450) {
+                item.element.classList.add('is-nearest');
             } else {
-                // Far horizon
-                card.style.opacity = 0;
-                card.style.pointerEvents = 'none';
-                card.classList.remove('is-nearest');
+                item.element.classList.remove('is-nearest');
             }
         });
 
-        // Update "THE FINAL FRAME" End Portal Scene
-        const finalFrame = document.getElementById('corridor-final-frame');
+        // Render & Position THE FINAL FRAME Destination Scene
         if (finalFrame) {
+            const endSceneZ = -filteredCollection.length * Z_SPACING - 300;
             const finalRelZ = endSceneZ + currentCameraZ;
             const finalAbsZ = Math.abs(finalRelZ);
 
@@ -515,6 +479,16 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 finalFrame.style.opacity = 0;
                 finalFrame.style.pointerEvents = 'none';
+            }
+        }
+
+        // Dynamic Scroll Hint Fading (fades slightly as camera advances, bright at entrance)
+        const scrollHintEl = document.getElementById('corridor-scroll-hint-text');
+        if (scrollHintEl) {
+            if (currentCameraZ > 300) {
+                scrollHintEl.style.opacity = '0.35';
+            } else {
+                scrollHintEl.style.opacity = '1';
             }
         }
 
@@ -614,28 +588,85 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Non-Passive Wheel Listener: Smoothed Input Filter (targetVelocity += clampedDelta * 0.52)
-    if (corridorViewport) {
-        corridorViewport.addEventListener('wheel', (e) => {
+    // Handoff & Scroll State Flags
+    let corridorHandoffComplete = false;
+    let corridorAutoScrolling = false;
+    let handoffTimeoutId = null;
+
+    // Reset handoff state when user scrolls page up above corridor
+    window.addEventListener('scroll', () => {
+        if (!corridorViewport) return;
+        const rect = corridorViewport.getBoundingClientRect();
+        if (currentCameraZ <= 0 && rect.top > 220) {
+            corridorHandoffComplete = false;
+        }
+    }, { passive: true });
+
+    // Wheel Event Handler: Explicit Handoff State Model & Boundary Passthrough
+    window.addEventListener('wheel', (e) => {
+        if (!corridorViewport) return;
+
+        // 1. Ignore wheel events from interactive controls, buttons, links, or modal elements
+        if (e.target.closest('button, a, input, select, textarea, .dossier-modal-overlay, #photo-dossier-modal, .filter-btn, .final-return-btn')) {
+            return;
+        }
+
+        // 2. Normalize wheel delta across pixel / line / page deltaModes
+        let rawDelta = e.deltaY !== 0 ? e.deltaY : e.deltaX;
+        if (e.deltaMode === 1) { // Line mode
+            rawDelta *= 16;
+        } else if (e.deltaMode === 2) { // Page mode
+            rawDelta *= 300;
+        }
+
+        // 3. Boundary Passthrough: Never trap page scrolling
+        if (currentCameraZ <= 0 && rawDelta < 0) {
+            // At entrance and scrolling UP: allow normal page scroll up
+            return;
+        }
+        if (currentCameraZ >= maxCameraZ && rawDelta > 0) {
+            // At Final Frame and scrolling DOWN: allow normal page scroll down
+            return;
+        }
+
+        // 4. Prevent duplicate handoff while smooth page scroll is active
+        if (corridorAutoScrolling) {
             e.preventDefault();
+            return;
+        }
 
-            // 1. Normalize wheel delta across pixel / line / page deltaModes
-            let rawDelta = e.deltaY !== 0 ? e.deltaY : e.deltaX;
-            if (e.deltaMode === 1) { // Line mode
-                rawDelta *= 16;
-            } else if (e.deltaMode === 2) { // Page mode
-                rawDelta *= 300;
-            }
+        // 5. Automatic Page-Scroll-to-Corridor Handoff
+        const rect = corridorViewport.getBoundingClientRect();
+        const navbarOffset = 80; // Account for floating cosmic navbar
 
-            // 2. Multiply by sensitivity scale 0.48 and clamp per event to ±48px
-            const normalizedDelta = rawDelta * 0.48;
-            const clampedDelta = Math.max(-48, Math.min(48, normalizedDelta));
+        if (currentCameraZ <= 0 && rawDelta > 0 && !corridorHandoffComplete && rect.top > navbarOffset + 10) {
+            e.preventDefault();
+            corridorAutoScrolling = true;
 
-            // 3. Add impulse to targetVelocity and clamp targetVelocity to ±24
-            targetVelocity += clampedDelta * 0.52;
-            targetVelocity = Math.max(-24, Math.min(24, targetVelocity));
-        }, { passive: false });
-    }
+            corridorViewport.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+                inline: 'nearest'
+            });
+
+            if (handoffTimeoutId) clearTimeout(handoffTimeoutId);
+            handoffTimeoutId = setTimeout(() => {
+                corridorAutoScrolling = false;
+                corridorHandoffComplete = true;
+            }, 550);
+
+            return;
+        }
+
+        // 6. Camera 3D Movement once handoff is complete or camera is inside corridor
+        e.preventDefault();
+
+        const normalizedDelta = rawDelta * 0.48;
+        const clampedDelta = Math.max(-48, Math.min(48, normalizedDelta));
+
+        targetVelocity += clampedDelta * 0.52;
+        targetVelocity = Math.max(-24, Math.min(24, targetVelocity));
+    }, { passive: false });
 
     // Touch & Drag Pointer Impulse Movement
     let startY = 0;
@@ -644,7 +675,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (corridorViewport) {
         corridorViewport.addEventListener('pointerdown', (e) => {
-            if (e.target.closest('.final-return-btn') || e.target.closest('.card-action-btn')) return;
+            if (e.pointerType === 'touch') return; // Preserve normal vertical page touch scrolling on mobile
+            if (e.target.closest('.final-return-btn') || e.target.closest('.card-action-btn') || e.target.closest('button')) return;
             isDragging = true;
             startY = e.clientY;
             lastY = e.clientY;
