@@ -1423,6 +1423,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+    });
     // Multiverse Live Countdown Timer Engine (Target Date: Oct 15, 2026)
     const daysEl = document.getElementById('cnt-days');
     const hoursEl = document.getElementById('cnt-hours');

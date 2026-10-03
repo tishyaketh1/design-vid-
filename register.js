@@ -54,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-<<<<<<< HEAD
 
     function renderEvents(targetEventToHighlight) {
         eventsListContainer.innerHTML = "";
@@ -252,6 +251,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Run Initializer
     checkUrlParameters();
-=======
->>>>>>> 43b8c90539d211ad37c10c9f2a1596fc225a4e33
 });
