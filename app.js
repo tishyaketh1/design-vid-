@@ -328,8 +328,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hasAlreadyEnteredPortal) {
         portalHasPlayedOnce = true;
         document.body.classList.add('portal-entered');
+        if (splashScreen) {
+            splashScreen.classList.add('hidden');
+            splashScreen.classList.remove('active-screen');
+        }
         if (mainScrollContainer) {
             mainScrollContainer.classList.add('scroll-enabled');
+            mainScrollContainer.scrollTop = 0;
         }
         if (loaderScreen) {
             loaderScreen.classList.add('hidden');
@@ -357,13 +362,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function handlePortalLaunch() {
 
         if (portalHasPlayedOnce || portalPlaybackActive) {
-
-            if (portalHasPlayedOnce) {
-                const targetPage = document.getElementById('about-page') || document.getElementById('calendar-page');
-                if (targetPage) {
-                    targetPage.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
             return;
         }
 
@@ -371,11 +369,15 @@ document.addEventListener('DOMContentLoaded', () => {
         portalHasPlayedOnce = true;
         flashTriggered = false;
 
-        splashScreen.classList.remove('active-screen');
-        splashScreen.classList.add('hidden');
+        if (splashScreen) {
+            splashScreen.classList.remove('active-screen');
+            splashScreen.classList.add('hidden');
+        }
 
-        loaderScreen.classList.remove('hidden');
-        loaderScreen.classList.add('active-screen');
+        if (loaderScreen) {
+            loaderScreen.classList.remove('hidden');
+            loaderScreen.classList.add('active-screen');
+        }
 
         if (portalFlashOverlay) {
             portalFlashOverlay.classList.remove('active-flash', 'fade-out');
@@ -435,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('wheel', (e) => {
-        if (!portalHasPlayedOnce && splashScreen.classList.contains('active-screen') && e.deltaY > 15) {
+        if (!portalHasPlayedOnce && splashScreen && splashScreen.classList.contains('active-screen') && e.deltaY > 15) {
             handlePortalLaunch();
         }
     }, { passive: true });
@@ -486,7 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function enterUniverse() {
-        if (!loaderScreen.classList.contains('active-screen') && !portalPlaybackActive) return;
+        if (loaderScreen && !loaderScreen.classList.contains('active-screen') && !portalPlaybackActive) return;
 
         try {
             sessionStorage.setItem('portalEntered', 'true');
@@ -506,11 +508,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 portalVideo.onended = null;
             }
 
-            loaderScreen.classList.remove('active-screen');
-            loaderScreen.classList.add('hidden');
+            if (loaderScreen) {
+                loaderScreen.classList.remove('active-screen');
+                loaderScreen.classList.add('hidden');
+            }
 
-            splashScreen.classList.remove('hidden');
-            splashScreen.classList.add('active-screen');
+            if (splashScreen) {
+                splashScreen.classList.add('hidden');
+                splashScreen.classList.remove('active-screen');
+            }
+
             document.body.classList.add('portal-entered');
 
             if (portalFlashOverlay) {
@@ -520,7 +527,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 800);
             }
 
-            mainScrollContainer.classList.add('scroll-enabled');
+            if (mainScrollContainer) {
+                mainScrollContainer.classList.add('scroll-enabled');
+                mainScrollContainer.scrollTop = 0;
+            }
 
             portalPlaybackActive = false;
             isSwiping = false;
@@ -529,11 +539,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (navWheel) {
                 navWheel.classList.remove('hidden-nav');
                 setTimeout(updateNavPill, 100);
-            }
-
-            const targetPage = document.getElementById('about-page') || document.getElementById('calendar-page');
-            if (targetPage) {
-                targetPage.scrollIntoView({ behavior: 'smooth' });
             }
 
             generateCalendarCube();
