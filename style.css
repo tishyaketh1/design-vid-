@@ -12123,3 +12123,2635 @@ body.subpage-body>.pravaah-full-footer {
         min-height: 135px !important;
     }
 }
+
+/* ==========================================================
+   PRAVAAH EVENTS - REFERENCE CARD SYSTEM
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   IMPORTANT STATE FIX
+   ---------------------------------------------------------- */
+
+.events-page-body
+.events-portal-hero.event-list-open
+.standalone-network-viewport {
+    display: flex !important;
+}
+
+
+/* ----------------------------------------------------------
+   EVENT LIST VIEW
+   ---------------------------------------------------------- */
+
+.events-page-body .verse-event-list-view {
+    position: absolute !important;
+
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    display: none !important;
+
+    flex-direction: column !important;
+
+    padding: 24px 26px 30px !important;
+
+    background:
+        radial-gradient(
+            circle at 50% 10%,
+            rgba(14, 38, 75, 0.28),
+            transparent 55%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(3, 7, 20, 0.94),
+            rgba(4, 6, 18, 0.98)
+        ) !important;
+
+    border-radius: 24px;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    z-index: 80 !important;
+}
+
+
+.events-page-body
+.events-portal-hero.event-list-open
+.portal-network-container {
+    display: none !important;
+}
+
+
+.events-page-body
+.events-portal-hero.event-list-open
+.verse-event-list-view {
+    display: flex !important;
+}
+
+
+.events-page-body
+.events-portal-hero.event-list-open
+.portal-hud-tip {
+    display: none !important;
+}
+
+
+/* ----------------------------------------------------------
+   EVENT LIST HEADER
+   ---------------------------------------------------------- */
+
+.events-page-body .verse-event-list-header {
+
+    flex: 0 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        180px
+        minmax(0, 1fr)
+        130px;
+
+    align-items: center;
+
+    gap: 18px;
+
+    width: 100%;
+
+    padding-bottom: 22px;
+
+    margin-bottom: 8px;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+}
+
+
+.events-page-body .verse-list-heading {
+
+    text-align: center;
+
+    min-width: 0;
+
+}
+
+
+.events-page-body .verse-list-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 12px;
+
+    border-radius: 999px;
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--event-color, var(--tech-color)) 45%,
+            transparent
+        );
+
+    color:
+        var(--event-color, var(--tech-color));
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size: 0.6rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.15em;
+}
+
+
+.events-page-body .verse-list-heading h2 {
+
+    margin:
+        8px 0 5px;
+
+    color: #fff;
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        clamp(
+            1.2rem,
+            2.5vw,
+            1.8rem
+        );
+
+    font-weight: 900;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 0 20px
+        rgba(255, 255, 255, 0.16);
+}
+
+
+.events-page-body .verse-list-heading p {
+
+    margin: 0;
+
+    color:
+        rgba(255, 255, 255, 0.52);
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-size: 0.72rem;
+
+    line-height: 1.4;
+}
+
+
+.events-page-body .verse-list-count {
+
+    justify-self: end;
+
+    color:
+        rgba(255, 255, 255, 0.65);
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size: 0.65rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+}
+
+
+/* ----------------------------------------------------------
+   BACK BUTTON
+   ---------------------------------------------------------- */
+
+.events-page-body .verse-list-back-btn {
+
+    justify-self: start;
+
+    min-height: 34px;
+
+    padding:
+        8px 13px;
+
+    color:
+        rgba(255, 255, 255, 0.8);
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.11);
+
+    border-radius: 5px;
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size: 0.58rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+    cursor: pointer;
+
+    transition:
+        0.3s ease;
+}
+
+
+.events-page-body .verse-list-back-btn:hover {
+
+    color: #fff;
+
+    border-color:
+        rgba(0, 210, 255, 0.45);
+
+    box-shadow:
+        0 0 18px
+        rgba(0, 210, 255, 0.12);
+
+    transform:
+        translateX(-3px);
+}
+
+
+/* ----------------------------------------------------------
+   CARD GRID
+   ---------------------------------------------------------- */
+
+.events-page-body .verse-event-list {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0, 1fr)
+        );
+
+    gap:
+        28px 24px;
+
+    width: 100%;
+
+    padding:
+        18px 6px
+        28px;
+}
+
+
+/* ----------------------------------------------------------
+   REFERENCE CARD
+   ---------------------------------------------------------- */
+
+.events-page-body .reference-event-card {
+
+    position: relative;
+
+    min-width: 0;
+
+    opacity: 0;
+
+    transform:
+        translateY(38px)
+        scale(0.96);
+
+    filter:
+        blur(4px);
+
+    transition:
+        opacity 0.55s ease,
+        transform 0.7s cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        ),
+        filter 0.55s ease;
+
+}
+
+
+.events-page-body .reference-event-card.is-visible {
+
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    filter:
+        blur(0);
+
+}
+
+
+/* ----------------------------------------------------------
+   TOP DECORATIVE ORNAMENT
+   ---------------------------------------------------------- */
+
+.events-page-body .reference-card-top-ornament {
+
+    position: relative;
+
+    width: 72%;
+
+    height: 22px;
+
+    margin:
+        0 auto
+        -3px;
+
+    z-index: 5;
+
+}
+
+
+.events-page-body .reference-card-top-ornament::before {
+
+    content: '';
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 9px;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(235, 239, 180, 0.9) 15%,
+            rgba(255, 255, 255, 0.95) 50%,
+            rgba(235, 239, 180, 0.9) 85%,
+            transparent
+        );
+
+    box-shadow:
+        0 0 7px
+        rgba(255, 255, 255, 0.38);
+}
+
+
+.events-page-body .reference-card-top-ornament::after {
+
+    content: '';
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 0;
+
+    width: 23px;
+    height: 23px;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+
+    border:
+        2px solid
+        rgba(230, 233, 180, 0.92);
+
+    background:
+        #10152a;
+
+    box-shadow:
+        0 0 10px
+        rgba(230, 233, 180, 0.22);
+
+}
+
+
+.events-page-body .reference-card-top-ornament span {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 4px;
+
+    width: 7px;
+    height: 7px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 2;
+
+    background:
+        rgba(255, 255, 255, 0.9);
+
+    box-shadow:
+        0 0 10px
+        rgba(255, 255, 255, 0.6);
+}
+
+
+/* ----------------------------------------------------------
+   GOLD FRAME
+   ---------------------------------------------------------- */
+
+.events-page-body .reference-card-frame {
+
+    position: relative;
+
+    padding:
+        9px
+        9px
+        10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e7e6a4,
+            #d8d98d 45%,
+            #b4b66e 100%
+        );
+
+    border-radius:
+        8px;
+
+    box-shadow:
+        0 12px 22px
+        rgba(0, 0, 0, 0.5),
+
+        0 0 0 1px
+        rgba(255, 255, 255, 0.16);
+
+    transition:
+        transform 0.4s cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        ),
+        box-shadow 0.4s ease;
+
+    overflow: hidden;
+
+}
+
+
+/* ----------------------------------------------------------
+   IMAGE
+   ---------------------------------------------------------- */
+
+.events-page-body .reference-card-image-wrap {
+
+    position: relative;
+
+    height: 195px;
+
+    overflow: hidden;
+
+    border-radius:
+        5px;
+
+    background:
+        #070a14;
+
+}
+
+
+.events-page-body
+.reference-card-image-wrap img {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    filter:
+        brightness(0.88)
+        contrast(1.05)
+        saturate(0.92);
+
+    transition:
+        transform 0.65s cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        ),
+        filter 0.65s ease;
+
+}
+.events-page-body .reference-card-lower {
+
+    position: relative;
+
+    margin-top:
+        -22px;
+
+    padding:
+        30px 9px
+        8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #07101a,
+            #02050b
+        );
+
+    clip-path:
+        polygon(
+            0 16%,
+            8% 0,
+            92% 0,
+            100% 16%,
+            100% 100%,
+            0 100%
+        );
+
+    z-index: 2;
+
+}
+
+
+.events-page-body .reference-card-lower h3 {
+
+    min-height: 38px;
+
+    margin:
+        0 5px
+        13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color:
+        #b9c8ff;
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size: 0.74rem;
+
+    font-weight: 700;
+
+    line-height: 1.25;
+
+    letter-spacing: 0.01em;
+
+    text-shadow:
+        0 0 9px
+        rgba(66, 118, 255, 0.25);
+}
+
+
+/* ----------------------------------------------------------
+   BUTTONS
+   ---------------------------------------------------------- */
+
+.events-page-body .reference-card-actions {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 7px;
+
+    margin:
+        0 2px
+        8px;
+
+}
+
+
+.events-page-body .reference-explore-btn,
+.events-page-body .reference-register-btn {
+
+    min-height: 31px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color:
+        #06101c;
+
+    background:
+        linear-gradient(
+            180deg,
+            #edf4ff,
+            #c9d5e7
+        );
+
+    border:
+        0;
+
+    border-radius:
+        1px;
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size: 0.55rem;
+
+    font-weight: 900;
+
+    letter-spacing:
+        0.07em;
+
+    text-decoration:
+        none;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+
+}
+
+
+.events-page-body .reference-explore-btn {
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            87% 100%,
+            0 100%
+        );
+
+}
+
+
+.events-page-body .reference-register-btn {
+
+    clip-path:
+        polygon(
+            13% 0,
+            100% 0,
+            100% 100%,
+            0 100%
+        );
+
+}
+
+
+.events-page-body
+.reference-explore-btn:hover,
+.events-page-body
+.reference-register-btn:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 4px 13px
+        rgba(54, 110, 255, 0.28);
+
+}
+
+
+/* ----------------------------------------------------------
+   PRICE BAR
+   ---------------------------------------------------------- */
+
+.events-page-body .reference-price-bar {
+
+    min-height: 29px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding:
+        5px 9px;
+
+    color:
+        #fff;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2d62fa,
+            #376eff
+        );
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-size:
+        0.58rem;
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.01em;
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.14);
+}
+
+
+.events-page-body .reference-price-bar strong {
+
+    color:
+        #ffffff;
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-weight: 900;
+
+}
+
+
+/* Animated shine */
+
+.events-page-body .reference-card-frame::after {
+
+    content: '';
+
+    position: absolute;
+
+    top: -120%;
+    left: -35%;
+
+    width: 35%;
+    height: 300%;
+
+    transform:
+        rotate(18deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+        );
+
+    opacity: 0;
+
+    transition:
+        left 0.8s ease,
+        opacity 0.2s ease;
+
+    pointer-events: none;
+
+}
+
+
+.events-page-body .reference-event-card:hover
+.reference-card-frame::after {
+
+    left: 125%;
+
+    opacity: 1;
+
+}
+
+
+/* ----------------------------------------------------------
+   CARD REVEAL ANIMATION
+   ---------------------------------------------------------- */
+
+@keyframes referenceCardReveal {
+
+    0% {
+
+        clip-path:
+            polygon(
+                8% 0,
+                92% 0,
+                92% 0,
+                8% 0
+            );
+
+    }
+
+    45% {
+
+        clip-path:
+            polygon(
+                4% 0,
+                96% 0,
+                96% 52%,
+                4% 52%
+            );
+
+    }
+
+    100% {
+
+        clip-path:
+            polygon(
+                0 0,
+                100% 0,
+                100% 100%,
+                0 100%
+            );
+
+    }
+
+}
+
+
+.events-page-body
+.reference-event-card.is-visible
+.reference-card-frame {
+
+    animation:
+        referenceCardReveal 0.72s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        )
+        both;
+
+}
+
+
+/* ----------------------------------------------------------
+   EVENT EXPLORER
+   ---------------------------------------------------------- */
+
+.events-page-body .event-explorer-view {
+
+    position: absolute !important;
+
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    display: none !important;
+
+    flex-direction: column;
+
+    padding:
+        22px
+        26px
+        28px;
+
+    background:
+        radial-gradient(
+            circle at 80% 15%,
+            rgba(0, 210, 255, 0.08),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(4, 8, 20, 0.98),
+            rgba(3, 6, 18, 1)
+        );
+
+    overflow-y: auto;
+
+    z-index: 95;
+}
+
+
+.events-page-body
+.events-portal-hero.event-explore-open
+.event-explorer-view {
+
+    display: flex !important;
+
+}
+
+
+.events-page-body
+.events-portal-hero.event-explore-open
+.verse-event-list-view {
+
+    display: none !important;
+
+}
+
+
+/* ----------------------------------------------------------
+   EXPLORER TOP BAR
+   ---------------------------------------------------------- */
+
+.events-page-body .event-explorer-topbar {
+
+    flex:
+        0 0 auto;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 13px;
+
+    margin-bottom: 17px;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+}
+
+
+.events-page-body .event-explorer-back {
+
+    min-height: 34px;
+
+    padding:
+        8px 13px;
+
+    color:
+        rgba(255, 255, 255, 0.82);
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.11);
+
+    border-radius:
+        5px;
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        0.58rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.08em;
+
+    cursor:
+        pointer;
+
+    transition:
+        0.3s ease;
+}
+
+
+.events-page-body .event-explorer-back:hover {
+
+    color: #fff;
+
+    border-color:
+        rgba(0, 210, 255, 0.45);
+
+    transform:
+        translateX(-3px);
+}
+
+
+.events-page-body .event-explorer-status {
+
+    color:
+        rgba(255, 255, 255, 0.42);
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        0.55rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.12em;
+}
+
+
+/* ----------------------------------------------------------
+   EXPLORER GRID
+   ---------------------------------------------------------- */
+
+.events-page-body .event-explorer-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.5fr)
+        minmax(265px, 0.7fr);
+
+    gap:
+        26px;
+
+    width: 100%;
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    align-items: start;
+
+}
+
+
+/* ----------------------------------------------------------
+   LEFT CONTENT
+   ---------------------------------------------------------- */
+
+.events-page-body .event-explorer-copy {
+
+    min-width: 0;
+
+    padding:
+        5px 5px 30px;
+}
+
+
+.events-page-body .explorer-verse {
+
+    display: inline-flex;
+
+    padding:
+        5px 10px;
+
+    color:
+        var(--event-color, var(--tech-color));
+
+    background:
+        rgba(255, 255, 255, 0.03);
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--event-color, var(--tech-color)) 32%,
+            transparent
+        );
+
+    border-radius:
+        999px;
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        0.58rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.13em;
+}
+
+
+.events-page-body .event-explorer-copy h2 {
+
+    margin:
+        11px 0 9px;
+
+    color:
+        #ffffff;
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        clamp(
+            1.55rem,
+            3vw,
+            2.3rem
+        );
+
+    font-weight:
+        900;
+
+    line-height:
+        1.15;
+
+    letter-spacing:
+        0.04em;
+}
+
+
+.events-page-body .explorer-description {
+
+    max-width:
+        780px;
+
+    margin:
+        0 0 18px;
+
+    color:
+        rgba(255, 255, 255, 0.68);
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-size:
+        0.8rem;
+
+    line-height:
+        1.6;
+}
+
+
+/* ----------------------------------------------------------
+   EXPLORER TABS
+   ---------------------------------------------------------- */
+
+.events-page-body .explorer-tabs {
+
+    display: flex;
+
+    align-items: center;
+
+    gap:
+        24px;
+
+    margin:
+        6px 0 21px;
+
+    padding-bottom:
+        9px;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+}
+
+
+.events-page-body .explorer-tabs span {
+
+    color:
+        rgba(255, 255, 255, 0.43);
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-size:
+        0.63rem;
+
+    font-weight:
+        700;
+
+    cursor: default;
+
+}
+
+
+.events-page-body .explorer-tabs span.active {
+
+    color:
+        #ffffff;
+
+}
+
+
+/* ----------------------------------------------------------
+   DETAIL GRID
+   ---------------------------------------------------------- */
+
+.events-page-body .explorer-detail-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap:
+        12px;
+
+    margin-bottom:
+        24px;
+}
+
+
+.events-page-body .explorer-detail-item {
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap:
+        5px;
+
+    padding:
+        10px 12px;
+
+    background:
+        rgba(13, 19, 40, 0.56);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius:
+        7px;
+}
+
+
+.events-page-body .explorer-detail-item span {
+
+    color:
+        rgba(255, 255, 255, 0.35);
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        0.5rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.12em;
+}
+
+
+.events-page-body .explorer-detail-item strong {
+
+    color:
+        rgba(255, 255, 255, 0.84);
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-size:
+        0.66rem;
+
+    line-height:
+        1.35;
+}
+
+
+/* ----------------------------------------------------------
+   EXPLORER SECTIONS
+   ---------------------------------------------------------- */
+
+.events-page-body .explorer-section {
+
+    margin-top:
+        22px;
+
+}
+
+
+.events-page-body .explorer-section-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap:
+        12px;
+
+    margin-bottom:
+        10px;
+
+}
+
+
+.events-page-body .explorer-section-heading h3 {
+
+    margin:
+        0;
+
+    color:
+        #ffffff;
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        1rem;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.04em;
+
+}
+
+
+.events-page-body .explorer-rules-heading span {
+
+    color:
+        rgba(255, 255, 255, 0.4);
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        0.52rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.1em;
+}
+
+
+.events-page-body .explorer-section ul {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        10px;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    list-style:
+        none;
+}
+
+
+.events-page-body .explorer-section li {
+
+    position:
+        relative;
+
+    padding-left:
+        18px;
+
+    color:
+        rgba(255, 255, 255, 0.67);
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-size:
+        0.69rem;
+
+    line-height:
+        1.5;
+}
+
+
+.events-page-body .explorer-section li::before {
+
+    content:
+        '✓';
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    top:
+        0;
+
+    color:
+        var(--tech-color);
+
+    font-weight:
+        900;
+}
+
+
+/* ----------------------------------------------------------
+   RIGHT SIDE
+   ---------------------------------------------------------- */
+
+.events-page-body .event-explorer-side {
+
+    position:
+        sticky;
+
+    top:
+        0;
+
+    align-self:
+        start;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        11px;
+}
+
+
+.events-page-body .explorer-image-frame {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    aspect-ratio:
+        1 / 0.95;
+
+    overflow:
+        hidden;
+
+    padding:
+        4px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0, 210, 255, 0.35),
+            rgba(92, 72, 178, 0.38),
+            rgba(0, 210, 255, 0.1)
+        );
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.1);
+
+    border-radius:
+        9px;
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 0, 0, 0.48),
+
+        inset 0 0 25px
+        rgba(0, 210, 255, 0.06);
+}
+
+
+.events-page-body .explorer-image-frame img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    display:
+        block;
+
+    object-fit:
+        cover;
+
+    border-radius:
+        5px;
+
+    filter:
+        brightness(0.88)
+        contrast(1.04);
+
+}
+
+
+/* ----------------------------------------------------------
+   PRIZE
+   ---------------------------------------------------------- */
+
+.events-page-body .explorer-price-card {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        10px;
+
+    padding:
+        11px 13px;
+
+    background:
+        rgba(12, 17, 34, 0.9);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    border-radius:
+        7px;
+}
+
+
+.events-page-body .explorer-price-card span {
+
+    color:
+        rgba(255, 255, 255, 0.38);
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        0.5rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.1em;
+}
+
+
+.events-page-body .explorer-price-card strong {
+
+    color:
+        #55ff9b;
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        0.86rem;
+
+    font-weight:
+        900;
+
+    text-shadow:
+        0 0 10px
+        rgba(85, 255, 155, 0.22);
+}
+
+
+/* ----------------------------------------------------------
+   REGISTER
+   ---------------------------------------------------------- */
+
+.events-page-body .explorer-register-btn {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-height:
+        47px;
+
+    width:
+        100%;
+
+    color:
+        #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #162f75,
+            #203f93
+        );
+
+    border:
+        1px solid
+        rgba(82, 130, 255, 0.58);
+
+    border-radius:
+        7px;
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        0.64rem;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        0.1em;
+
+    text-decoration:
+        none;
+
+    box-shadow:
+        0 0 18px
+        rgba(65, 112, 255, 0.15);
+
+    transition:
+        0.3s ease;
+}
+
+
+.events-page-body .explorer-register-btn:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(0, 210, 255, 0.7);
+
+    box-shadow:
+        0 8px 24px
+        rgba(0, 210, 255, 0.18);
+}
+
+
+.events-page-body .explorer-mini-note {
+
+    color:
+        rgba(255, 255, 255, 0.35);
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-size:
+        0.56rem;
+
+    line-height:
+        1.45;
+
+    text-align:
+        center;
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+   ---------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+
+    .events-page-body .verse-event-list {
+
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .events-page-body .verse-event-list-header {
+
+        grid-template-columns:
+            1fr auto;
+
+    }
+
+
+    .events-page-body .verse-list-heading {
+
+        grid-column:
+            1 / -1;
+
+        grid-row:
+            1;
+
+    }
+
+
+    .events-page-body .verse-list-back-btn {
+
+        grid-column:
+            1;
+
+        grid-row:
+            2;
+
+    }
+
+
+    .events-page-body .verse-list-count {
+
+        grid-column:
+            2;
+
+        grid-row:
+            2;
+
+    }
+
+
+    .events-page-body .verse-event-list {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+    }
+
+
+    .events-page-body .event-explorer-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .events-page-body .event-explorer-side {
+
+        position:
+            relative;
+
+        top:
+            auto;
+
+        display:
+            grid;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
+
+    }
+
+
+    .events-page-body .explorer-image-frame {
+
+        grid-column:
+            1 / -1;
+
+    }
+
+
+    .events-page-body .explorer-mini-note {
+
+        grid-column:
+            1 / -1;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .events-page-body .verse-event-list-view {
+
+        padding:
+            17px 12px
+            24px !important;
+
+    }
+
+
+    .events-page-body .verse-event-list {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            25px;
+
+        padding:
+            14px 4px
+            25px;
+
+    }
+
+
+    .events-page-body .reference-card-image-wrap {
+
+        height:
+            190px;
+
+    }
+
+
+    .events-page-body .reference-card-lower h3 {
+
+        font-size:
+            0.72rem;
+
+    }
+
+
+    .events-page-body .reference-explore-btn,
+    .events-page-body .reference-register-btn {
+
+        font-size:
+            0.52rem;
+
+    }
+
+
+    .events-page-body .event-explorer-view {
+
+        padding:
+            16px 13px 25px;
+
+    }
+
+
+    .events-page-body .event-explorer-grid {
+
+        gap:
+            18px;
+
+    }
+
+
+    .events-page-body .explorer-detail-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .events-page-body .explorer-tabs {
+
+        gap:
+            13px;
+
+        overflow-x:
+            auto;
+
+        white-space:
+            nowrap;
+
+    }
+
+
+    .events-page-body .event-explorer-side {
+
+        display:
+            flex;
+
+    }
+
+
+    .events-page-body .explorer-image-frame {
+
+        aspect-ratio:
+            1 / 0.8;
+
+    }
+
+}
+
+/* ==========================================================
+   EVENT CARD - HOVER DESCRIPTION FIX
+   ========================================================== */
+
+.events-page-body .reference-event-card:hover .reference-card-image-wrap {
+    z-index: 4;
+}
+
+.events-page-body .reference-event-card:hover .reference-card-hover-layer {
+    z-index: 5;
+    padding-bottom: 12px;
+}
+
+
+/* ==========================================================
+   REFERENCE CARD HOVER - EXACT LOWER PANEL BEHAVIOUR
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   CARD DOES NOT ENLARGE
+   ---------------------------------------------------------- */
+
+.events-page-body
+.reference-event-card:hover
+.reference-card-frame {
+
+    transform: none !important;
+
+    box-shadow:
+        0 14px 28px
+        rgba(0, 0, 0, 0.58),
+
+        0 0 18px
+        color-mix(
+            in srgb,
+            var(--event-color, #00d2ff) 18%,
+            transparent
+        ) !important;
+
+}
+
+
+/* ----------------------------------------------------------
+   IMAGE STAYS STABLE
+   ---------------------------------------------------------- */
+
+.events-page-body
+.reference-event-card:hover
+.reference-card-image-wrap img {
+
+    transform: none !important;
+
+    filter:
+        brightness(0.88)
+        contrast(1.05)
+        saturate(0.92) !important;
+
+}
+
+
+/* ----------------------------------------------------------
+   TITLE / DESCRIPTION SHARED AREA
+   ---------------------------------------------------------- */
+
+.events-page-body
+.reference-card-title-area {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 5px;
+
+}
+
+
+/* ----------------------------------------------------------
+   EVENT TITLE
+   ---------------------------------------------------------- */
+
+.events-page-body
+.reference-card-title {
+
+    position: absolute;
+
+    inset: 0;
+
+    margin: 0;
+
+    padding:
+        0 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color:
+        #b9c8ff;
+
+    font-family:
+        'Orbitron',
+        sans-serif;
+
+    font-size:
+        0.74rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.25;
+
+    letter-spacing:
+        0.01em;
+
+    text-shadow:
+        0 0 9px
+        rgba(66, 118, 255, 0.25);
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+    transition:
+        opacity 0.28s ease,
+        transform 0.32s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        );
+
+}
+
+
+/* ----------------------------------------------------------
+   EVENT DESCRIPTION
+   ---------------------------------------------------------- */
+
+.events-page-body
+.reference-card-description {
+
+    position: absolute;
+
+    inset: 0;
+
+    margin: 0;
+
+    padding:
+        3px 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color:
+        rgba(255, 255, 255, 0.86);
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-size:
+        0.58rem;
+
+    font-weight:
+        500;
+
+    line-height:
+        1.38;
+
+    overflow:
+        hidden;
+
+    display: -webkit-box;
+
+    -webkit-box-orient:
+        vertical;
+
+    -webkit-line-clamp:
+        3;
+
+    opacity: 0;
+
+    transform:
+        translateY(8px);
+
+    transition:
+        opacity 0.32s ease,
+        transform 0.38s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        );
+
+}
+
+
+/* ----------------------------------------------------------
+   HOVER = TITLE OUT / DESCRIPTION IN
+   ---------------------------------------------------------- */
+
+.events-page-body
+.reference-event-card:hover
+.reference-card-title {
+
+    opacity: 0;
+
+    transform:
+        translateY(-8px);
+
+}
+
+
+.events-page-body
+.reference-event-card:hover
+.reference-card-description {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* ----------------------------------------------------------
+   BLUE BUTTON ANIMATION
+   ---------------------------------------------------------- */
+
+.events-page-body
+.reference-explore-btn,
+.events-page-body
+.reference-register-btn {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            #edf4ff 0%,
+            #c9d5e7 38%,
+            #edf4ff 50%,
+            #c9d5e7 62%,
+            #edf4ff 100%
+        );
+
+    background-size:
+        240% 100%;
+
+    background-position:
+        100% 0;
+
+    transition:
+        background-position 0.55s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        ),
+        color 0.25s ease,
+        box-shadow 0.35s ease,
+        transform 0.25s ease;
+
+}
+
+
+/* Blue sweep */
+
+.events-page-body
+.reference-explore-btn:hover,
+.events-page-body
+.reference-register-btn:hover {
+
+    background-position:
+        0 0;
+
+    color:
+        #ffffff;
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 0 0 1px
+        rgba(0, 210, 255, 0.7),
+
+        0 0 12px
+        rgba(0, 210, 255, 0.42),
+
+        inset 0 0 10px
+        rgba(0, 210, 255, 0.2);
+
+}
+
+
+/* ----------------------------------------------------------
+   KEEP CARD SIZE FIXED DURING HOVER
+   ---------------------------------------------------------- */
+
+.events-page-body
+.reference-event-card {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+.events-page-body
+.reference-event-card:hover {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+/* ----------------------------------------------------------
+   MOBILE
+   ---------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    .events-page-body
+    .reference-card-title-area {
+
+        height:
+            62px;
+
+    }
+
+    .events-page-body
+    .reference-card-title {
+
+        font-size:
+            0.72rem;
+
+    }
+
+    .events-page-body
+    .reference-card-description {
+
+        font-size:
+            0.57rem;
+
+        -webkit-line-clamp:
+            3;
+
+    }
+
+}
+/* ==========================================================
+   REFERENCE HOVER - FIXED CARD GEOMETRY
+   ========================================================== */
+
+/* Card never changes position or size */
+.events-page-body .reference-event-card,
+.events-page-body .reference-event-card:hover {
+    transform: translateY(0) scale(1) !important;
+}
+
+/* Frame never moves */
+.events-page-body .reference-event-card:hover .reference-card-frame {
+    transform: none !important;
+
+    box-shadow:
+        0 14px 28px rgba(0, 0, 0, 0.58),
+        0 0 18px color-mix(
+            in srgb,
+            var(--event-color, #00d2ff) 18%,
+            transparent
+        );
+}
+
+/* Image stays fixed */
+.events-page-body .reference-event-card:hover .reference-card-image-wrap img {
+    transform: none !important;
+
+    filter:
+        brightness(0.88)
+        contrast(1.05)
+        saturate(0.92) !important;
+}
+
+/* The lower panel NEVER changes its position */
+.events-page-body .reference-card-lower {
+    margin-top: -22px !important;
+
+    position: relative;
+    z-index: 2;
+}
+
+/* Fixed area reserved for title/description */
+.events-page-body .reference-card-title-area {
+    position: relative;
+
+    width: 100%;
+    height: 58px;
+
+    margin: 0 0 13px 0;
+
+    overflow: hidden;
+}
+
+/* Title and description occupy EXACTLY the same area */
+.events-page-body .reference-card-title,
+.events-page-body .reference-card-description {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    transition:
+        opacity 0.42s ease,
+        transform 0.48s cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        );
+}
+
+/* Normal title */
+.events-page-body .reference-card-title {
+    color: #b9c8ff;
+
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.74rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+
+    text-shadow:
+        0 0 9px rgba(66, 118, 255, 0.25);
+
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+/* Hidden description */
+.events-page-body .reference-card-description {
+    color: rgba(255, 255, 255, 0.84);
+
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 500;
+    line-height: 1.38;
+
+    overflow: hidden;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+
+    opacity: 0;
+
+    transform: translateY(12px);
+}
+
+/* Hover: title leaves */
+.events-page-body .reference-event-card:hover .reference-card-title {
+    opacity: 0;
+
+    transform: translateY(-12px);
+}
+
+/* Hover: description enters */
+.events-page-body .reference-event-card:hover .reference-card-description {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+/* Buttons stay at EXACT same position */
+.events-page-body .reference-card-actions {
+    position: relative;
+
+    height: 31px;
+    min-height: 31px;
+
+    margin:
+        0 2px
+        8px;
+}
+
+
+
+/* ==========================================================
+   EVENT EXPLORER - FIX NESTED SECTION OVERLAY
+   ========================================================== */
+
+.events-page-body .event-explorer-view section.explorer-section {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+
+    display: block !important;
+
+    z-index: auto !important;
+
+    flex-direction: initial !important;
+    align-items: initial !important;
+    justify-content: initial !important;
+}
+
+.events-page-body .event-explorer-topbar {
+    position: relative !important;
+    z-index: 20 !important;
+}
+
+.events-page-body .event-explorer-back {
+    position: relative !important;
+    z-index: 30 !important;
+    pointer-events: auto !important;
+}
+
+/* ==========================================================
+   REFERENCE BLUE BUTTON SWEEP
+   ========================================================== */
+
+.events-page-body
+.reference-explore-btn,
+.events-page-body
+.reference-register-btn {
+
+    position: relative !important;
+
+    isolation: isolate;
+
+    overflow: hidden;
+
+    color: #17345c !important;
+
+    background:
+        #edf4ff !important;
+
+    box-shadow:
+        none;
+
+    transition:
+        color 0.2s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* Blue moving slash */
+
+.events-page-body
+.reference-explore-btn::before,
+.events-page-body
+.reference-register-btn::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: -45%;
+    left: -85%;
+
+    width: 65%;
+    height: 190%;
+
+    background:
+        linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(0, 210, 255, 0.15) 18%,
+            rgba(45, 98, 250, 0.95) 48%,
+            rgba(0, 210, 255, 0.55) 58%,
+            transparent 82%
+        );
+
+    transform:
+        skewX(-18deg);
+
+    opacity: 0;
+
+    z-index: -1;
+
+    transition:
+        left 0.65s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        ),
+        opacity 0.18s ease;
+}
+
+
+/* Hover */
+
+.events-page-body
+.reference-explore-btn:hover::before,
+.events-page-body
+.reference-register-btn:hover::before {
+
+    left: 120%;
+
+    opacity: 1;
+}
+
+
+.events-page-body
+.reference-explore-btn:hover,
+.events-page-body
+.reference-register-btn:hover {
+
+    color: #0b294f !important;
+
+    box-shadow:
+        0 0 10px
+        rgba(0, 210, 255, 0.28),
+
+        inset 0 0 8px
+        rgba(0, 210, 255, 0.16);
+
+}
+
+
+/* Keep text above the animation */
+
+.events-page-body
+.reference-explore-btn,
+.events-page-body
+.reference-register-btn {
+
+    text-shadow:
+        0 1px 1px
+        rgba(255, 255, 255, 0.45);
+}

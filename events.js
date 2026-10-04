@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================
 
     const activeNav = document.querySelector('.nav-item.active');
-
     const pill = document.getElementById('nav-indicator-pill');
 
     if (activeNav && pill) {
@@ -13,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
 
             pill.style.left = `${activeNav.offsetLeft}px`;
-
             pill.style.width = `${activeNav.offsetWidth}px`;
 
         }, 100);
@@ -22,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================================
-    // VERSES CONFIGURATION
+    // VERSES
     // =========================================================
 
     const verses = [
@@ -57,7 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const eventsData = [
 
+        // -----------------------------------------------------
         // TECH VERSE
+        // -----------------------------------------------------
 
         {
             id: 'tech-1',
@@ -156,7 +156,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
 
+        // -----------------------------------------------------
         // CULT VERSE
+        // -----------------------------------------------------
 
         {
             id: 'cult-1',
@@ -190,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             prize: '₹100,000',
             team: '3 - 8 Members',
             rules: [
-                'Performance slot: 20 minutes (including 5 min line check).',
+                'Performance slot: 20 minutes including 5 min line check.',
                 'At least one original composition or creative adaptation required.',
                 'Full drum kit and sound amplification provided.'
             ]
@@ -251,7 +253,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
 
-        // INT / ENTREPRENEUR VERSE
+        // -----------------------------------------------------
+        // ENTREPRENEUR VERSE
+        // -----------------------------------------------------
 
         {
             id: 'ent-1',
@@ -347,6 +351,105 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================================
+    // WHAT YOU LEARN
+    // =========================================================
+
+    const learnById = {
+
+        'tech-1': [
+            'Build and control a competition-ready robot.',
+            'Apply autonomous/manual decision making under match pressure.',
+            'Work on mechanical reliability, strategy, and team coordination.'
+        ],
+
+        'tech-2': [
+            'Solve algorithmic and system-level programming problems.',
+            'Write efficient, testable code under a strict time limit.',
+            'Collaborate using modern development workflows and debugging.'
+        ],
+
+        'tech-3': [
+            'Design practical deep-learning pipelines for noisy data.',
+            'Compare model quality, latency, and parameter efficiency.',
+            'Present technical results clearly to evaluators.'
+        ],
+
+        'tech-4': [
+            'Design responsive interfaces with strong interaction quality.',
+            'Use modern web rendering and component techniques.',
+            'Balance aesthetics, usability, responsiveness, and performance.'
+        ],
+
+        'tech-5': [
+            'Create precise 3D engineering models.',
+            'Translate mechanical concepts into manufacturable CAD geometry.',
+            'Evaluate designs with engineering simulation thinking.'
+        ],
+
+        'cult-1': [
+            'Build synchronized group choreography.',
+            'Develop stage presence, movement, and creative direction.',
+            'Coordinate a large team under performance time limits.'
+        ],
+
+        'cult-2': [
+            'Arrange and perform music as a coordinated band.',
+            'Develop stage control, musical interpretation, and originality.',
+            'Work with live instrumentation and sound constraints.'
+        ],
+
+        'cult-3': [
+            'Develop a focused street-theatre narrative.',
+            'Use performance to communicate contemporary social ideas.',
+            'Coordinate cast, timing, and live-stage execution.'
+        ],
+
+        'cult-4': [
+            'Improve vocal control and performance confidence.',
+            'Interpret different musical styles effectively.',
+            'Build a polished solo-stage presentation.'
+        ],
+
+        'cult-5': [
+            'Translate a theme into a complete visual concept.',
+            'Coordinate fashion, music, narration, and runway movement.',
+            'Build a cohesive futuristic presentation.'
+        ],
+
+        'ent-1': [
+            'Structure a startup idea into a compelling pitch.',
+            'Think about market validation, MVPs, and funding.',
+            'Defend the business model through investor-style Q&A.'
+        ],
+
+        'ent-2': [
+            'Build a structured business plan.',
+            'Work with market sizing and financial reasoning.',
+            'Communicate strategy and viability to a judging panel.'
+        ],
+
+        'ent-3': [
+            'Understand simulated market decision-making.',
+            'Evaluate risk and portfolio performance.',
+            'React to information while managing capital strategically.'
+        ],
+
+        'ent-4': [
+            'Develop ideas quickly from an unexpected brief.',
+            'Combine copywriting, performance, and visual storytelling.',
+            'Deliver a concise creative pitch under time pressure.'
+        ],
+
+        'ent-5': [
+            'Turn an idea into a practical sustainability-focused concept.',
+            'Think about prototyping and real-world impact.',
+            'Present an innovation clearly to an evaluation panel.'
+        ]
+
+    };
+
+
+    // =========================================================
     // DOM REFERENCES
     // =========================================================
 
@@ -395,8 +498,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const backToVerses =
         document.getElementById('back-to-verses');
 
-    const portalHudTip =
-        document.querySelector('.portal-hud-tip');
+    const explorerView =
+        document.getElementById('event-explorer-view');
+
+    const backToCards =
+        document.getElementById('back-to-event-cards');
+
+    const explorerVerse =
+        document.getElementById('explorer-verse');
+
+    const explorerTitle =
+        document.getElementById('explorer-title');
+
+    const explorerDesc =
+        document.getElementById('explorer-desc');
+
+    const explorerDate =
+        document.getElementById('explorer-date');
+
+    const explorerVenue =
+        document.getElementById('explorer-venue');
+
+    const explorerTeam =
+        document.getElementById('explorer-team');
+
+    const explorerPrize =
+        document.getElementById('explorer-prize');
+
+    const explorerImage =
+        document.getElementById('explorer-image');
+
+    const explorerLearn =
+        document.getElementById('explorer-learn');
+
+    const explorerRules =
+        document.getElementById('explorer-rules');
+
+    const explorerRegister =
+        document.getElementById('explorer-register');
+
+    const explorerRuleCount =
+        document.getElementById('explorer-rule-count');
 
 
     // =========================================================
@@ -404,16 +546,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================
 
     let orbitAngle = 0;
-
     let isOrbitPaused = false;
-
     let isNetworkDeployed = false;
-
     let activeVerse = null;
+    let activeEvent = null;
 
 
     // =========================================================
-    // RENDER PORTAL NETWORK
+    // PORTAL NETWORK
     // =========================================================
 
     function renderPortalNetwork() {
@@ -427,15 +567,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         portalOrbitWrapper
-            .querySelectorAll(
-                '.portal-node, .branch-event-node'
-            )
+            .querySelectorAll('.portal-node')
             .forEach(el => el.remove());
 
         networkSvg.innerHTML = '';
 
+
         const rect =
             portalNetworkContainer.getBoundingClientRect();
+
+        if (!rect.width || !rect.height) {
+            return;
+        }
+
 
         const cx =
             rect.width / 2;
@@ -443,8 +587,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const cy =
             rect.height / 2;
 
+
         const isMobile =
             window.innerWidth <= 768;
+
 
         const minDimension =
             Math.min(
@@ -452,7 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 rect.height
             );
 
-        // Distance of the three verse spheres from PRAVAAH.
+
         const rPortal =
             isMobile
                 ? minDimension * 0.32
@@ -460,59 +606,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // ---------------------------------------------------------
-        // CENTRAL SVG RING
+        // CORE RING
         // ---------------------------------------------------------
 
         const coreRing =
             document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "circle"
+                'http://www.w3.org/2000/svg',
+                'circle'
             );
 
         coreRing.setAttribute(
-            "cx",
+            'cx',
             cx
         );
 
         coreRing.setAttribute(
-            "cy",
+            'cy',
             cy
         );
 
         coreRing.setAttribute(
-            "r",
+            'r',
             50
         );
 
         coreRing.setAttribute(
-            "stroke",
-            "rgba(255, 223, 122, 0.25)"
+            'stroke',
+            'rgba(255, 223, 122, 0.25)'
         );
 
         coreRing.setAttribute(
-            "stroke-width",
-            "2"
+            'stroke-width',
+            '2'
         );
 
         coreRing.setAttribute(
-            "fill",
-            "none"
+            'fill',
+            'none'
         );
 
         coreRing.setAttribute(
-            "id",
-            "core-svg-ring"
+            'id',
+            'core-svg-ring'
         );
 
         coreRing.setAttribute(
-            "opacity",
+            'opacity',
             isNetworkDeployed
-                ? "1"
-                : "0"
+                ? '1'
+                : '0'
         );
 
         coreRing.style.transition =
-            "opacity 1.2s ease 0.4s";
+            'opacity 1.2s ease 0.4s';
 
         networkSvg.appendChild(
             coreRing
@@ -520,13 +666,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // ---------------------------------------------------------
-        // THREE VERSE SPHERES
+        // VERSE SPHERES
         // ---------------------------------------------------------
 
-        verses.forEach((verse) => {
+        verses.forEach(verse => {
 
             const rad =
-                (verse.angle * Math.PI) / 180;
+                verse.angle * Math.PI / 180;
 
             const px =
                 cx +
@@ -543,47 +689,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const coreLine =
                 document.createElementNS(
-                    "http://www.w3.org/2000/svg",
-                    "path"
+                    'http://www.w3.org/2000/svg',
+                    'path'
                 );
 
             coreLine.setAttribute(
-                "d",
+                'd',
                 `M ${cx} ${cy} L ${px} ${py}`
             );
 
             coreLine.setAttribute(
-                "stroke",
+                'stroke',
                 verse.color
             );
 
             coreLine.setAttribute(
-                "stroke-width",
-                "2"
+                'stroke-width',
+                '2'
+            );
+
+            coreLine.setAttribute(
+                'fill',
+                'none'
             );
 
             coreLine.style.filter =
                 `drop-shadow(0 0 2px ${verse.color})`;
 
             coreLine.setAttribute(
-                "fill",
-                "none"
-            );
-
-            coreLine.setAttribute(
-                "id",
+                'id',
                 `path-core-${verse.key}`
             );
 
             coreLine.setAttribute(
-                "opacity",
+                'opacity',
                 isNetworkDeployed
-                    ? "0.55"
-                    : "0"
+                    ? '0.55'
+                    : '0'
             );
 
             coreLine.style.transition =
-                "opacity 1.2s ease 0.4s";
+                'opacity 1.2s ease 0.4s';
 
             networkSvg.appendChild(
                 coreLine
@@ -636,23 +782,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
 
-            portal.setAttribute(
-                'data-target-left',
-                px
-            );
+            portal.dataset.targetLeft =
+                px;
 
-            portal.setAttribute(
-                'data-target-top',
-                py
-            );
+            portal.dataset.targetTop =
+                py;
 
-            portal.setAttribute(
-                'data-verse',
-                verse.key
-            );
+            portal.dataset.verse =
+                verse.key;
 
 
-            // Small orbiting moons
+            // Moons
 
             const numMoons =
                 verse.key === 'tech'
@@ -683,26 +823,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
                 moonsHTML += `
-
                     <div
                         class="portal-moon-orbit"
                         style="
-                            animation-name: ${spinAnimation};
-                            animation-duration: ${orbitSpeed}s;
+                            animation-name:${spinAnimation};
+                            animation-duration:${orbitSpeed}s;
                         "
                     >
-
                         <div
                             class="portal-moon"
                             style="
-                                background-color: ${verse.color};
-                                box-shadow: 0 0 8px ${verse.color};
-                                top: ${-moonOffset}px;
+                                background-color:${verse.color};
+                                box-shadow:0 0 8px ${verse.color};
+                                top:${-moonOffset}px;
                             "
                         ></div>
-
                     </div>
-
                 `;
 
             }
@@ -746,16 +882,11 @@ document.addEventListener('DOMContentLoaded', () => {
             );
 
 
-            portalOrbitWrapper.appendChild(
-                portal
-            );
-
-
-            // Click verse
+            // Verse click
 
             portal.addEventListener(
                 'click',
-                (e) => {
+                e => {
 
                     e.stopPropagation();
 
@@ -766,13 +897,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             );
 
+
+            portalOrbitWrapper.appendChild(
+                portal
+            );
+
         });
 
     }
 
 
     // =========================================================
-    // OPEN EVENT LIST FOR SELECTED VERSE
+    // OPEN VERSE EVENT LIST
     // =========================================================
 
     function activatePortalBranch(
@@ -786,7 +922,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const selectedVerse =
             verses.find(
-                v => v.key === verseKey
+                verse =>
+                    verse.key === verseKey
             );
 
 
@@ -798,20 +935,18 @@ document.addEventListener('DOMContentLoaded', () => {
         activeVerse =
             verseKey;
 
+        activeEvent =
+            null;
+
         isOrbitPaused =
             true;
 
 
-        // Remove previous verse state
-
         verses.forEach(
-            v => {
-
+            verse =>
                 document.body.classList.remove(
-                    `verse-${v.key}-active`
-                );
-
-            }
+                    `verse-${verse.key}-active`
+                )
         );
 
 
@@ -820,56 +955,43 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
 
-        // Highlight selected sphere
-
         document
-            .querySelectorAll(
-                '.portal-node'
-            )
-            .forEach(
-                node => {
+            .querySelectorAll('.portal-node')
+            .forEach(node => {
 
-                    const selected =
-                        node.getAttribute(
-                            'data-verse'
-                        ) === verseKey;
+                const selected =
+                    node.dataset.verse ===
+                    verseKey;
 
+                node.classList.toggle(
+                    'active-portal',
+                    selected
+                );
 
-                    node.classList.toggle(
-                        'active-portal',
-                        selected
-                    );
+                node.classList.toggle(
+                    'portal-dimmed',
+                    !selected
+                );
 
+            });
 
-                    node.classList.toggle(
-                        'portal-dimmed',
-                        !selected
-                    );
-
-                }
-            );
-
-
-        // Render event list
 
         renderVerseEventList(
             selectedVerse
         );
 
 
-        // Switch from network to event list
-
-        eventsPortalHero.classList.add(
+        eventsPortalHero?.classList.add(
             'event-list-open'
         );
 
 
-        verseEventListView.classList.add(
+        verseEventListView?.classList.add(
             'visible'
         );
 
 
-        verseEventListView.setAttribute(
+        verseEventListView?.setAttribute(
             'aria-hidden',
             'false'
         );
@@ -878,12 +1000,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================================
-    // RENDER EVENT LIST
+    // CARD LIST
     // =========================================================
 
-    function renderVerseEventList(
-        verse
-    ) {
+    function renderVerseEventList(verse) {
 
         if (!verseEventList) {
             return;
@@ -900,7 +1020,6 @@ document.addEventListener('DOMContentLoaded', () => {
         verseListBadge.textContent =
             verse.label;
 
-
         verseListBadge.style.setProperty(
             '--event-color',
             verse.color
@@ -912,7 +1031,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         verseListSubtitle.textContent =
-            `Explore all ${verseEvents.length} events in the ${verse.label}. Select an event to view its details.`;
+            `Explore all ${verseEvents.length} events in the ${verse.label}.`;
 
 
         verseListCount.textContent =
@@ -920,84 +1039,159 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         verseEventList.innerHTML =
-            verseEvents
-                .map(
-                    event => `
+            verseEvents.map(
+                event => `
 
-                        <button
-                            type="button"
-                            class="verse-event-card"
-                            data-event-id="${event.id}"
-                            style="--event-color: ${verse.color};"
+            <article
+                class="reference-event-card"
+                data-event-id="${event.id}"
+                style="--event-color:${verse.color}"
+            >
+
+                <div class="reference-card-top-ornament">
+                    <span></span>
+                </div>
+
+
+                <div class="reference-card-frame">
+
+
+                    <!-- EVENT IMAGE -->
+
+                    <div class="reference-card-image-wrap">
+
+                        <img
+                            src="page5_gallery.jpg"
+                            alt="${event.name}"
+                            loading="lazy"
                         >
 
-                            <span class="verse-event-icon">
-                                ${event.icon}
-                            </span>
+                    </div>
 
-                            <span class="verse-event-main">
 
-                                <span class="verse-event-name">
-                                    ${event.name}
-                                </span>
+                    <!-- LOWER EVENT CONTENT -->
 
-                                <span class="verse-event-meta">
+                    <div class="reference-card-lower">
 
-                                    <span>
-                                        📅 ${event.date}
-                                    </span>
+                        <div class="reference-card-title-area">
 
-                                    <span>
-                                        📍 ${event.venue}
-                                    </span>
+                            <h3 class="reference-card-title">
+                                ${event.name}
+                            </h3>
 
-                                    <span>
-                                        👥 ${event.team}
-                                    </span>
+                            <p class="reference-card-description">
+                                ${event.desc}
+                            </p>
 
-                                </span>
+                        </div>
 
-                            </span>
 
-                            <span class="verse-event-prize">
+                        <!-- ACTIONS -->
+
+                        <div class="reference-card-actions">
+
+                            <button
+                                type="button"
+                                class="reference-explore-btn"
+                                data-event-id="${event.id}"
+                            >
+                                EXPLORE
+                            </button>
+
+
+                            <a
+                                class="reference-register-btn"
+                                href="${registrationHref(event)}"
+                            >
+                                REGISTER
+                            </a>
+
+                        </div>
+
+
+                        <!-- PRICE -->
+
+                        <div class="reference-price-bar">
+
+                            Prize:
+
+                            <strong>
                                 ${event.prize}
-                            </span>
+                            </strong>
 
-                            <span class="verse-event-arrow">
-                                →
-                            </span>
+                        </div>
 
-                        </button>
+                    </div>
 
-                    `
-                )
-                .join('');
+                </div>
+
+            </article>
+
+        `
+            ).join('');
 
 
-        // Event card click
+        // ---------------------------------------------------------
+        // CARD ENTRANCE
+        // ---------------------------------------------------------
+
+        requestAnimationFrame(
+            () => {
+
+                verseEventList
+                    .querySelectorAll(
+                        '.reference-event-card'
+                    )
+                    .forEach(
+                        (card, index) => {
+
+                            setTimeout(
+                                () => {
+
+                                    card.classList.add(
+                                        'is-visible'
+                                    );
+
+                                },
+                                90 * index
+                            );
+
+                        }
+                    );
+
+            }
+        );
+
+
+        // ---------------------------------------------------------
+        // EXPLORE BUTTONS
+        // ---------------------------------------------------------
 
         verseEventList
             .querySelectorAll(
-                '.verse-event-card'
+                '.reference-explore-btn'
             )
             .forEach(
-                card => {
+                button => {
 
-                    card.addEventListener(
+                    button.addEventListener(
                         'click',
-                        () => {
+                        e => {
+
+                            e.stopPropagation();
+
 
                             const event =
                                 eventsData.find(
                                     item =>
                                         item.id ===
-                                        card.dataset.eventId
+                                        button.dataset.eventId
                                 );
 
 
                             if (event) {
 
-                                openModal(
+                                openExplorer(
                                     event
                                 );
 
@@ -1011,9 +1205,192 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    // =========================================================
+    // REGISTRATION URL
+    // =========================================================
+
+    function registrationHref(
+        event
+    ) {
+
+        return `register.html?event=${encodeURIComponent(event.name)}&day=${encodeURIComponent(event.day || '1')}&verse=${encodeURIComponent(event.verse)}`;
+
+    }
+
 
     // =========================================================
-    // DEPLOY / HIDE THREE VERSES
+    // EVENT EXPLORER
+    // =========================================================
+
+    function openExplorer(
+        event
+    ) {
+
+        if (!explorerView) {
+            return;
+        }
+
+
+        activeEvent =
+            event.id;
+
+
+        const verse =
+            verses.find(
+                item =>
+                    item.key ===
+                    event.verse
+            );
+
+
+        explorerVerse.textContent =
+            event.verseName;
+
+
+        explorerVerse.style.setProperty(
+            '--event-color',
+            verse?.color ||
+            'var(--tech-color)'
+        );
+
+
+        explorerTitle.textContent =
+            event.name;
+
+
+        explorerDesc.textContent =
+            event.desc;
+
+
+        explorerDate.textContent =
+            event.date;
+
+
+        explorerVenue.textContent =
+            event.venue;
+
+
+        explorerTeam.textContent =
+            event.team;
+
+
+        explorerPrize.textContent =
+            event.prize;
+
+
+        explorerImage.src =
+            'page5_gallery.jpg';
+
+
+        explorerImage.alt =
+            event.name;
+
+
+        const learnItems =
+            learnById[event.id] ||
+            [
+                'Build practical skills through the event challenge.',
+                'Apply the concepts in a real competition setting.',
+                'Present your work clearly to the judges.'
+            ];
+
+
+        explorerLearn.innerHTML =
+            learnItems
+                .map(
+                    item =>
+                        `<li>${item}</li>`
+                )
+                .join('');
+
+
+        explorerRules.innerHTML =
+            (event.rules || [])
+                .map(
+                    rule =>
+                        `<li>${rule}</li>`
+                )
+                .join('');
+
+
+        explorerRuleCount.textContent =
+            `${(event.rules || []).length} RULES`;
+
+
+        explorerRegister.href =
+            registrationHref(event);
+
+
+        eventsPortalHero?.classList.add(
+            'event-explore-open'
+        );
+
+
+        explorerView.classList.add(
+            'visible'
+        );
+
+
+        explorerView.setAttribute(
+            'aria-hidden',
+            'false'
+        );
+
+
+        verseEventListView?.classList.remove(
+            'visible'
+        );
+
+
+        verseEventListView?.setAttribute(
+            'aria-hidden',
+            'true'
+        );
+
+    }
+
+
+    // =========================================================
+    // BACK FROM EXPLORER
+    // =========================================================
+
+    function closeExplorerToCards() {
+
+        activeEvent =
+            null;
+
+
+        eventsPortalHero?.classList.remove(
+            'event-explore-open'
+        );
+
+
+        explorerView?.classList.remove(
+            'visible'
+        );
+
+
+        explorerView?.setAttribute(
+            'aria-hidden',
+            'true'
+        );
+
+
+        verseEventListView?.classList.add(
+            'visible'
+        );
+
+
+        verseEventListView?.setAttribute(
+            'aria-hidden',
+            'false'
+        );
+
+    }
+
+
+    // =========================================================
+    // DEPLOY NETWORK
     // =========================================================
 
     function deployNetwork() {
@@ -1035,26 +1412,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isNetworkDeployed) {
 
-            if (universePage) {
+            universePage?.classList.remove(
+                'network-undeployed'
+            );
 
-                universePage.classList.remove(
-                    'network-undeployed'
-                );
-
-                universePage.classList.add(
-                    'network-deployed'
-                );
-
-            }
+            universePage?.classList.add(
+                'network-deployed'
+            );
 
 
-            if (corePrompt) {
-
-                corePrompt.classList.add(
-                    'fade-out'
-                );
-
-            }
+            corePrompt?.classList.add(
+                'fade-out'
+            );
 
 
             if (bigBangFlash) {
@@ -1065,13 +1434,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
                 setTimeout(
-                    () => {
-
+                    () =>
                         bigBangFlash.classList.remove(
                             'flash-active'
-                        );
-
-                    },
+                        ),
                     750
                 );
 
@@ -1086,20 +1452,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
                 setTimeout(
-                    () => {
-
+                    () =>
                         pravaahCore.classList.remove(
                             'core-flash-pulse'
-                        );
-
-                    },
+                        ),
                     600
                 );
 
             }
 
-
-            // Move the three verse spheres into position
 
             document
                 .querySelectorAll(
@@ -1108,138 +1469,87 @@ document.addEventListener('DOMContentLoaded', () => {
                 .forEach(
                     node => {
 
-                        const targetLeft =
-                            node.getAttribute(
-                                'data-target-left'
-                            );
+                        node.style.left =
+                            `${node.dataset.targetLeft}px`;
 
-                        const targetTop =
-                            node.getAttribute(
-                                'data-target-top'
-                            );
+                        node.style.top =
+                            `${node.dataset.targetTop}px`;
 
+                        node.style.transform =
+                            'translate(-50%, -50%) scale(1)';
 
-                        if (
-                            targetLeft &&
-                            targetTop
-                        ) {
+                        node.style.opacity =
+                            '1';
 
-                            node.style.left =
-                                `${targetLeft}px`;
-
-                            node.style.top =
-                                `${targetTop}px`;
-
-                            node.style.transform =
-                                'translate(-50%, -50%) scale(1)';
-
-                            node.style.opacity =
-                                '1';
-
-                            node.style.pointerEvents =
-                                'auto';
-
-                        }
+                        node.style.pointerEvents =
+                            'auto';
 
                     }
                 );
 
-
-            // Fade in core connecting lines
 
             document
                 .querySelectorAll(
                     '[id^="path-core-"]'
                 )
                 .forEach(
-                    line => {
-
+                    line =>
                         line.style.opacity =
-                            "0.55";
-
-                    }
+                        '0.55'
                 );
 
 
-            const coreRing =
+            const ring =
                 document.getElementById(
                     'core-svg-ring'
                 );
 
 
-            if (coreRing) {
-
-                coreRing.style.opacity =
-                    "1";
-
+            if (ring) {
+                ring.style.opacity =
+                    '1';
             }
-
-
-            activeVerse =
-                null;
 
         } else {
 
-            if (universePage) {
+            universePage?.classList.remove(
+                'network-deployed'
+            );
 
-                universePage.classList.remove(
-                    'network-deployed'
-                );
-
-                universePage.classList.add(
-                    'network-undeployed'
-                );
-
-            }
+            universePage?.classList.add(
+                'network-undeployed'
+            );
 
 
-            if (corePrompt) {
-
-                corePrompt.classList.remove(
-                    'fade-out'
-                );
-
-            }
-
-
-            verses.forEach(
-                v => {
-
-                    document.body.classList.remove(
-                        `verse-${v.key}-active`
-                    );
-
-                }
+            corePrompt?.classList.remove(
+                'fade-out'
             );
 
 
             activeVerse =
                 null;
 
+            activeEvent =
+                null;
 
-            // Hide event list if it was open
-
-            if (eventsPortalHero) {
-
-                eventsPortalHero.classList.remove(
-                    'event-list-open'
-                );
-
-            }
+            eventsPortalHero?.classList.remove(
+                'event-list-open',
+                'event-explore-open'
+            );
 
 
-            if (verseEventListView) {
+            verseEventListView?.classList.remove(
+                'visible'
+            );
 
-                verseEventListView.classList.remove(
-                    'visible'
-                );
 
-                verseEventListView.setAttribute(
-                    'aria-hidden',
-                    'true'
-                );
+            explorerView?.classList.remove(
+                'visible'
+            );
 
-            }
+
+            isOrbitPaused =
+                false;
 
 
             const cx =
@@ -1273,6 +1583,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         node.style.pointerEvents =
                             'none';
 
+
                         node.classList.remove(
                             'active-portal',
                             'portal-dimmed'
@@ -1284,33 +1595,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document
                 .querySelectorAll(
-                    '.network-svg path'
+                    '[id^="path-core-"]'
                 )
                 .forEach(
-                    path => {
-
-                        path.style.opacity =
-                            "0";
-
-                        path.classList.remove(
-                            'line-active'
-                        );
-
-                    }
+                    line =>
+                        line.style.opacity =
+                        '0'
                 );
 
 
-            const coreRing =
+            const ring =
                 document.getElementById(
                     'core-svg-ring'
                 );
 
 
-            if (coreRing) {
-
-                coreRing.style.opacity =
-                    "0";
-
+            if (ring) {
+                ring.style.opacity =
+                    '0';
             }
 
         }
@@ -1319,14 +1621,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================================
-    // CORE CLICK
+    // EVENTS
     // =========================================================
 
     if (pravaahCore) {
 
         pravaahCore.addEventListener(
             'click',
-            (e) => {
+            e => {
 
                 e.stopPropagation();
 
@@ -1338,23 +1640,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =========================================================
-    // PROMPT CLICK
-    // =========================================================
-
     if (corePrompt) {
 
         corePrompt.addEventListener(
             'click',
-            (e) => {
+            e => {
 
                 e.stopPropagation();
 
-
                 if (!isNetworkDeployed) {
-
                     deployNetwork();
-
                 }
 
             }
@@ -1363,15 +1658,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =========================================================
-    // BACK TO VERSES
-    // =========================================================
+    if (backToCards) {
+
+        backToCards.addEventListener(
+            'click',
+            e => {
+
+                e.stopPropagation();
+
+                closeExplorerToCards();
+
+            }
+        );
+
+    }
+
 
     if (backToVerses) {
 
         backToVerses.addEventListener(
             'click',
-            (e) => {
+            e => {
 
                 e.stopPropagation();
 
@@ -1379,21 +1686,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 activeVerse =
                     null;
 
+                activeEvent =
+                    null;
+
                 isOrbitPaused =
                     false;
 
 
-                eventsPortalHero.classList.remove(
-                    'event-list-open'
+                eventsPortalHero?.classList.remove(
+                    'event-list-open',
+                    'event-explore-open'
                 );
 
 
-                verseEventListView.classList.remove(
+                verseEventListView?.classList.remove(
                     'visible'
                 );
 
 
-                verseEventListView.setAttribute(
+                explorerView?.classList.remove(
+                    'visible'
+                );
+
+
+                verseEventListView?.setAttribute(
+                    'aria-hidden',
+                    'true'
+                );
+
+
+                explorerView?.setAttribute(
                     'aria-hidden',
                     'true'
                 );
@@ -1404,14 +1726,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         '.portal-node'
                     )
                     .forEach(
-                        node => {
-
+                        node =>
                             node.classList.remove(
                                 'active-portal',
                                 'portal-dimmed'
-                            );
-
-                        }
+                            )
                     );
 
             }
@@ -1421,7 +1740,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================================
-    // ORBITAL ROTATION
+    // ORBIT ANIMATION
     // =========================================================
 
     function animateOrbit() {
@@ -1433,7 +1752,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ) {
 
             orbitAngle =
-                (orbitAngle + 0.05) % 360;
+                (
+                    orbitAngle +
+                    0.05
+                ) % 360;
 
 
             portalOrbitWrapper.style.transform =
@@ -1527,184 +1849,5 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         150
     );
-
-
-    // =========================================================
-    // MODAL HANDLING
-    // =========================================================
-
-    const modal =
-        document.getElementById(
-            'event-detail-modal'
-        );
-
-    const closeModalBtn =
-        document.getElementById(
-            'close-detail-modal'
-        );
-
-    const modalTag =
-        document.getElementById(
-            'modal-tag'
-        );
-
-    const modalTitle =
-        document.getElementById(
-            'modal-title'
-        );
-
-    const modalDesc =
-        document.getElementById(
-            'modal-desc'
-        );
-
-    const modalSchedule =
-        document.getElementById(
-            'modal-schedule'
-        );
-
-    const modalVenue =
-        document.getElementById(
-            'modal-venue'
-        );
-
-    const modalPrize =
-        document.getElementById(
-            'modal-prize'
-        );
-
-    const modalTeam =
-        document.getElementById(
-            'modal-team'
-        );
-
-    const modalRules =
-        document.getElementById(
-            'modal-rules'
-        );
-
-    const modalRegisterBtn =
-        document.getElementById(
-            'modal-register-btn'
-        );
-
-
-    function openModal(
-        event
-    ) {
-
-        if (!modal) {
-            return;
-        }
-
-
-        modalTag.textContent =
-            event.verseName;
-
-
-        modalTag.className =
-            `verse-badge badge-${event.verse}`;
-
-
-        modalTitle.textContent =
-            event.name;
-
-
-        modalDesc.textContent =
-            event.desc;
-
-
-        modalSchedule.textContent =
-            event.date;
-
-
-        modalVenue.textContent =
-            event.venue;
-
-
-        modalPrize.textContent =
-            event.prize;
-
-
-        modalTeam.textContent =
-            event.team;
-
-
-        if (
-            event.rules &&
-            event.rules.length > 0
-        ) {
-
-            modalRules.innerHTML =
-                event.rules
-                    .map(
-                        rule =>
-                            `<li>${rule}</li>`
-                    )
-                    .join('');
-
-        } else {
-
-            modalRules.innerHTML =
-                '<li>Official rules and guidelines apply. Please report 30 mins before schedule.</li>';
-
-        }
-
-
-        if (modalRegisterBtn) {
-
-            modalRegisterBtn.href =
-                `register.html?event=${encodeURIComponent(event.name)}&day=${encodeURIComponent(event.day || '1')}&verse=${encodeURIComponent(event.verse)}`;
-
-        }
-
-
-        modal.classList.remove(
-            'hidden'
-        );
-
-    }
-
-
-    // Close modal button
-
-    if (closeModalBtn) {
-
-        closeModalBtn.addEventListener(
-            'click',
-            () => {
-
-                modal.classList.add(
-                    'hidden'
-                );
-
-            }
-        );
-
-    }
-
-
-    // Click outside modal
-
-    if (modal) {
-
-        modal.addEventListener(
-            'click',
-            (e) => {
-
-                if (
-                    e.target === modal
-                ) {
-
-                    modal.classList.add(
-                        'hidden'
-                    );
-
-                }
-
-            }
-        );
-
-    }
 
 });
