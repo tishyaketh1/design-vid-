@@ -61,8 +61,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 4. Cosmic Nav Wheel Indicator Pill Tracker
+    function getActiveNav() {
+        let activeNav = document.querySelector('.nav-item.active');
+        if (!activeNav) {
+            const path = window.location.pathname.split('/').pop() || 'index.html';
+            activeNav = Array.from(document.querySelectorAll('.nav-item')).find(item => {
+                const href = item.getAttribute('href');
+                return href === path || (path === '' && href === 'index.html');
+            }) || document.querySelector('.nav-item[href="index.html"]') || document.querySelector('.nav-item');
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+        }
+        return activeNav;
+    }
+
     function updateNavPill() {
-        const activeNav = document.querySelector('.nav-item.active');
+        const activeNav = getActiveNav();
         const pill = document.getElementById('nav-indicator-pill');
         if (activeNav && pill) {
             pill.style.left = `${activeNav.offsetLeft}px`;
@@ -74,6 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(updateNavPill, 120);
     window.addEventListener('resize', updateNavPill);
     window.addEventListener('load', updateNavPill);
+
+    const navWheel = document.getElementById('cosmic-nav-wheel');
+    const navTrack = document.querySelector('.nav-wheel-track');
 
     document.querySelectorAll('.nav-item').forEach(item => {
         item.addEventListener('mouseenter', () => {
@@ -92,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const navTrack = document.querySelector('.nav-wheel-track');
     if (navTrack) {
         navTrack.addEventListener('mouseleave', updateNavPill);
         navTrack.addEventListener('focusout', (e) => {
@@ -100,5 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateNavPill();
             }
         });
+    }
+
+    if (navWheel) {
+        navWheel.addEventListener('mouseleave', updateNavPill);
     }
 });
