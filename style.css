@@ -3876,27 +3876,6 @@ body.portal-entered #main-scroll-container {
         opacity 1.2s ease-out;
 }
 
-.pravaah-core-btn.core-flash-pulse {
-    animation: coreFlashEffect 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-@keyframes coreFlashEffect {
-    0% {
-        transform: translate(-50%, -50%) scale(1.0);
-        box-shadow: 0 0 0px #fff;
-    }
-
-    20% {
-        transform: translate(-50%, -50%) scale(1.5);
-        box-shadow: 0 0 100px #fff, 0 0 200px var(--tech-glow);
-    }
-
-    100% {
-        transform: translate(-50%, -50%) scale(1.0);
-        box-shadow: 0 0 35px var(--tech-glow);
-    }
-}
-
 .calendar-page-heading {
     text-align: center;
     font-family: 'Orbitron', sans-serif;
@@ -12647,33 +12626,6 @@ body.subpage-body>.pravaah-full-footer {
    REFERENCE CARD
    ---------------------------------------------------------- */
 
-.events-page-body .reference-event-card {
-
-    position: relative;
-
-    min-width: 0;
-
-    opacity: 0;
-
-    transform:
-        translateY(38px)
-        scale(0.96);
-
-    filter:
-        blur(4px);
-
-    transition:
-        opacity 0.55s ease,
-        transform 0.7s cubic-bezier(
-            0.16,
-            1,
-            0.3,
-            1
-        ),
-        filter 0.55s ease;
-
-}
-
 
 .events-page-body .reference-event-card.is-visible {
 
@@ -13178,33 +13130,45 @@ body.subpage-body>.pravaah-full-footer {
 
 }
 
+/* ==========================================================
+   EVENT CARD - TOP TO BOTTOM SCROLL REVEAL
+   ========================================================== */
+
 
 /* ----------------------------------------------------------
-   CARD REVEAL ANIMATION
+   INITIAL STATE
    ---------------------------------------------------------- */
 
-@keyframes referenceCardReveal {
+.events-page-body
+.reference-event-card {
+
+    position: relative;
+
+    min-width: 0;
+
+    opacity: 1;
+
+    transform:
+        none !important;
+
+    filter:
+        none !important;
+
+}
+
+/* ----------------------------------------------------------
+   TOP -> BOTTOM REVEAL
+   ---------------------------------------------------------- */
+
+
+
+@keyframes referenceCardTopToBottom {
 
     0% {
 
         clip-path:
-            polygon(
-                8% 0,
-                92% 0,
-                92% 0,
-                8% 0
-            );
-
-    }
-
-    45% {
-
-        clip-path:
-            polygon(
-                4% 0,
-                96% 0,
-                96% 52%,
-                4% 52%
+            inset(
+                0 0 100% 0
             );
 
     }
@@ -13212,33 +13176,14 @@ body.subpage-body>.pravaah-full-footer {
     100% {
 
         clip-path:
-            polygon(
-                0 0,
-                100% 0,
-                100% 100%,
-                0 100%
+            inset(
+                0 0 0 0
             );
 
     }
 
 }
 
-
-.events-page-body
-.reference-event-card.is-visible
-.reference-card-frame {
-
-    animation:
-        referenceCardReveal 0.72s
-        cubic-bezier(
-            0.16,
-            1,
-            0.3,
-            1
-        )
-        both;
-
-}
 
 
 /* ----------------------------------------------------------
@@ -14971,4 +14916,340 @@ body.subpage-body>.pravaah-full-footer {
     text-shadow:
         0 1px 1px
         rgba(255, 255, 255, 0.45);
+}
+
+/* ==========================================================
+   CATEGORY HEADING - SLOW CHARACTER REVEAL
+   ========================================================== */
+
+.events-page-body
+.events-hero-title.category-heading-reveal {
+
+    white-space: nowrap;
+}
+
+
+/* ==========================================================
+   CATEGORY HEADING - STABLE LETTER-BY-LETTER REVEAL
+   ========================================================== */
+
+.events-page-body
+.events-hero-title.category-heading-reveal {
+
+    white-space: nowrap;
+}
+
+
+/* Each letter appears independently */
+.events-page-body
+.events-hero-title
+.category-heading-letter {
+
+    display: inline-block;
+
+    opacity: 0;
+
+    filter: blur(3px);
+
+    animation:
+        categoryLetterStableReveal
+        0.45s
+        ease-out
+        forwards;
+
+}
+
+
+/* No bounce / no pop / no overshoot */
+@keyframes categoryLetterStableReveal {
+
+    0% {
+        opacity: 0;
+        filter: blur(3px);
+    }
+
+    60% {
+        opacity: 0.7;
+        filter: blur(1px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+}
+
+
+
+/* ==========================================================
+   HIDE REDUNDANT TEXT WHEN EVENT LIST IS OPEN
+   ========================================================== */
+
+.events-page-body
+.events-portal-hero.event-list-open
+.verse-list-heading h2 {
+    display: none !important;
+}
+
+.events-page-body
+.events-portal-hero.event-list-open
+.verse-list-heading p {
+    display: none !important;
+}
+
+/* ==========================================================
+   DISABLE PRAVAAH CORE CLICK FLASH COMPLETELY
+   ========================================================== */
+
+.events-page-body .big-bang-flash {
+    display: none !important;
+}
+
+/* ==========================================================
+   EVENT CARD - TOP TO BOTTOM SCROLL REVEAL
+   ========================================================== */
+
+
+/* The card keeps its normal layout space */
+.events-page-body
+.reference-event-card {
+
+    position: relative;
+
+    min-width: 0;
+
+    opacity: 1;
+
+    transform: none !important;
+
+    filter: none !important;
+
+    clip-path:
+        inset(
+            0 0 100% 0
+        );
+
+}
+
+
+/* Reveal the ENTIRE card, including the ornament */
+.events-page-body
+.reference-event-card.is-visible {
+
+    animation:
+        referenceCardTopReveal
+        1.15s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        )
+        forwards;
+
+}
+
+
+@keyframes referenceCardTopReveal {
+
+    0% {
+
+        clip-path:
+            inset(
+                0 0 100% 0
+            );
+
+    }
+
+    100% {
+
+        clip-path:
+            inset(
+                0 0 0 0
+            );
+
+    }
+
+}
+
+/* ==========================================================
+   FINAL EVENT CARD SCROLL REVEAL
+   ========================================================== */
+
+/*
+   Remove the old reveal animation's effect from the frame.
+   The new animation belongs to the entire card.
+*/
+
+.events-page-body
+.reference-event-card
+.reference-card-frame {
+
+    animation: none !important;
+
+}
+
+
+/*
+   Initial state:
+   the card exists in the layout,
+   but its contents are revealed from 0% height.
+*/
+
+.events-page-body
+.reference-event-card {
+
+    position: relative !important;
+
+    opacity: 1 !important;
+
+    transform:
+        none !important;
+
+    filter:
+        none !important;
+
+    clip-path:
+        inset(
+            0 0 100% 0
+        );
+
+    will-change:
+        clip-path;
+
+}
+
+
+/*
+   Once JavaScript adds .is-visible,
+   reveal from TOP to BOTTOM.
+*/
+
+.events-page-body
+.reference-event-card.is-visible {
+
+    clip-path:
+        inset(
+            0 0 0 0
+        );
+
+    animation:
+        referenceCardScrollReveal
+        1.05s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        )
+        forwards !important;
+
+}
+
+
+/*
+   Actual top-to-bottom animation.
+*/
+
+@keyframes referenceCardScrollReveal {
+
+    0% {
+
+        clip-path:
+            inset(
+                0 0 100% 0
+            );
+
+    }
+
+    100% {
+
+        clip-path:
+            inset(
+                0 0 0 0
+            );
+
+    }
+
+}
+
+
+/*
+   Do not allow the reveal animation to change
+   the card's physical position.
+*/
+
+.events-page-body
+.reference-event-card.is-visible,
+.events-page-body
+.reference-event-card.is-visible:hover {
+
+    transform:
+        none !important;
+
+}
+
+
+/*
+   Keep the card frame fixed after reveal.
+*/
+
+.events-page-body
+.reference-event-card.is-visible
+.reference-card-frame {
+
+    transform:
+        none !important;
+
+}
+
+
+/*
+   Keep the existing hover geometry.
+   Hover must not interfere with the scroll reveal.
+*/
+
+.events-page-body
+.reference-event-card:hover {
+
+    transform:
+        none !important;
+
+}
+
+
+/*
+   Extra safety:
+   the card content remains visible after
+   the reveal is complete.
+*/
+
+.events-page-body
+.reference-event-card.is-visible
+.reference-card-image-wrap,
+.events-page-body
+.reference-event-card.is-visible
+.reference-card-lower {
+
+    opacity:
+        1;
+
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+    .events-page-body
+    .reference-event-card.is-visible {
+
+        animation-duration:
+            0.95s !important;
+
+    }
+
 }
