@@ -581,19 +581,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 220);
     }
 
-    // Trigger glitch on link clicks when navigating
-    document.querySelectorAll('a.nav-item, .footer-links-list a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            if (href && !href.startsWith('#') && href !== 'index.html' && !link.hasAttribute('target')) {
-                e.preventDefault();
-                triggerPageGlitch(document);
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 180);
-            }
-        });
-    });
 
     const observerOptions = {
         root: mainScrollContainer,
