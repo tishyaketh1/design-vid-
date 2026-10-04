@@ -712,6 +712,25 @@ section {
                 visibility 0.8s;
 }
 
+html.portal-entered-fast #splash-screen,
+html.portal-entered-fast #loader-screen,
+body.portal-entered #splash-screen,
+body.portal-entered #loader-screen {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: -9999 !important;
+}
+
+html.portal-entered-fast .cosmic-nav-wheel,
+body.portal-entered .cosmic-nav-wheel {
+    opacity: 1 !important;
+    transform: translate(-50%, 0) !important;
+    pointer-events: all !important;
+    visibility: visible !important;
+}
+
 #loader-screen.portal-warp-section {
     background: #000;
     z-index: 9999;

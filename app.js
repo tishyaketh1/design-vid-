@@ -327,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (hasAlreadyEnteredPortal) {
         portalHasPlayedOnce = true;
+        document.documentElement.classList.add('portal-entered-fast');
         document.body.classList.add('portal-entered');
         if (splashScreen) {
             splashScreen.classList.add('hidden');
