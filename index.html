@@ -82,9 +82,34 @@
                             <div class="big-septagon-edge-shadow"></div>
                         </div>
                         <svg viewBox="0 0 100 100" class="big-septagon-frame-svg">
-                            <polygon points="50,2.5 88.5,22.5 98,62 71.3,94.5 28.7,94.5 2,62 11.5,22.5" class="big-septagon-border-glow" />
-                            <polygon points="50,2.5 88.5,22.5 98,62 71.3,94.5 28.7,94.5 2,62 11.5,22.5" class="big-septagon-border-main" />
-                            <polygon points="50,5 86,24 95,61 70,92 30,92 5,61 14,24" class="big-septagon-border-inner" />
+                            <!-- Outer Layer 1: Septagon (7 sides) -->
+                            <g class="rotate-layer-sync">
+                                <polygon points="50,2.5 87.1,20.4 96.3,60.6 70.6,92.8 29.4,92.8 3.7,60.6 12.9,20.4" class="big-septagon-border-glow" />
+                                <polygon points="50,2.5 87.1,20.4 96.3,60.6 70.6,92.8 29.4,92.8 3.7,60.6 12.9,20.4" class="big-septagon-border-main" />
+                            </g>
+
+                            <!-- Inner Layer 2: Hexagon (6 sides) -->
+                            <g class="rotate-layer-reverse">
+                                <polygon points="50,12 82.9,31 82.9,69 50,88 17.1,69 17.1,31" class="border-hexagon" />
+                            </g>
+
+                            <!-- Inner Layer 3: Pentagon (5 sides) -->
+                            <g class="rotate-layer-sync">
+                                <polygon points="50,21 77.6,41 67.0,73.5 33.0,73.5 22.4,41" class="border-pentagon" />
+                            </g>
+
+                            <!-- Inner Layer 4: Square / Diamond (4 sides) -->
+                            <g class="rotate-layer-reverse">
+                                <polygon points="50,30 70,50 50,70 30,50" class="border-square" />
+                            </g>
+
+                            <!-- Inner Layer 5: Triangle (3 sides) -->
+                            <g class="rotate-layer-sync">
+                                <polygon points="50,38 60.4,56 39.6,56" class="border-triangle" />
+                            </g>
+
+                            <!-- Core Node -->
+                            <circle cx="50" cy="50" r="3" class="border-core-dot" />
                         </svg>
                     </div>
                 </div>
@@ -771,73 +796,43 @@
             <header class="hud-header">
                 <div class="hud-left">
                     <span class="hud-indicator status-green"></span>
-                    <span class="hud-title">PRAVAAH TRANSMISSION // LEADERSHIP & CONNECT</span>
+                    <span class="hud-title">PRAVAAH TRANSMISSION // CONNECT & REGISTER</span>
                 </div>
                 <div class="hud-right">
                     <span class="hud-date">OCTOBER 15-18, 2026</span>
                 </div>
             </header>
 
-            <div class="team-dashboard">
-                <h2 class="team-page-heading spider-title" data-text="CORE LEADERSHIP & TEAM">CORE LEADERSHIP & TEAM</h2>
+            <div class="last-page-hero-container">
+                <span class="hero-brand-title spider-title" data-text="PRAVAAH 2026">PRAVAAH 2026</span>
+                <p class="hero-tagline">The Annual Cultural & Technopreneurship Fest of IIT Bhubaneswar</p>
 
-                <div class="team-section">
-                    <h3 class="about-title-tag">CORE LEADERSHIP // FESTIVAL COORDINATORS</h3>
-                    <div class="team-row">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScJp86gL9E-Pravaah2026MockForm/viewform" target="_blank" class="hero-register-btn">
+                    <span>REGISTER NOW</span>
+                    <span class="register-sparkle">✦</span>
+                </a>
 
-                        <div class="team-card">
-                            <div class="avatar-logo logo-tech">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                            </div>
-                            <div class="team-name">K. Joji Kumar</div>
-                            <div class="team-role">CHIEF COORDINATOR</div>
-                            <a href="mailto:coord.pravaah@iitbbs.ac.in" class="team-email-link">Email</a>
-                        </div>
-
-                        <div class="team-card">
-                            <div class="avatar-logo logo-cult">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            </div>
-                            <div class="team-name">Baman & Renuka</div>
-                            <div class="team-role">EVENTS COORDINATORS</div>
-                            <a href="mailto:events.pravaah@iitbbs.ac.in" class="team-email-link">Email</a>
-                        </div>
-
-                        <div class="team-card">
-                            <div class="avatar-logo logo-ent">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                            </div>
-                            <div class="team-name">Varshitha & Dhanush</div>
-                            <div class="team-role">SPONSORSHIP LEADS</div>
-                            <a href="mailto:marketing.pravaah@iitbbs.ac.in" class="team-email-link">Email</a>
-                        </div>
-
-                        <div class="team-card">
-                            <div class="avatar-logo logo-social">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                            </div>
-                            <div class="team-name">Parmeshwar & Abhinav</div>
-                            <div class="team-role">WEB & MEDIA LEADS</div>
-                            <a href="mailto:coord.pravaah@iitbbs.ac.in" class="team-email-link">Email</a>
-                        </div>
-                    </div>
+                <div class="hero-social-block">
+                    <a href="https://www.instagram.com/iitbbs.pravaah/?hl=en" target="_blank" class="hero-social-btn btn-insta" aria-label="Instagram" rel="noopener">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                        <span>INSTAGRAM</span>
+                    </a>
+                    <a href="https://www.linkedin.com/company/pravaah-iit-bhubaneswar/posts/?feedView=all" target="_blank" class="hero-social-btn btn-linkedin" aria-label="LinkedIn" rel="noopener">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        <span>LINKEDIN</span>
+                    </a>
+                    <a href="https://youtube.com/@pravaahiitbbs?si=9zFAqSFCleCCECZ_" target="_blank" class="hero-social-btn btn-youtube" aria-label="YouTube" rel="noopener">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.71.46 8.59.46 8.59.46s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                        <span>YOUTUBE</span>
+                    </a>
                 </div>
             </div>
 
-            <footer class="pravaah-full-footer">
-                <div class="footer-columns-grid">
-                    <div class="footer-col footer-brand">
-                        <span class="footer-logo-title">PRAVAAH 2026</span>
-                        <p class="footer-tagline">The Annual Cultural & Technopreneurship Fest of IIT Bhubaneswar.</p>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScJp86gL9E-Pravaah2026MockForm/viewform" target="_blank" class="footer-register-btn">
-                            <span>REGISTER NOW</span>
-                            <span>✦</span>
-                        </a>
-                    </div>
-
-                    <div class="footer-col">
+            <footer class="pravaah-full-footer footer-centered">
+                <div class="footer-columns-grid grid-centered">
+                    <div class="footer-col col-centered">
                         <h4 class="footer-heading">EXPLORE</h4>
-                        <ul class="footer-links-list">
+                        <ul class="footer-links-list list-centered">
                             <li><a href="events.html">Events Directory</a></li>
                             <li><a href="register.html">Registration & Passes</a></li>
                             <li><a href="accommodation.html">Accommodation</a></li>
@@ -847,32 +842,17 @@
                         </ul>
                     </div>
 
-                    <div class="footer-col">
+                    <div class="footer-col col-centered">
                         <h4 class="footer-heading">REACH OUT</h4>
-                        <ul class="footer-links-list">
+                        <ul class="footer-links-list list-centered">
                             <li><a href="mailto:coord.pravaah@iitbbs.ac.in">coord.pravaah@iitbbs.ac.in</a></li>
                             <li><a href="mailto:events.pravaah@iitbbs.ac.in">events.pravaah@iitbbs.ac.in</a></li>
                             <li><a href="https://www.iitbbs.ac.in/" target="_blank">IIT Bhubaneswar, Argul, Odisha 752050</a></li>
                         </ul>
                     </div>
-
-                    <div class="footer-col">
-                        <h4 class="footer-heading">CONNECT</h4>
-                        <div class="footer-social-icons">
-                            <a href="https://www.instagram.com/iitbbs.pravaah/?hl=en" target="_blank" class="footer-social-btn" aria-label="Instagram" rel="noopener">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                            </a>
-                            <a href="https://www.linkedin.com/company/pravaah-iit-bhubaneswar/posts/?feedView=all" target="_blank" class="footer-social-btn" aria-label="LinkedIn" rel="noopener">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                            </a>
-                            <a href="https://youtube.com/@pravaahiitbbs?si=9zFAqSFCleCCECZ_" target="_blank" class="footer-social-btn" aria-label="YouTube" rel="noopener">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19c1.71.46 8.59.46 8.59.46s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
-                            </a>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="footer-bottom-bar">
+                <div class="footer-bottom-bar bar-centered">
                     <span>@PRAVAAH'26 IIT BHUBANESWAR</span>
                     <span>MADE WITH 💜 BY WEB TEAM</span>
                 </div>
