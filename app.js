@@ -601,31 +601,33 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     let lastSectionId = null;
-    const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const sectionId = entry.target.id;
-                lastSectionId = sectionId;
+    const targetNavItems = document.querySelectorAll('.nav-item[data-target]');
+    if (targetNavItems.length > 0 && mainScrollContainer) {
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.id;
+                    lastSectionId = sectionId;
 
-                const navItems = document.querySelectorAll('.nav-item');
-                navItems.forEach(item => {
-                    if (item.getAttribute('data-target') === sectionId) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-                updateNavPill();
-            }
+                    targetNavItems.forEach(item => {
+                        if (item.getAttribute('data-target') === sectionId) {
+                            item.classList.add('active');
+                        } else {
+                            item.classList.remove('active');
+                        }
+                    });
+                    updateNavPill();
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.snap-page').forEach(section => {
+            navObserver.observe(section);
         });
-    }, observerOptions);
-
-    document.querySelectorAll('.snap-page').forEach(section => {
-        navObserver.observe(section);
-    });
+    }
 
     function updateNavPill() {
-        const activeItem = document.querySelector('.nav-item.active');
+        const activeItem = document.querySelector('.nav-item.active') || document.querySelector('.nav-item[href="index.html"]') || document.querySelector('.nav-item');
         const pill = document.getElementById('nav-indicator-pill');
         const navWheel = document.getElementById('cosmic-nav-wheel');
         if (activeItem && pill && navWheel) {
