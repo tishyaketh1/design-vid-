@@ -1,68 +1,61 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // =========================================================
-    // NAV INDICATOR
-    // =========================================================
+    /* =========================================================
+       NAV
+       ========================================================= */
 
     const activeNav = document.querySelector('.nav-item.active');
     const pill = document.getElementById('nav-indicator-pill');
 
     if (activeNav && pill) {
-
         setTimeout(() => {
-
             pill.style.left = `${activeNav.offsetLeft}px`;
             pill.style.width = `${activeNav.offsetWidth}px`;
-
         }, 100);
-
     }
 
 
-    // =========================================================
-    // VERSES
-    // =========================================================
+    /* =========================================================
+       VERSES
+       ========================================================= */
 
     const verses = [
-
         {
             key: 'tech',
-            label: 'TECH VERSE',
+            label: 'TECH EVENT',
+            heading: 'TECHNICAL EVENTS',
             color: 'var(--tech-color)',
             angle: -90
         },
-
         {
             key: 'cult',
-            label: 'CULT VERSE',
+            label: 'CULT EVENT',
+            heading: 'CULTURAL EVENTS',
             color: 'var(--cult-color)',
             angle: 30
         },
-
         {
             key: 'ent',
-            label: 'INT VERSE',
+            label: 'ENT EVENT',
+            heading: 'ENTREPRENEUR EVENTS',
             color: 'var(--ent-color)',
             angle: 150
         }
-
     ];
 
 
-    // =========================================================
-    // EVENT DATA
-    // =========================================================
+    /* =========================================================
+       EVENT DATA
+       ========================================================= */
 
     const eventsData = [
 
-        // -----------------------------------------------------
-        // TECH VERSE
-        // -----------------------------------------------------
+        /* ---------------- TECH ---------------- */
 
         {
             id: 'tech-1',
             verse: 'tech',
-            verseName: 'TECH VERSE',
+            verseName: 'TECH EVENT',
             name: 'Robo Soccer',
             icon: '🤖',
             desc: 'Build a customized autonomous or manual robot to battle in a futuristic arena and claim the championship trophy.',
@@ -82,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'tech-2',
             verse: 'tech',
-            verseName: 'TECH VERSE',
+            verseName: 'TECH EVENT',
             name: 'Code-A-Thon',
             icon: '💻',
             desc: 'A grueling 24-hour sprint where developer teams solve complex algorithmic problems and real-world system challenges.',
@@ -102,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'tech-3',
             verse: 'tech',
-            verseName: 'TECH VERSE',
+            verseName: 'TECH EVENT',
             name: 'AI Odyssey',
             icon: '🧠',
             desc: 'Design and train a deep learning model to navigate, classify, and resolve dimensional anomalies in noisy datasets.',
@@ -121,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'tech-4',
             verse: 'tech',
-            verseName: 'TECH VERSE',
+            verseName: 'TECH EVENT',
             name: 'WebCraft UI/UX',
             icon: '🌐',
             desc: 'Create futuristic, ultra-smooth interactive web experiences using modern canvas, WebGL, and reactive component frameworks.',
@@ -140,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'tech-5',
             verse: 'tech',
-            verseName: 'TECH VERSE',
+            verseName: 'TECH EVENT',
             name: 'Mech-Trix CAD Design',
             icon: '⚙️',
             desc: 'CAD 3D modeling challenge to construct aerodynamic space exploration rovers and drone frameworks.',
@@ -156,14 +149,12 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
 
-        // -----------------------------------------------------
-        // CULT VERSE
-        // -----------------------------------------------------
+        /* ---------------- CULT ---------------- */
 
         {
             id: 'cult-1',
             verse: 'cult',
-            verseName: 'CULT VERSE',
+            verseName: 'CULT EVENT',
             name: 'Step Up Group Dance',
             icon: '💃',
             desc: 'Unleash street dance, hip-hop, or classical choreography in a high-octane stage showdown.',
@@ -182,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'cult-2',
             verse: 'cult',
-            verseName: 'CULT VERSE',
+            verseName: 'CULT EVENT',
             name: 'Symphony Rock Battle',
             icon: '🎸',
             desc: 'The ultimate rock and fusion band championship. Feel acoustic decibels shake the multiverse.',
@@ -201,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'cult-3',
             verse: 'cult',
-            verseName: 'CULT VERSE',
+            verseName: 'CULT EVENT',
             name: 'Dramatics & Street Play',
             icon: '🎭',
             desc: 'Intense street theatre competition portraying contemporary social realities and cosmic satire.',
@@ -219,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'cult-4',
             verse: 'cult',
-            verseName: 'CULT VERSE',
+            verseName: 'CULT EVENT',
             name: 'Voice of Pravaah',
             icon: '🎤',
             desc: 'Solo vocal competition spanning classical, western pop, rock, and Bollywood melodies.',
@@ -237,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'cult-5',
             verse: 'cult',
-            verseName: 'CULT VERSE',
+            verseName: 'CULT EVENT',
             name: 'Vogue Cosmic Fashion',
             icon: '✨',
             desc: 'Futuristic fashion runway reflecting themes of cyberpunk, neon retro-futurism, and sustainable haute couture.',
@@ -253,14 +244,12 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
 
-        // -----------------------------------------------------
-        // ENTREPRENEUR VERSE
-        // -----------------------------------------------------
+        /* ---------------- ENTREPRENEUR ---------------- */
 
         {
             id: 'ent-1',
             verse: 'ent',
-            verseName: 'ENTREPRENEUR VERSE',
+            verseName: 'ENT EVENT',
             name: 'Pitchers // Shark Arena',
             icon: '💼',
             desc: 'Pitch your early-stage startup or tech innovation directly to real angel investors and VC partners for funding.',
@@ -278,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'ent-2',
             verse: 'ent',
-            verseName: 'ENTREPRENEUR VERSE',
+            verseName: 'ENT EVENT',
             name: 'B-Plan Showdown',
             icon: '📊',
             desc: 'Draft comprehensive corporate business plans detailing market sizing, unit economics, and go-to-market strategies.',
@@ -296,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'ent-3',
             verse: 'ent',
-            verseName: 'ENTREPRENEUR VERSE',
+            verseName: 'ENT EVENT',
             name: 'Crypto & Market Quest',
             icon: '📈',
             desc: 'Live high-frequency simulated stock and crypto market trading platform. Read news feeds and execute trades.',
@@ -314,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'ent-4',
             verse: 'ent',
-            verseName: 'ENTREPRENEUR VERSE',
+            verseName: 'ENT EVENT',
             name: 'Ad-Mad Creative Pitch',
             icon: '📣',
             desc: 'Brainstorm, script, and perform humorous or viral advertisements for bizarre futuristic gadgets.',
@@ -332,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'ent-5',
             verse: 'ent',
-            verseName: 'ENTREPRENEUR VERSE',
+            verseName: 'ENT EVENT',
             name: 'Young Innovator Cup',
             icon: '🚀',
             desc: 'Ideation challenge for school and junior college innovators creating tech prototypes for sustainability.',
@@ -346,13 +335,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Certificate of Excellence for all participants.'
             ]
         }
-
     ];
 
 
-    // =========================================================
-    // WHAT YOU LEARN
-    // =========================================================
+    /* =========================================================
+       WHAT YOU LEARN
+       ========================================================= */
 
     const learnById = {
 
@@ -449,9 +437,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    // =========================================================
-    // DOM REFERENCES
-    // =========================================================
+    /* =========================================================
+       DOM
+       ========================================================= */
 
     const portalNetworkContainer =
         document.getElementById('portal-network-container');
@@ -464,9 +452,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const pravaahCore =
         document.getElementById('pravaah-core');
-
-    const bigBangFlash =
-        document.getElementById('big-bang-flash');
 
     const corePrompt =
         document.getElementById('core-deploy-prompt');
@@ -540,10 +525,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const explorerRuleCount =
         document.getElementById('explorer-rule-count');
 
+    const eventsHeroTitle =
+        document.querySelector('.events-hero-title');
 
-    // =========================================================
-    // STATE
-    // =========================================================
+
+    /* =========================================================
+       STATE
+       ========================================================= */
 
     let orbitAngle = 0;
     let isOrbitPaused = false;
@@ -552,9 +540,67 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeEvent = null;
 
 
-    // =========================================================
-    // PORTAL NETWORK
-    // =========================================================
+    /* =========================================================
+       CATEGORY HEADING
+       ========================================================= */
+
+    function animateCategoryHeading(title) {
+
+        if (!eventsHeroTitle) {
+            return;
+        }
+
+        eventsHeroTitle.classList.remove(
+            'category-heading-reveal'
+        );
+
+        eventsHeroTitle.innerHTML = '';
+
+        eventsHeroTitle.setAttribute(
+            'data-text',
+            title
+        );
+
+        [...title].forEach((character, index) => {
+
+            const span =
+                document.createElement('span');
+
+            span.className =
+                'category-heading-letter';
+
+            span.textContent =
+                character === ' '
+                    ? '\u00A0'
+                    : character;
+
+            span.style.animationDelay =
+                `${index * 120}ms`;
+
+            eventsHeroTitle.appendChild(
+                span
+            );
+
+        });
+
+        requestAnimationFrame(() => {
+
+            requestAnimationFrame(() => {
+
+                eventsHeroTitle.classList.add(
+                    'category-heading-reveal'
+                );
+
+            });
+
+        });
+
+    }
+
+
+    /* =========================================================
+       PORTAL NETWORK
+       ========================================================= */
 
     function renderPortalNetwork() {
 
@@ -568,18 +614,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         portalOrbitWrapper
             .querySelectorAll('.portal-node')
-            .forEach(el => el.remove());
+            .forEach(
+                node => node.remove()
+            );
 
         networkSvg.innerHTML = '';
-
 
         const rect =
             portalNetworkContainer.getBoundingClientRect();
 
-        if (!rect.width || !rect.height) {
+        if (
+            !rect.width ||
+            !rect.height
+        ) {
             return;
         }
-
 
         const cx =
             rect.width / 2;
@@ -587,10 +636,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const cy =
             rect.height / 2;
 
-
         const isMobile =
             window.innerWidth <= 768;
-
 
         const minDimension =
             Math.min(
@@ -598,318 +645,362 @@ document.addEventListener('DOMContentLoaded', () => {
                 rect.height
             );
 
-
-        const rPortal =
+        const radius =
             isMobile
                 ? minDimension * 0.32
                 : minDimension * 0.38;
 
 
-        // ---------------------------------------------------------
-        // CORE RING
-        // ---------------------------------------------------------
-
-        const coreRing =
+        const ring =
             document.createElementNS(
                 'http://www.w3.org/2000/svg',
                 'circle'
             );
 
-        coreRing.setAttribute(
+        ring.setAttribute(
             'cx',
             cx
         );
 
-        coreRing.setAttribute(
+        ring.setAttribute(
             'cy',
             cy
         );
 
-        coreRing.setAttribute(
+        ring.setAttribute(
             'r',
             50
         );
 
-        coreRing.setAttribute(
+        ring.setAttribute(
             'stroke',
             'rgba(255, 223, 122, 0.25)'
         );
 
-        coreRing.setAttribute(
+        ring.setAttribute(
             'stroke-width',
             '2'
         );
 
-        coreRing.setAttribute(
+        ring.setAttribute(
             'fill',
             'none'
         );
 
-        coreRing.setAttribute(
+        ring.setAttribute(
             'id',
             'core-svg-ring'
         );
 
-        coreRing.setAttribute(
+        ring.setAttribute(
             'opacity',
-            isNetworkDeployed
-                ? '1'
-                : '0'
+            isNetworkDeployed ? '1' : '0'
         );
-
-        coreRing.style.transition =
-            'opacity 1.2s ease 0.4s';
 
         networkSvg.appendChild(
-            coreRing
+            ring
         );
 
 
-        // ---------------------------------------------------------
-        // VERSE SPHERES
-        // ---------------------------------------------------------
+        verses.forEach(
+            verse => {
 
-        verses.forEach(verse => {
+                const radians =
+                    verse.angle *
+                    Math.PI /
+                    180;
 
-            const rad =
-                verse.angle * Math.PI / 180;
+                const px =
+                    cx +
+                    Math.cos(radians) *
+                    radius;
 
-            const px =
-                cx +
-                Math.cos(rad) *
-                rPortal;
-
-            const py =
-                cy +
-                Math.sin(rad) *
-                rPortal;
+                const py =
+                    cy +
+                    Math.sin(radians) *
+                    radius;
 
 
-            // Connecting line
+                const path =
+                    document.createElementNS(
+                        'http://www.w3.org/2000/svg',
+                        'path'
+                    );
 
-            const coreLine =
-                document.createElementNS(
-                    'http://www.w3.org/2000/svg',
-                    'path'
+                path.setAttribute(
+                    'd',
+                    `M ${cx} ${cy} L ${px} ${py}`
                 );
 
-            coreLine.setAttribute(
-                'd',
-                `M ${cx} ${cy} L ${px} ${py}`
-            );
+                path.setAttribute(
+                    'stroke',
+                    verse.color
+                );
 
-            coreLine.setAttribute(
-                'stroke',
-                verse.color
-            );
+                path.setAttribute(
+                    'stroke-width',
+                    '2'
+                );
 
-            coreLine.setAttribute(
-                'stroke-width',
-                '2'
-            );
+                path.setAttribute(
+                    'fill',
+                    'none'
+                );
 
-            coreLine.setAttribute(
-                'fill',
-                'none'
-            );
+                path.setAttribute(
+                    'id',
+                    `path-core-${verse.key}`
+                );
 
-            coreLine.style.filter =
-                `drop-shadow(0 0 2px ${verse.color})`;
+                path.style.filter =
+                    `drop-shadow(0 0 2px ${verse.color})`;
 
-            coreLine.setAttribute(
-                'id',
-                `path-core-${verse.key}`
-            );
+                path.style.opacity =
+                    isNetworkDeployed
+                        ? '0.55'
+                        : '0';
 
-            coreLine.setAttribute(
-                'opacity',
-                isNetworkDeployed
-                    ? '0.55'
-                    : '0'
-            );
-
-            coreLine.style.transition =
-                'opacity 1.2s ease 0.4s';
-
-            networkSvg.appendChild(
-                coreLine
-            );
+                networkSvg.appendChild(
+                    path
+                );
 
 
-            // Portal sphere
+                const portal =
+                    document.createElement('div');
 
-            const portal =
-                document.createElement('div');
+                portal.className =
+                    `portal-node portal-${verse.key}`;
 
-            portal.className =
-                `portal-node portal-${verse.key}`;
+                portal.dataset.targetLeft =
+                    px;
 
+                portal.dataset.targetTop =
+                    py;
 
-            if (isNetworkDeployed) {
-
-                portal.style.left =
-                    `${px}px`;
-
-                portal.style.top =
-                    `${py}px`;
-
-                portal.style.transform =
-                    'translate(-50%, -50%) scale(1)';
-
-                portal.style.opacity =
-                    '1';
-
-                portal.style.pointerEvents =
-                    'auto';
-
-            } else {
-
-                portal.style.left =
-                    `${cx}px`;
-
-                portal.style.top =
-                    `${cy}px`;
-
-                portal.style.transform =
-                    'translate(-50%, -50%) scale(0)';
-
-                portal.style.opacity =
-                    '0';
-
-                portal.style.pointerEvents =
-                    'none';
-
-            }
+                portal.dataset.verse =
+                    verse.key;
 
 
-            portal.dataset.targetLeft =
-                px;
+                if (isNetworkDeployed) {
 
-            portal.dataset.targetTop =
-                py;
+                    portal.style.left =
+                        `${px}px`;
 
-            portal.dataset.verse =
-                verse.key;
+                    portal.style.top =
+                        `${py}px`;
 
+                    portal.style.transform =
+                        'translate(-50%, -50%) scale(1)';
 
-            // Moons
+                    portal.style.opacity =
+                        '1';
 
-            const numMoons =
-                verse.key === 'tech'
-                    ? 2
-                    : 1;
+                    portal.style.pointerEvents =
+                        'auto';
 
-            let moonsHTML = '';
+                } else {
 
+                    portal.style.left =
+                        `${cx}px`;
 
-            for (
-                let m = 0;
-                m < numMoons;
-                m++
-            ) {
+                    portal.style.top =
+                        `${cy}px`;
 
-                const orbitSpeed =
-                    6 + m * 5;
+                    portal.style.transform =
+                        'translate(-50%, -50%) scale(0)';
 
-                const moonOffset =
-                    isMobile
-                        ? 35 + m * 6
-                        : 65 + m * 10;
+                    portal.style.opacity =
+                        '0';
 
-                const spinAnimation =
-                    m === 1
-                        ? 'spin-counter'
-                        : 'spin';
+                    portal.style.pointerEvents =
+                        'none';
+
+                }
 
 
-                moonsHTML += `
-                    <div
-                        class="portal-moon-orbit"
-                        style="
-                            animation-name:${spinAnimation};
-                            animation-duration:${orbitSpeed}s;
-                        "
-                    >
+                const moonCount =
+                    verse.key === 'tech'
+                        ? 2
+                        : 1;
+
+                let moons = '';
+
+                for (
+                    let i = 0;
+                    i < moonCount;
+                    i++
+                ) {
+
+                    const speed =
+                        6 +
+                        i * 5;
+
+                    const offset =
+                        isMobile
+                            ? 35 + i * 6
+                            : 65 + i * 10;
+
+                    moons += `
                         <div
-                            class="portal-moon"
+                            class="portal-moon-orbit"
                             style="
-                                background-color:${verse.color};
-                                box-shadow:0 0 8px ${verse.color};
-                                top:${-moonOffset}px;
+                                animation-name:${i === 1 ? 'spin-counter' : 'spin'};
+                                animation-duration:${speed}s;
                             "
-                        ></div>
+                        >
+                            <div
+                                class="portal-moon"
+                                style="
+                                    background-color:${verse.color};
+                                    box-shadow:0 0 8px ${verse.color};
+                                    top:${-offset}px;
+                                "
+                            ></div>
+                        </div>
+                    `;
+
+                }
+
+
+                portal.innerHTML = `
+                    <div class="portal-upright-wrapper">
+
+                        <div class="portal-ring-swirl"></div>
+
+                        <div class="portal-center">
+                            ${verse.key.toUpperCase().substring(0, 4)}
+                        </div>
+
+                        <span class="portal-label">
+                            ${verse.label}
+                        </span>
+
+                        ${moons}
+
                     </div>
                 `;
 
+
+                portal.addEventListener(
+                    'mouseenter',
+                    () => {
+                        isOrbitPaused = true;
+                    }
+                );
+
+
+                portal.addEventListener(
+                    'mouseleave',
+                    () => {
+                        isOrbitPaused = false;
+                    }
+                );
+
+
+                portal.addEventListener(
+                    'click',
+                    event => {
+
+                        event.stopPropagation();
+
+                        activatePortalBranch(
+                            verse.key
+                        );
+
+                    }
+                );
+
+
+                portalOrbitWrapper.appendChild(
+                    portal
+                );
+
             }
+        );
+
+    }
 
 
-            portal.innerHTML = `
+    /* =========================================================
+       CARD SCROLL REVEAL
+       ========================================================= */
 
-                <div class="portal-upright-wrapper">
+    function revealVisibleEventCards() {
 
-                    <div class="portal-ring-swirl"></div>
+        if (
+            !verseEventListView ||
+            !verseEventList
+        ) {
+            return;
+        }
 
-                    <div class="portal-center">
-                        ${verse.key.toUpperCase().substring(0, 4)}
-                    </div>
+        const viewportRect =
+            verseEventListView.getBoundingClientRect();
 
-                    <span class="portal-label">
-                        ${verse.label}
-                    </span>
+        const visibleTop =
+            viewportRect.top +
+            viewportRect.height * 0.06;
 
-                    ${moonsHTML}
+        const visibleBottom =
+            viewportRect.bottom -
+            viewportRect.height * 0.06;
 
-                </div>
+        const hiddenCards =
+            [
+                ...verseEventList.querySelectorAll(
+                    '.reference-event-card:not(.is-visible)'
+                )
+            ].filter(
+                card => {
 
-            `;
+                    const cardRect =
+                        card.getBoundingClientRect();
 
-
-            // Pause rotation on hover
-
-            portal.addEventListener(
-                'mouseenter',
-                () => {
-                    isOrbitPaused = true;
-                }
-            );
-
-            portal.addEventListener(
-                'mouseleave',
-                () => {
-                    isOrbitPaused = false;
-                }
-            );
-
-
-            // Verse click
-
-            portal.addEventListener(
-                'click',
-                e => {
-
-                    e.stopPropagation();
-
-                    activatePortalBranch(
-                        verse.key
+                    return (
+                        cardRect.top < visibleBottom &&
+                        cardRect.bottom > visibleTop
                     );
 
                 }
             );
 
 
-            portalOrbitWrapper.appendChild(
-                portal
-            );
+        hiddenCards.forEach(
+            (card, index) => {
 
-        });
+                setTimeout(
+                    () => {
+
+                        card.classList.add(
+                            'is-visible'
+                        );
+
+                    },
+                    index * 120
+                );
+
+            }
+        );
 
     }
 
 
-    // =========================================================
-    // OPEN VERSE EVENT LIST
-    // =========================================================
+    if (verseEventListView) {
+
+        verseEventListView.addEventListener(
+            'scroll',
+            revealVisibleEventCards,
+            {
+                passive: true
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       OPEN VERSE
+       ========================================================= */
 
     function activatePortalBranch(
         verseKey
@@ -919,18 +1010,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-
         const selectedVerse =
             verses.find(
                 verse =>
-                    verse.key === verseKey
+                    verse.key ===
+                    verseKey
             );
-
 
         if (!selectedVerse) {
             return;
         }
-
 
         activeVerse =
             verseKey;
@@ -943,10 +1032,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         verses.forEach(
-            verse =>
+            verse => {
+
                 document.body.classList.remove(
                     `verse-${verse.key}-active`
-                )
+                );
+
+            }
         );
 
 
@@ -956,24 +1048,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         document
-            .querySelectorAll('.portal-node')
-            .forEach(node => {
+            .querySelectorAll(
+                '.portal-node'
+            )
+            .forEach(
+                node => {
 
-                const selected =
-                    node.dataset.verse ===
-                    verseKey;
+                    const selected =
+                        node.dataset.verse ===
+                        verseKey;
 
-                node.classList.toggle(
-                    'active-portal',
-                    selected
-                );
+                    node.classList.toggle(
+                        'active-portal',
+                        selected
+                    );
 
-                node.classList.toggle(
-                    'portal-dimmed',
-                    !selected
-                );
+                    node.classList.toggle(
+                        'portal-dimmed',
+                        !selected
+                    );
 
-            });
+                }
+            );
 
 
         renderVerseEventList(
@@ -996,24 +1092,48 @@ document.addEventListener('DOMContentLoaded', () => {
             'false'
         );
 
+
+        /*
+         * IMPORTANT:
+         * The list was hidden when the cards were created.
+         * Wait until the browser has painted the visible list,
+         * then calculate which cards are currently visible.
+         */
+
+        requestAnimationFrame(
+            () => {
+
+                requestAnimationFrame(
+                    () => {
+
+                        revealVisibleEventCards();
+
+                    }
+                );
+
+            }
+        );
+
     }
 
 
-    // =========================================================
-    // CARD LIST
-    // =========================================================
+    /* =========================================================
+       RENDER EVENT CARDS
+       ========================================================= */
 
-    function renderVerseEventList(verse) {
+    function renderVerseEventList(
+        verse
+    ) {
 
         if (!verseEventList) {
             return;
         }
 
-
         const verseEvents =
             eventsData.filter(
                 event =>
-                    event.verse === verse.key
+                    event.verse ===
+                    verse.key
             );
 
 
@@ -1027,7 +1147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         verseListTitle.textContent =
-            `${verse.key.toUpperCase()} EVENTS`;
+            verse.heading;
 
 
         verseListSubtitle.textContent =
@@ -1038,134 +1158,95 @@ document.addEventListener('DOMContentLoaded', () => {
             `${verseEvents.length} EVENTS`;
 
 
-        verseEventList.innerHTML =
-            verseEvents.map(
-                event => `
-
-            <article
-                class="reference-event-card"
-                data-event-id="${event.id}"
-                style="--event-color:${verse.color}"
-            >
-
-                <div class="reference-card-top-ornament">
-                    <span></span>
-                </div>
-
-
-                <div class="reference-card-frame">
-
-
-                    <!-- EVENT IMAGE -->
-
-                    <div class="reference-card-image-wrap">
-
-                        <img
-                            src="page5_gallery.jpg"
-                            alt="${event.name}"
-                            loading="lazy"
-                        >
-
-                    </div>
-
-
-                    <!-- LOWER EVENT CONTENT -->
-
-                    <div class="reference-card-lower">
-
-                        <div class="reference-card-title-area">
-
-                            <h3 class="reference-card-title">
-                                ${event.name}
-                            </h3>
-
-                            <p class="reference-card-description">
-                                ${event.desc}
-                            </p>
-
-                        </div>
-
-
-                        <!-- ACTIONS -->
-
-                        <div class="reference-card-actions">
-
-                            <button
-                                type="button"
-                                class="reference-explore-btn"
-                                data-event-id="${event.id}"
-                            >
-                                EXPLORE
-                            </button>
-
-
-                            <a
-                                class="reference-register-btn"
-                                href="${registrationHref(event)}"
-                            >
-                                REGISTER
-                            </a>
-
-                        </div>
-
-
-                        <!-- PRICE -->
-
-                        <div class="reference-price-bar">
-
-                            Prize:
-
-                            <strong>
-                                ${event.prize}
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        `
-            ).join('');
-
-
-        // ---------------------------------------------------------
-        // CARD ENTRANCE
-        // ---------------------------------------------------------
-
-        requestAnimationFrame(
-            () => {
-
-                verseEventList
-                    .querySelectorAll(
-                        '.reference-event-card'
-                    )
-                    .forEach(
-                        (card, index) => {
-
-                            setTimeout(
-                                () => {
-
-                                    card.classList.add(
-                                        'is-visible'
-                                    );
-
-                                },
-                                90 * index
-                            );
-
-                        }
-                    );
-
-            }
+        animateCategoryHeading(
+            verse.heading
         );
 
 
-        // ---------------------------------------------------------
-        // EXPLORE BUTTONS
-        // ---------------------------------------------------------
+        verseEventList.innerHTML =
+            verseEvents
+                .map(
+                    event => `
+
+                    <article
+                        class="reference-event-card"
+                        data-event-id="${event.id}"
+                        style="--event-color:${verse.color}"
+                    >
+
+                        <div class="reference-card-top-ornament">
+                            <span></span>
+                        </div>
+
+
+                        <div class="reference-card-frame">
+
+                            <div class="reference-card-image-wrap">
+
+                                <img
+                                    src="page5_gallery.jpg"
+                                    alt="${event.name}"
+                                    loading="lazy"
+                                >
+
+                            </div>
+
+
+                            <div class="reference-card-lower">
+
+                                <div class="reference-card-title-area">
+
+                                    <h3 class="reference-card-title">
+                                        ${event.name}
+                                    </h3>
+
+                                    <p class="reference-card-description">
+                                        ${event.desc}
+                                    </p>
+
+                                </div>
+
+
+                                <div class="reference-card-actions">
+
+                                    <button
+                                        type="button"
+                                        class="reference-explore-btn"
+                                        data-event-id="${event.id}"
+                                    >
+                                        EXPLORE
+                                    </button>
+
+
+                                    <a
+                                        class="reference-register-btn"
+                                        href="${registrationHref(event)}"
+                                    >
+                                        REGISTER
+                                    </a>
+
+                                </div>
+
+
+                                <div class="reference-price-bar">
+                                    Prize:
+                                    <strong>
+                                        ${event.prize}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                `
+                )
+                .join('');
+
+
+        /* Explore buttons */
 
         verseEventList
             .querySelectorAll(
@@ -1176,23 +1257,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     button.addEventListener(
                         'click',
-                        e => {
+                        event => {
 
-                            e.stopPropagation();
+                            event.stopPropagation();
 
-
-                            const event =
+                            const selectedEvent =
                                 eventsData.find(
                                     item =>
                                         item.id ===
                                         button.dataset.eventId
                                 );
 
-
-                            if (event) {
+                            if (selectedEvent) {
 
                                 openExplorer(
-                                    event
+                                    selectedEvent
                                 );
 
                             }
@@ -1205,22 +1284,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    // =========================================================
-    // REGISTRATION URL
-    // =========================================================
+
+    /* =========================================================
+       REGISTRATION
+       ========================================================= */
 
     function registrationHref(
         event
     ) {
 
-        return `register.html?event=${encodeURIComponent(event.name)}&day=${encodeURIComponent(event.day || '1')}&verse=${encodeURIComponent(event.verse)}`;
+        return (
+            `register.html?event=${encodeURIComponent(event.name)}` +
+            `&day=${encodeURIComponent(event.day || '1')}` +
+            `&verse=${encodeURIComponent(event.verse)}`
+        );
 
     }
 
 
-    // =========================================================
-    // EVENT EXPLORER
-    // =========================================================
+    /* =========================================================
+       EVENT EXPLORER
+       ========================================================= */
 
     function openExplorer(
         event
@@ -1235,21 +1319,22 @@ document.addEventListener('DOMContentLoaded', () => {
             event.id;
 
 
-        const verse =
+        const selectedVerse =
             verses.find(
-                item =>
-                    item.key ===
+                verse =>
+                    verse.key ===
                     event.verse
             );
 
 
         explorerVerse.textContent =
+            selectedVerse?.label ||
             event.verseName;
 
 
         explorerVerse.style.setProperty(
             '--event-color',
-            verse?.color ||
+            selectedVerse?.color ||
             'var(--tech-color)'
         );
 
@@ -1286,7 +1371,7 @@ document.addEventListener('DOMContentLoaded', () => {
             event.name;
 
 
-        const learnItems =
+        const learn =
             learnById[event.id] ||
             [
                 'Build practical skills through the event challenge.',
@@ -1296,7 +1381,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         explorerLearn.innerHTML =
-            learnItems
+            learn
                 .map(
                     item =>
                         `<li>${item}</li>`
@@ -1350,9 +1435,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =========================================================
-    // BACK FROM EXPLORER
-    // =========================================================
+    /* =========================================================
+       BACK TO CARDS
+       ========================================================= */
 
     function closeExplorerToCards() {
 
@@ -1386,12 +1471,27 @@ document.addEventListener('DOMContentLoaded', () => {
             'false'
         );
 
+
+        requestAnimationFrame(
+            () => {
+
+                requestAnimationFrame(
+                    () => {
+
+                        revealVisibleEventCards();
+
+                    }
+                );
+
+            }
+        );
+
     }
 
 
-    // =========================================================
-    // DEPLOY NETWORK
-    // =========================================================
+    /* =========================================================
+       DEPLOY NETWORK
+       ========================================================= */
 
     function deployNetwork() {
 
@@ -1426,42 +1526,6 @@ document.addEventListener('DOMContentLoaded', () => {
             );
 
 
-            if (bigBangFlash) {
-
-                bigBangFlash.classList.add(
-                    'flash-active'
-                );
-
-
-                setTimeout(
-                    () =>
-                        bigBangFlash.classList.remove(
-                            'flash-active'
-                        ),
-                    750
-                );
-
-            }
-
-
-            if (pravaahCore) {
-
-                pravaahCore.classList.add(
-                    'core-flash-pulse'
-                );
-
-
-                setTimeout(
-                    () =>
-                        pravaahCore.classList.remove(
-                            'core-flash-pulse'
-                        ),
-                    600
-                );
-
-            }
-
-
             document
                 .querySelectorAll(
                     '.portal-node'
@@ -1493,9 +1557,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     '[id^="path-core-"]'
                 )
                 .forEach(
-                    line =>
+                    line => {
+
                         line.style.opacity =
-                        '0.55'
+                            '0.55';
+
+                    }
                 );
 
 
@@ -1509,6 +1576,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ring.style.opacity =
                     '1';
             }
+
 
         } else {
 
@@ -1532,6 +1600,7 @@ document.addEventListener('DOMContentLoaded', () => {
             activeEvent =
                 null;
 
+
             eventsPortalHero?.classList.remove(
                 'event-list-open',
                 'event-explore-open'
@@ -1548,17 +1617,32 @@ document.addEventListener('DOMContentLoaded', () => {
             );
 
 
+            verseEventListView?.setAttribute(
+                'aria-hidden',
+                'true'
+            );
+
+
+            explorerView?.setAttribute(
+                'aria-hidden',
+                'true'
+            );
+
+
             isOrbitPaused =
                 false;
 
 
+            animateCategoryHeading(
+                'MULTIVERSE EVENTS'
+            );
+
+
             const cx =
-                portalNetworkContainer.clientWidth /
-                2;
+                portalNetworkContainer.clientWidth / 2;
 
             const cy =
-                portalNetworkContainer.clientHeight /
-                2;
+                portalNetworkContainer.clientHeight / 2;
 
 
             document
@@ -1583,7 +1667,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         node.style.pointerEvents =
                             'none';
 
-
                         node.classList.remove(
                             'active-portal',
                             'portal-dimmed'
@@ -1598,9 +1681,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     '[id^="path-core-"]'
                 )
                 .forEach(
-                    line =>
+                    line => {
+
                         line.style.opacity =
-                        '0'
+                            '0';
+
+                    }
                 );
 
 
@@ -1620,17 +1706,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =========================================================
-    // EVENTS
-    // =========================================================
+    /* =========================================================
+       BUTTON EVENTS
+       ========================================================= */
 
     if (pravaahCore) {
 
         pravaahCore.addEventListener(
             'click',
-            e => {
+            event => {
 
-                e.stopPropagation();
+                event.stopPropagation();
 
                 deployNetwork();
 
@@ -1644,9 +1730,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         corePrompt.addEventListener(
             'click',
-            e => {
+            event => {
 
-                e.stopPropagation();
+                event.stopPropagation();
 
                 if (!isNetworkDeployed) {
                     deployNetwork();
@@ -1662,9 +1748,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         backToCards.addEventListener(
             'click',
-            e => {
+            event => {
 
-                e.stopPropagation();
+                event.preventDefault();
+                event.stopPropagation();
 
                 closeExplorerToCards();
 
@@ -1678,9 +1765,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         backToVerses.addEventListener(
             'click',
-            e => {
+            event => {
 
-                e.stopPropagation();
+                event.preventDefault();
+                event.stopPropagation();
 
 
                 activeVerse =
@@ -1726,12 +1814,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         '.portal-node'
                     )
                     .forEach(
-                        node =>
+                        node => {
+
                             node.classList.remove(
                                 'active-portal',
                                 'portal-dimmed'
-                            )
+                            );
+
+                        }
                     );
+
+
+                animateCategoryHeading(
+                    'MULTIVERSE EVENTS'
+                );
 
             }
         );
@@ -1739,9 +1835,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =========================================================
-    // ORBIT ANIMATION
-    // =========================================================
+    /* =========================================================
+       ORBIT
+       ========================================================= */
 
     function animateOrbit() {
 
@@ -1790,9 +1886,9 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
 
-    // =========================================================
-    // LIVE COORDINATES
-    // =========================================================
+    /* =========================================================
+       TELEMETRY
+       ========================================================= */
 
     if (liveCoords) {
 
@@ -1823,9 +1919,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =========================================================
-    // RESIZE
-    // =========================================================
+    /* =========================================================
+       RESIZE
+       ========================================================= */
 
     window.addEventListener(
         'resize',
@@ -1837,9 +1933,9 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
 
-    // =========================================================
-    // INITIALIZE
-    // =========================================================
+    /* =========================================================
+       INITIAL LOAD
+       ========================================================= */
 
     setTimeout(
         () => {
