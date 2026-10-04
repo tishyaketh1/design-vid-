@@ -219,7 +219,7 @@ section {
 
 .big-septagon-portal-container {
     position: absolute;
-    top: 22%;
+    top: 36%;
     left: 50%;
     width: clamp(360px, 46vw, 600px);
     height: clamp(360px, 46vw, 600px);
