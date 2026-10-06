@@ -29,6 +29,8 @@ body.photo-gallery-body {
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Background Cyber Radial Vignette */
@@ -211,8 +213,10 @@ body.photo-gallery-body {
 /* Main Layout Shell */
 .photo-gallery-main {
     max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
     padding: 5.2rem 1.25rem 1.5rem 1.25rem;
+    flex: 1 0 auto;
 }
 
 /* Header Section */
@@ -1217,3 +1221,110 @@ body.photo-gallery-body {
     box-shadow: 0 0 12px #00f2fe;
     animation: loaderBeamRun 1.1s infinite ease-in-out;
 }
+
+/* ==========================================================================
+   SHARED SYMMETRICAL 3-COLUMN FOOTER (Matches profile.html / style.css)
+   ========================================================================== */
+.pravaah-full-footer {
+    width: 100%;
+    background: rgba(6, 4, 16, 0.88);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px 20px 0 0;
+    padding: 20px 40px 14px 40px;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.5);
+    z-index: 30;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.footer-columns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-logo-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+}
+
+.footer-tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.4;
+}
+
+.footer-heading {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--cyan-primary, #00f2fe);
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.footer-links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links-list a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-links-list a:hover {
+    color: var(--cyan-primary, #00f2fe);
+    padding-left: 4px;
+}
+
+.footer-bottom-bar {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.45);
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+}
+
